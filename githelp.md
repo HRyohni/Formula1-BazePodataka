@@ -11,7 +11,7 @@ git config --global user.email "your_email_address@example.com"
 ## step 2 
 skine datoteke s github
 ``` cpp
-git clone https://github.com/HRyohni/DiscordEasyBotSetup
+git clone https://github.com/HRyohni/Formula1-BazePodataka.git
 ``` 
 
 

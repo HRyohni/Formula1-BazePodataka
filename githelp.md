@@ -20,6 +20,7 @@ dodaje datoteke na github
 ``` cpp
 git add ime.txt
 git commit -m "opis commita"
+git push
 ```
 
 ## Pull

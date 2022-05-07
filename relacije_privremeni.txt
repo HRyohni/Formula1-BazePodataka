@@ -1,0 +1,37 @@
+group: F1
+
+tim = {
+	id_tim, id_ravnatelj, dobiveno_utrka, osvojeno_podija, sjediste, kod_sasija
+}
+
+vozac = {
+	id_vozac, id_tim, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova
+}
+
+auto = {
+	id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma
+}
+
+sponzor = {
+	id_sponzor, ime, isplacen_novac
+}
+
+staza = {
+	id_staza, ime_staze, drzava, duzina, broj_drs_zona
+}
+
+kvalifikacija = {
+	id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum
+}
+
+trening = {
+	id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum
+}
+
+utrka = {
+	id_utrka, ime_nagrade, broj_krugova, vrijeme_vozeno, najbrzi_pitstop, datum
+}
+
+sezona = {
+	id_sezona, prvak
+}

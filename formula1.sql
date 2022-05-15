@@ -30,6 +30,7 @@ CREATE TABLE tim(
 CREATE TABLE vozac(
    id INTEGER PRIMARY KEY,
    id_tim INTEGER NOT NULL,
+   id_auto INTEGER NOT NULL;
    ime VARCHAR(30) NOT NULL,
    prezime VARCHAR(30) NOT NULL,
    odabrani_broj INTEGER NOT NULL,
@@ -39,11 +40,16 @@ CREATE TABLE vozac(
    osvojeno_podija CHAR(5) NOT NULL,
    osvojeno_bodova CHAR(5) NOT NULL,
    odvozeno_najbrzih_krugova INTEGER NOT NULL,
+
    FOREIGN KEY (id_tim) REFERENCES tim(id)
 );
 
+  
+
+
 CREATE TABLE auto(
    id INTEGER PRIMARY KEY,
+   id_vozac INTEGER NOT NULL,
    zavrseno_utrka CHAR(5) NOT NULL ,
    vrsta_motora VARCHAR(40) NOT NULL,
    proizvodac_guma VARCHAR(30) NOT NULL
@@ -52,7 +58,7 @@ CREATE TABLE auto(
 CREATE TABLE sponzor(
    id INTEGER PRIMARY KEY,
    ime VARCHAR(20) NOT NULL,
-   isplacen_novac CHAR(5) NOT NULL
+   isplacen_novac INTEGER NOT NULL
 );
 
 CREATE TABLE staza(
@@ -82,10 +88,12 @@ CREATE TABLE trening(
 CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
    ime_nagrade VARCHAR(30),
-   broj_krugova CHAR(5) NOT NULL,
+   pobjednik INTEGER,
+   broj_krugova INTEGER NOT NULL,
    vrijeme_vozeno TIME NOT NULL, # fixat
-   najbrzi_pitstop CHAR(5) NOT NULL,
-   datum DATE NOT NULL #fixat
+   najbrzi_krug TIME NOT NULL,
+   datum DATE NOT NULL, #fixat
+   FOREIGN KEY (pobjednik) REFERENCES vozac(id)
 );
 
 CREATE TABLE sezona(
@@ -103,6 +111,15 @@ ALTER TABLE staza
 ALTER TABLE tim
 	ADD CONSTRAINT id_len_ck CHECK (length(id) = 3),
    ADD CONSTRAINT id_rng_ck CHECK (id>=100 AND id<=999);
+
+ALTER TABLE sponzor
+   ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
+   ADD CONSTRAINT id_rng_ck CHECK (id>=2000 AND id<=2999),
+   ADD CONSTRAINT payout_ck CHECK (isplacen_novac >= 500000);
+
+ALTER TABLE utrka
+   ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
+   ADD CONSTRAINT id_rng_ck CHECK (id>=3000 AND id<=3999);
 
 
 -- POPUNJAVANJE TABLICE // WIP
@@ -135,12 +152,71 @@ INSERT INTO tim VALUES  (101,'McLaren F1 Team', 'Andreas Seidl', 182, 488, 'Woki
                       */
 
 
-INSERT INTO vozac VALUES (id_vozac, id_tim, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova);
+INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, '16.10.1997.', 'Monako', 0, 16, 631, 7),
+                           (id_vozac, id_tim,id_auta, 'Max', 'Verstappen', 1, '30.0.1997.', 'nizozemsko', 1, 62, 1616.5, 17),
+                           (id, id_tim,   id_auto,  'Sergio', 'Pérez', 11,  '26.1.1990', 0, 15, 896, 6),
+                           (id, id_tim,   id_auto,  'George','Russell', 63,  '15.2.1998.', 0, 1, 19, 1),
+                           (id, id_tim,   id_auto,  'Carlos', 'Sainz', 55,'1.9.1994.', 0, 7, 554.5, 1),
+                           (id, id_tim,   id_auto,  'Lewis', 'Hamilton', 44,'7.1.1985.', 7, 182, 4165.5, 59),
+                           (id, id_tim,   id_auto,  'Lando', 'Norris', 4,'13.11.1999.', 0, 5, 312, 3),
+                           (id, id_tim,   id_auto,  'Valtteri', 'Bottas', 77,'28.8.1989.', 0, 67, 1697, 19),
+                           (id, id_tim,   id_auto,  'Esteban', 'Ocon', '31,  17.9.1996', 0, 2, 272, 0),
+                           (id, id_tim,   id_auto,  'Kevin', 'Magnussen',   ,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
+                           (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
 INSERT INTO auto VALUES (id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma);
 
 
-INSERT INTO sponzor VALUES (id_sponzor, ime, isplacen_novac);
-                           ()
+-- SPONZORI // LISTA JE SMANJENA ZBOG OGROMNE KOLIČINE PODATAKA GLEDAJUĆI DA SVAKI TIM IMA PO MINIMALNO 20 SPONZORA.
+INSERT INTO sponzor VALUES (2001, 'Petronas', 100000000),
+                           (2002, 'Tommy Hilfiger', 24000000),
+                           (2003, 'Monster Energy',56000000),
+                           (2004, 'Oracle', 96500000),
+                           (2005, 'Cash App', 76000000),
+                           (2006, 'AT&T', 23760000),
+                           (2007, 'Shell', 136758000),
+                           (2008, 'Santander', 12000000),
+                           (2009, 'VELAS', 57000000),
+                           (2010, 'Snapdragon', 9000000),
+                           (2011, 'Google', 194986000),
+                           (2012, 'Dell', 29000000),
+                           (2013, 'Alienware', 19000000),
+                           (2014, 'Logitech G', 38760000),
+                           (2015, 'SunGod', 560000),
+                           (2016, 'BWT', 112000000),
+                           (2017, 'RCI Bank and Services', 98760000),
+                           (2018, 'Yahoo', 56000000),
+                           (2019, 'Kappa', 780000),
+                           (2020, 'Sprinklr', 520000),
+                           (2021, 'AlphaTauri', 230670000),
+                           (2022, 'Honda', 73187500),
+                           (2023, 'Pirelli', 4167940000),
+                           (2024, 'Ray Ban', 10000000),
+                           (2025, 'Siemens', 13000000),
+                           (2026, 'Aramco', 79000000),
+                           (2027, 'TikTok', 20000000),
+                           (2028, 'Hackett London',6780000),
+                           (2029, 'Lavazza', 30000000),
+                           (2030, 'DURACELL', 24000000),
+                           (2031, 'Acronis', 53000000),
+                           (2032, 'Alfa Romeo', 45600000),
+                           (2033, 'PKN ORLEN', 39876500),
+                           (2034, 'Iveco', 12000000),
+                           (2035, 'Puma', 40123000),
+                           (2036, 'Haas Automation', 36000000),
+                           (2037, 'Maui Jim', 980760),
+                           (2038, 'Alpinestars', 63000000),
+                           (2039, 'TeamViewer', 5000000),
+                           (2040, 'Richard Mille', 16400300),
+                           (2041, 'Police', 5600000),
+                           (2042, 'Philip Morris International', 13873900),
+                           (2043, 'Rauch', 97655980),
+                           (2044, 'UPS', 37000000),
+                           (2045, 'Dupont', 19050000),
+                           (2046, 'Marlboro', 160753100),
+                           (2047, 'Martini', 75000000),
+                           (2048, 'Rexona', 80000000),
+                           (2049, 'NOVA Chemicals', 93000000),
+                           (2050, 'TAGHeuer', 60000000);
 
 
 -- STAZE // SVE OD 2012 DO 2022 // NEKE SU SE MJENJALE KROZ GODINE ALI "FOR SAKE OF BREVITY" NECEMO IH UBACIVATI KAO ODVOJENE STAZE.
@@ -183,5 +259,74 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sak
 
 INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum);
 INSERT INTO trening  VALUES (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
-INSERT INTO utrka  VALUES (id_utrka, ime_nagrade, broj_krugova, vrijeme_vozeno, najbrzi_pitstop, datum);
-INSERT INTO sezona  VALUES (id_sezona, prvak);
+
+
+-- UTRKE //
+INSERT INTO utrka  VALUES (id, ime_nagrade, pobjednik, broj_krugova, vrijeme_vozeno, najbrzi_krug, datum),
+                          (3001, '2012 Australian GP', pobjednik, 58, 01:34:09.565, 00:01:29.187, 2012-03-18),
+                          (3002, '2012 Malaysian GP', pobjednik, 56, 02:44:51.812, 00:01:41.680, 2012-03-25),
+                          (3002, '2012 Chinese GP', pobjednik, 56, 01:36:26.929, 00:01:40.967, 2012-04-15),
+                          (3002, '2012 Bahrain GP', pobjednik, 57, 01:35:10.990, 00:01:36.379, 2012-04-22),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+                          (3002, '', pobjednik, , , , ),
+
+-- SEZONE // 
+INSERT INTO sezona  VALUES (id, prvak);
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),
+                           (, ),

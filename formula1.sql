@@ -105,21 +105,21 @@ CREATE TABLE sezona(
 -- PROMJENE I OGRANIČENJA NA TABLICAMA
 ALTER TABLE staza
 	ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id>=1000 AND id<=1999),
-   ADD CONSTRAINT duzina_rng_ck CHECK (duzina_m>=1000 AND duzina_m<=99999);
+   ADD CONSTRAINT id_rng_ck CHECK (id >= 1000 AND id <= 1999),
+   ADD CONSTRAINT duzina_rng_ck CHECK (duzina_m >= 1000 AND duzina_m <= 99999);
    
 ALTER TABLE tim
 	ADD CONSTRAINT id_len_ck CHECK (length(id) = 3),
-   ADD CONSTRAINT id_rng_ck CHECK (id>=100 AND id<=999);
+   ADD CONSTRAINT id_rng_ck CHECK (id >= 100 AND id <= 999);
 
 ALTER TABLE sponzor
    ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id>=2000 AND id<=2999),
+   ADD CONSTRAINT id_rng_ck CHECK (id> = 2000 AND id <= 2999),
    ADD CONSTRAINT payout_ck CHECK (isplacen_novac >= 500000);
 
 ALTER TABLE utrka
    ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id>=3000 AND id<=3999);
+   ADD CONSTRAINT id_rng_ck CHECK (id >= 3000 AND id <= 3999);
 
 
 -- POPUNJAVANJE TABLICE // WIP

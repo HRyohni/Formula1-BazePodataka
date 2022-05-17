@@ -34,17 +34,18 @@ CREATE TABLE vozac(
    ime VARCHAR(30) NOT NULL,
    prezime VARCHAR(30) NOT NULL,
    odabrani_broj INTEGER NOT NULL,
-   datum_rodenja DATE NOT NULL, #fixat datum
+   datum_rodenja DATE NOT NULL, -- fixat datum
    nacionalnost VARCHAR(30) NOT NULL,
    osvojeno_naslova_prvaka INTEGER NOT NULL,
    osvojeno_podija CHAR(5) NOT NULL,
    osvojeno_bodova CHAR(5) NOT NULL,
    odvozeno_najbrzih_krugova INTEGER NOT NULL,
 
-   FOREIGN KEY (id_tim) REFERENCES tim(id)
+   FOREIGN KEY (id_tim) REFERENCES tim(id_tim)
 );
 
 CREATE TABLE vozac_u_timu(
+   id_vozac_u_timu INTEGER PRIMARY KEY,
    id_vozac FOREIGN KEY,
    id_tim FOREIGN KEY,
    godina INTEGER NOT NULL
@@ -77,7 +78,7 @@ CREATE TABLE kvalifikacija(
    sesija_kvalifikacije CHAR(5) NOT NULL,
    krugova_vozeno CHAR(5) NOT NULL,
    izlazaka_na_stazu CHAR(5) NOT NULL,
-   datum DATE #fixat datum
+   datum DATE -- fixat datum
 );
 
 CREATE TABLE trening(
@@ -85,7 +86,7 @@ CREATE TABLE trening(
    odvozeno_krugova CHAR(5) NOT NULL,
    najbrzi_krug CHAR(5) NOT NULL,
    izlazaka_na_stazu CHAR(5) NOT NULL,
-   datum DATE NOT NULL #datum fixat
+   datum DATE NOT NULL -- datum fixat
 );
 
 CREATE TABLE utrka(
@@ -93,22 +94,28 @@ CREATE TABLE utrka(
    ime_nagrade VARCHAR(30),
    pobjednik INTEGER,
    broj_krugova INTEGER NOT NULL,
-   vrijeme_vozeno TIME NOT NULL, # fixat
+   vrijeme_vozeno TIME NOT NULL, -- fixat
    najbrzi_krug TIME NOT NULL,
-   datum DATE NOT NULL, #fixat
-   FOREIGN KEY (pobjednik) REFERENCES vozac(id)
+   datum DATE NOT NULL, -- fixat
+   FOREIGN KEY (pobjednik) REFERENCES vozac(id_vozac)
 );
 
 CREATE TABLE sezona(
    id_sezona INTEGER PRIMARY KEY,
-   prvak VARCHAR(30) NOT NULL
+   godina INTEGER
+);
+
+CREATE TABLE prvak(
+   id_vozac_u_timu FOREIGN KEY, -- Vozač za tim
+   id_tim FOREIGN KEY -- Konstruktor
+   id_sezona FOREIGN KEY
 );
 
 CREATE TABLE vikend(
    id_vikend INTEGER PRIMARY KEY,
    id_trening FOREIGN KEY,
    id_quali FOREIGN KEY,
-   id_utrka FOREIGN KEY
+   id_utrka FOREIGN KEY,
 );
 
 
@@ -168,9 +175,9 @@ INSERT INTO vozac VALUES -- // 2016 \\
                            (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.','venecuelanski', 0, 1, 76, 0),
                            (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  '25.9.1991.','američko', 0, 25, osvojeno_bodova, odvozeno_najbrzih_krugova),
                            (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
-                           (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
+                           (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova);
 
-INSERT INTO auto VALUES (id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma);
+INSERT INTO automobil VALUES (id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma);
 
 
 -- SPONZORI // LISTA JE SMANJENA ZBOG OGROMNE KOLIČINE PODATAKA GLEDAJUĆI DA SVAKI TIM IMA PO MINIMALNO 20 SPONZORA.
@@ -356,33 +363,33 @@ INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
                           (3318, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
 
 --                         // GODINA: 2016 \\
-                          (3400, '2016 Australia GP', pobjednik, 57, 1:48:15.565, 00:01:30.557, 2016-03-20),
-                          (3401, '2016 Bahrain GP', pobjednik, 57, 1:33:34.696, 00:01:34.158, 2016-04-03),
-                          (3402, '2016 China GP', pobjednik, 56, 1:38:53.891, 00:01:35.402, 2016-04-17),
-                          (3403, '2016 Russia GP', pobjednik, 56, 1:32:53.891, 00:01:41.997, 2016-05-01),
-                          (3404, '2016 Spain GP', pobjednik, , , , 2016-05-15),
-                          (3405, '2016 Monaco GP', pobjednik, , , , 2016-05-29),
-                          (3406, '2016 Canada GP', pobjednik, , , , 2016-06-12),
-                          (3407, '2016 Europe GP', pobjednik, , , , 2016-06-19),
-                          (3408, '2016 Austria GP', pobjednik, , , , 2016-07-03),
-                          (3409, '2016 Great Britain GP', pobjednik, , , , 2016-07-10),
-                          (3410, '2016 Hungary GP', pobjednik, , , , 2016-07-10),
-                          (3411, '2016 Germany GP', pobjednik, , , , 2016-07-24),
-                          (3412, '2016 Belgium GP', pobjednik, , , , 2016-07-31),
-                          (3413, '2016 Italy GP', pobjednik, , , , 2016-08-28),
-                          (3414, '2016 Singapore GP', pobjednik, , , , 2016-09-04),
-                          (3415, '2016 Malaysia GP', pobjednik, , , , 2016-09-18)
-                          (3416, '2016 Japan GP', pobjednik, , , , 2016-10-09),
-                          (3417, '2016 United States GP', pobjednik, , , , 2016-10-23),
-                          (3418, '2016 Mexico GP', pobjednik, , , , 2016-10-30),
-                          (3419, '2016 Brasil GP', pobjednik, , , , 2016-11-13),
-                          (3420, '2016 Abu Dhabi GP', pobjednik, , , , 2016-11-27),
+                          (3400, '2016 Australia GP', pobjednik, 57, 01:48:15.565, 00:01:30.557, 2016-03-20),
+                          (3401, '2016 Bahrain GP', pobjednik, 57, 01:33:34.696, 00:01:34.158, 2016-04-03),
+                          (3402, '2016 China GP', pobjednik, 56, 01:38:53.891, 00:01:35.402, 2016-04-17),
+                          (3403, '2016 Russia GP', pobjednik, 56, 01:32:53.891, 00:01:41.997, 2016-05-01),
+                          (3404, '2016 Spain GP', pobjednik, 66, 01:41:40.017, 00:01:26.948, 2016-05-15),
+                          (3405, '2016 Monaco GP', pobjednik, 78, 01:59:29.133, 00:01:17.937, 2016-05-29),
+                          (3406, '2016 Canada GP', pobjednik, 70, 01:31:05.296, 00:01:15.981, 2016-06-12),
+                          (3407, '2016 Europe GP', pobjednik, 51, 01:32:52.366, 00:01:46.485, 2016-06-19),
+                          (3408, '2016 Austria GP', pobjednik, 71, 01:27:38.107, 00:01:08.411, 2016-07-03),
+                          (3409, '2016 Great Britain GP', pobjednik, 52, 01:34:55.831, 00:01:35.548, 2016-07-10),
+                          (3410, '2016 Hungary GP', pobjednik, 70, 01:40:30.115, 00:01:23.086, 2016-07-10),
+                          (3411, '2016 Germany GP', pobjednik, 67, 01:30:44.200, 00:01:48.442, 2016-07-24),
+                          (3412, '2016 Belgium GP', pobjednik, 44, 01:44:51.058, 00:01:51.583, 2016-07-31),
+                          (3413, '2016 Italy GP', pobjednik, 53, 01:17:28.089, 00:01:25.340, 2016-08-28),
+                          (3414, '2016 Singapore GP', pobjednik, 61, 01:55:48.950, 00:01:47.187, 2016-09-04),
+                          (3415, '2016 Malaysia GP', pobjednik, 56, 01:37:12.776, 00:01:36.424, 2016-09-18)
+                          (3416, '2016 Japan GP', pobjednik, 53, 01:26:43.333, 00:01:35.318, 2016-10-09),
+                          (3417, '2016 United States GP', pobjednik, 56, 01:38:12.618, 00:01:42.386, 2016-10-23),
+                          (3418, '2016 Mexico GP', pobjednik, 71, 01:40:31.402, 00:01:21.134, 2016-10-30),
+                          (3419, '2016 Brasil GP', pobjednik, 71, 03:01:01.355, 00:01:25.305, 2016-11-13),
+                          (3420, '2016 Abu Dhabi GP', pobjednik, 55, 01:38:04.013, 00:01:43.729, 2016-11-27);
 
 
 -- SEZONE // 
-INSERT INTO sezona  VALUES (id, prvak);
-                           (2012, ),
-                           (2013, ),
-                           (2014, ),
-                           (2015, ),
-                           (2016, ),
+INSERT INTO sezona VALUES (id_sezona, godina);
+                          (2012, 2012),
+                          (2013, 2013),
+                          (2014, 2014),
+                          (2015, 2015),
+                          (2016, 2016);

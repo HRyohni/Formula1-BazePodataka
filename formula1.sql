@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS Formula1;
 
 CREATE DATABASE Formula1;
 USE Formula1;
+
 /*
 tim (id_tim, id_SEF, pobjede, osvojeno_podija, sjediste, kod_sasija)
 vozac(id_vozac, id_tim, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
@@ -113,22 +114,26 @@ CREATE TABLE vikend(
 
 -- PROMJENE I OGRANIČENJA NA TABLICAMA
 ALTER TABLE staza
-	ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id >= 1000 AND id <= 1999),
-   ADD CONSTRAINT duzina_rng_ck CHECK (duzina_m >= 1000 AND duzina_m <= 99999);
+	ADD CONSTRAINT id_len_ck_staza CHECK (length(id) = 4),
+   ADD CONSTRAINT id_rng_ck_staza CHECK (id_staza >= 1000 AND id_staza <= 1999),
+   ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m <= 99999);
    
 ALTER TABLE tim
-	ADD CONSTRAINT id_len_ck CHECK (length(id) = 3),
-   ADD CONSTRAINT id_rng_ck CHECK (id >= 100 AND id <= 999);
+	ADD CONSTRAINT id_len_ck_tim CHECK (length(id_tim) = 3),
+   ADD CONSTRAINT id_rng_ck_tim CHECK (id_tim >= 100 AND id_tim <= 999);
 
 ALTER TABLE sponzor
-   ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id >= 4000 AND id <= 4999),
-   ADD CONSTRAINT payout_ck CHECK (isplacen_novac >= 500000);
+   ADD CONSTRAINT id_len_ck_spozor CHECK (length(id_sponzor) = 4),
+   ADD CONSTRAINT id_rng_ck_spozor CHECK (id_sponzor >= 4000 AND id_sponzor <= 4999),
+   ADD CONSTRAINT payout_ck_spozor CHECK (isplacen_novac >= 500000);
 
 ALTER TABLE utrka
-   ADD CONSTRAINT id_len_ck CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck CHECK (id >= 3000 AND id <= 3999);
+   ADD CONSTRAINT id_len_ck_utrka CHECK (length(id_utrka) = 4),
+   ADD CONSTRAINT id_rng_ck_utrka CHECK (id_utrka >= 3000 AND id_utrka <= 3499);
+
+ALTER TABLE vikend
+   ADD CONSTRAINT id_len_ck_vikend CHECK (length(id_vikend) BETWEEN 1 AND 2),
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id_vikend >= 1 AND id_vikend <= 99);
 
 
 -- POPUNJAVANJE TABLICE // WIP 
@@ -143,43 +148,26 @@ INSERT INTO tim VALUES  (id_tim, naziv, voditelj, pobjede, osvojeno_podija, sjed
                         (111, 'Sauber F1 Team', 'Monisha Kaltenborn', 0, 10, 'Hinwil, Švicarska', 'Sauber C37', 373),
                         (112, 'Force India F1 Team', 'Colin Kolles', 0, 6, 'Silverstone, Northamptonshire, Velika Britanija', 'Force India VJM11', 212),
                         (113, 'Red Bull Toro Rosso Honda', 'Franz Tost', 1, 2, 'Faenza, Italija', 'Toro Rosso STR14', 259),
-                        -- (114,'Team Penske', 'Tim Cindric', 1, 0, 'Mooresville, North Carolina, Sjedinjene Američke Države', 'sasija', 41)  <- Tim iz 1970-ih
-                        (115, 'Haas F1 Team', 'Günther Steiner', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'VF-22', 122);
-                        (111, 'Manor Racing MRT', 'Dave Ryan', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'MRT05', 21),
-                        (111, 'Marussia F1 Team', 'John Booth', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'MR03B', 74),
-                        (111, 'HRT Formula 1 Team', 'Colin Kolles', 0, 0, 'Madrid, Španjolska', 'F112', 56),
-                        (111, 'Caterham F1 Team', 'Tony Fernandes', 0, 0, 'Leafield, Oxfordshire, Velika Britanija', 'Caterham CT5', 94),
-                        (111, 'Lotus F1 Team', 'Gérard Lopez', 2, 25, 'Enstone, Oxfordshire, Velika Britanija', 'E23', 77);
-
-                         
-
-                      /*
-                      (100,'Red Bull Racing Oracle', 'Christian Horner', 62, 170, 'Christian Horner', 'Red Bull RB18',286),
-                      (106,'Alfa Romeo Racing Orlen', 'Frédéric Vasseur', 10, 26, 'Hinwil, Švicarska', 'Alfa Romeo C39', 131),
-                       (109,'Renault DP World F1 Team', 'Cyril Abiteboul', 35, 100, ' Enstone, Oxfordshire, Velika Britanija', '	Renault R.S.20', 383),
-                        (110,'BWT Racing Point F1 Team',NULL, 1, 4, 'Silverstone, Velika Britanija', 'Racing Point RP19', 47),
-                      */
+                        (114, 'Haas F1 Team', 'Günther Steiner', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'VF-22', 122);
+                        (115, 'Manor Racing MRT', 'Dave Ryan', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'MRT05', 21),
+                        (116, 'Marussia F1 Team', 'John Booth', 0, 0, 'Banbury, Oxfordshire, Velika Britanija', 'MR03B', 74),
+                        (117, 'HRT Formula 1 Team', 'Colin Kolles', 0, 0, 'Madrid, Španjolska', 'F112', 56),
+                        (118, 'Caterham F1 Team', 'Tony Fernandes', 0, 0, 'Leafield, Oxfordshire, Velika Britanija', 'Caterham CT5', 94),
+                        (119, 'Lotus F1 Team', 'Gérard Lopez', 2, 25, 'Enstone, Oxfordshire, Velika Britanija', 'E23', 77);
 
 
-INSERT INTO vozac VALUES   /*2017*/
-                           (id, id_tim,   id_auto,  'Felipe', 'Massa', 19,  '25.4.1981.','brazilsko', 0, 41, 1167, 15),
-                           (id, id_tim,   id_auto,  'Jolyon', 'Palmer', 30,  '20.1.1991.','britansko', 0, 0, 35, 0)
-                           (id, id_tim,   id_auto,  'Pascal', 'Wehrlein', 94,  '18.10.1994.','njemačko', 0, 3, 6, 3),
-                           (id, id_tim,   id_auto,  'Daniil', 'Kvyat', 26,  '26.4.1994.','ruska', 0, 3, 202, 1),
-                           (id, id_tim,   id_auto,  'Antonio' , 'Giovinazzi', 99,  '14.12.1993.','talijanska', 0, 0, 21, 0),
-
-                           /*2016*/
+INSERT INTO vozac VALUES -- // 2016 \\
                            (id, id_tim,   id_auto,  'Jenson', 'Button', 22,  '19.1.1980.','britanska', 1, 50, 1235, 8)                           
                            (id, id_tim,   id_auto,  'Esteban', 'Gutierrez', 21,  '5.8.1991.','meksički', 0, 0, 6, 1),                           
                            (id, id_tim,   id_auto,  'Rio', 'Haryanto', 88,  '22.1.1993.','indonezijsko', 0, 0, 0, 0),
 
-                           /*2015*/
+                         --  // 2015 \\
                            (id, id_tim,   id_auto,  'Roberto', 'Merhi', 98,  '22.3.1991.','španjolsko', 0, 0, 0, 0),
                            (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  '27.6.1985.','njemačko', 1, 57, 1594.5, 20),
                            (id, id_tim,   id_auto,  'Felipe', 'Nasr', 12,  '21.8.1992.','brazilsko', 0, 0, 29, 0),
-                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.','venecuelanski', 0, 1, 76, 0)
-                           (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  '25.9.1991.','američko', 0, 25, osvojeno_bodova, odvozeno_najbrzih_krugova)x
-                           (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
+                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.','venecuelanski', 0, 1, 76, 0),
+                           (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  '25.9.1991.','američko', 0, 25, osvojeno_bodova, odvozeno_najbrzih_krugova),
+                           (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
                            (id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja','nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
 
 INSERT INTO auto VALUES (id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma);
@@ -274,6 +262,7 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sak
                           (1032, 'Korean International Circuit 2010-2022', 'Yeongam, South Korea', 5615, 2),
                           (1033, 'Buddh International Circuit 2011-2022', 'Greater Noida, India', 5125, 2),
                           (1034, 'Valencia Street Circuit 2008-2012', 'Valencia, Spain', 5419, 2);
+                          -- Ugašene novije staze (nakon 2016.)
 
 
 INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum);

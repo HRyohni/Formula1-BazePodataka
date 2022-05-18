@@ -195,8 +195,8 @@ INSERT INTO vozac VALUES   (id_vozac, id_auto, ime, prezime, odabrani_broj, datu
                            (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  '25.4.1990.','francusko', 0, 0, 51, 0),
                            (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  '3.8.1989.','francusko', 0, 0, 2, 0),
                            (id, id_tim,   id_auto,  'Charles', 'Pic', 99,  '15.2.1990.','francusko', 0, 0, 0, 0),
-                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2)
-                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', odabrani_broj,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0)
+                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2),
+                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', odabrani_broj,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0);
    
 
 INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
@@ -280,13 +280,10 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
 
 
 -- STAZE // SVE OD 2012 DO 2022 // NEKE SU SE MJENJALE KROZ GODINE ALI "FOR SAKE OF BREVITY" NECEMO IH UBACIVATI KAO ODVOJENE STAZE.
-INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sakhir, Bahrain', 5412, 3),
-                          -- (1002, 'Jeddah Corniche Circuit', 'Jeddah, Saudi Arabia', 6174, 3),
+INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit', 'Sakhir, Bahrain', 5412, 3),
                           (1003, 'Albert Park Circuit', 'Melbourne, Australia', 5278, 3),
-                          -- (1004, 'Autodromo Enzo e Dino Ferrari 2008-2022', 'Imola, San Marino', 4909, 1),
-                          -- (1005, 'Miami International Autodrome', 'Miami, USA', 5412, 3),
                           (1006, 'Circuit de Barcelona-Catalunya 2021-2022', 'Montmeló, Spain', 4675, 2),
-                          (1007, 'Circuit de Monte Carlo 2015-2022', 'Monte Carlo, Monaco', 3337, 1),
+                          (1007, 'Circuit de Monte Carlo', 'Monte Carlo, Monaco', 3337, 1),
                           (1008, 'Baku City Circuit', 'Baku, Azerbaijan', 6003, 2),
                           (1009, 'Circuit Gilles-Villeneuve', 'Montreal, Canada', 4361, 2),
                           (1010, 'Silverstone Circuit', 'Silverstone, UK', 5891, 2),
@@ -294,7 +291,6 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sak
                           (1012, 'Circuit Paul Ricard', 'Le Castellet, France', 5842, 2),
                           (1013, 'Hungaroring', 'Mogyoród, Hungary', 4381, 1),
                           (1014, 'Circuit Spa-Francorchamps', 'Stavelot, Belgium', 7004, 2),
-                          -- (1015, 'Circuit Zandvoort', 'Zandvoort, Netherlands', 4259, 2),
                           (1016, 'Autodromo Nazionale Monza', 'Monza, Italy', 5793, 2),
                           (1017, 'Sochi Autodrom', 'Sochi, Russia', 5848, 2),
                           (1018, 'Marina Bay Circuit', 'Marina Bay, Singapore', 5063, 3),
@@ -303,22 +299,19 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sak
                           (1021, 'Autódromo Hermanos Rodríguez', 'Mexico City, Mexico', 4304, 1),
                           (1022, 'Autódromo José Carlos Pace', 'São Paulo, Brazil', 4309, 2),
                           (1023, 'Yas Marina Circuit', 'Yas Island', 5281, 2),
-                          (1023, 'Autodromo do Algarve 2008-2022', 'Portimão, Portugal', 4653, 2),
-                          -- (1024, 'Istanbul Park 2005-2022', 'Istanbul, Turkey', 5338, 2),
-                          (1025, 'Losail International Circuit 2004-2022', 'Lusail, Qatar', 5380, 1),
-                          -- (1026, 'Mugello 1974-2022', 'Scarperia e San Piero, Italy', 5245, 1),
-                          (1027, 'Nürburgring 2002-2022', 'Nürburg, Germany', 5148, 2),
-                          -- (1028, 'Bahrain International Circuit (OUTER)', 'Sakhir, Bahrain', 3543, 2),
-                          (1029, 'Hockenheimring 2002-2022', 'Hockenheim, Germany', 4574, 2),
-                          (1030, 'Shanghai International Circuit 2004-2022', 'Shanghai, China', 5451, 2),
-                          (1031, 'Sepang International Circuit 1999-2022', 'Sepang, Malaysia', 5543, 2),
-                          (1032, 'Korean International Circuit 2010-2022', 'Yeongam, South Korea', 5615, 2),
-                          (1033, 'Buddh International Circuit 2011-2022', 'Greater Noida, India', 5125, 2),
-                          (1034, 'Valencia Street Circuit 2008-2012', 'Valencia, Spain', 5419, 2);
-                          -- Ugašene novije staze (nakon 2015.)
+                          (1023, 'Autodromo do Algarve', 'Portimão, Portugal', 4653, 2),
+                          (1025, 'Losail International Circuit', 'Lusail, Qatar', 5380, 1),
+                          (1027, 'Nürburgring', 'Nürburg, Germany', 5148, 2),
+                          (1029, 'Hockenheimring', 'Hockenheim, Germany', 4574, 2),
+                          (1030, 'Shanghai International Circuit', 'Shanghai, China', 5451, 2),
+                          (1031, 'Sepang International Circuit', 'Sepang, Malaysia', 5543, 2),
+                          (1032, 'Korean International Circuit', 'Yeongam, South Korea', 5615, 2),
+                          (1033, 'Buddh International Circuit', 'Greater Noida, India', 5125, 2),
+                          (1034, 'Valencia Street Circuit', 'Valencia, Spain', 5419, 2);
+                          -- Izbrisane ugašene staze i datumi promjena staza
 
 
-INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum);
+INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, krugova_vozeno, izlazaka_na_stazu, datum);
 INSERT INTO trening  VALUES (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
 
 
@@ -329,63 +322,40 @@ INSERT INTO utrka  VALUES
                           (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199, 2013-03-24),
                           (3103, '2013 China GP', pobjednik, 56, 01:36:26.945, 00:01:36.808, 2013-04-14),
                           (3104, '2013 Bahrain GP', pobjednik, 57, 01:36:00.498, 00:01:36.961, 2013-04-21),
-                          (3105, '2013 Spain GP', pobjednik, 66, 01:39:16.596, 00:01:26.217, 2013-05-12),
                           (3106, '2013 Monaco GP', pobjednik, 78, 02:17:52.056, 00:01:18.133, 2013-05-26),
                           (3107, '2013 Canada GP', pobjednik, 70, 01:32:09.143, 00:01:16.182, 2013-06-09),
                           (3108, '2013 Great Britain GP', pobjednik, 52, 01:32:59.456, 00:01:33.401, 2013-06-30),
                           (3109, '2013 Germany GP', pobjednik, 60, 01:41:14.711, 00:01:33.468, 2013-07-07),
-                          (3110, '2013 Hungary GP', pobjednik, 70, 01:42:29.445, 00:01:24.069, 2013-07-28),
-                          (3111, '2013 Belgium GP', pobjednik, 44, 01:23:42.196, 00:01:50.756, 2013-08-25),
-                          (3112, '2013 Italy GP', pobjednik, 53, 01:18:33.352, 00:01:25.849, 2013-09-08),
                           (3113, '2013 Singapore GP', pobjednik, 61, 01:59:13.132, 00:01:48.574, 2013-09-22),
-                          (3114, '2013 Korea GP', pobjednik, 55, 01:43:13.701, 00:01:41.380, 2013-10-06),
                           (3115, '2013 Japan GP', pobjednik, 53, 01:26:49.301, 00:01:34.587, 2013-10-13),
                           (3116, '2013 India GP', pobjednik, 60, 01:31:12.187, 00:01:27:679, 2013-10-27),
                           (3117, '2013 Abu Dhabi GP', pobjednik, 55, 01:38:06.106, 00:01:43:434, 2013-11-03),
-                          (3118, '2013 United States GP', pobjednik, 56, 01:39:17.148, 00:01:39.856, 2013-11-17),
                           (3119, '2013 Brazil GP', pobjednik, 71, 01:32:26.300, 00:01:15.436, 2013-11-24),
 
 --                         // GODINA: 2014 \\
                           (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.478, 2014-03-16),
-                          (3201, '2014 Malaysia GP', pobjednik, 56, 01:40:25.974, 00:01:43.066, 2014-03-30),
-                          (3202, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020, 2014-04-06),
-                          (3203, '2014 China GP', pobjednik, 54, 01:33:28.338, 00:01:40.402, 2014-04-20),
-                          (3204, '2014 Spain GP', pobjednik, 66, 01:41:05.155, 00:01:28.198, 2014-05-11),
-                          (3205, '2014 Monaco GP', pobjednik, 78, 01:49:27.661, 00:01:18.479, 2014-05-25),
-                          (3206, '2014 Canada GP', pobjednik, 70, 01:39:12.830, 00:01:18.504, 2014-06-08),
-                          (3207, '2014 Austria GP', pobjednik, 71, 01:27:54.976, 00:01:12.142, 2014-06-22),
-                          (3208, '2014 Great Britain GP', pobjednik, 52, 02:26:52.094, 00:01:37.176, 2014-07-06),
-                          (3209, '2014 Germany GP', pobjednik, 67, 01:33:42.914, 00:01:19.908, 2014-07-20),
-                          (3210, '2014 Hungary GP', pobjednik, 70, 01:53:05.058, 00:01:25.724, 2014-07-27),
-                          (3211, '2014 Belgium GP', pobjednik, 44, 01:24:36.556, 00:01:50.511, 2014-08-24),
-                          (3212, '2014 Italy GP', pobjednik, 53, 01:19:10.236, 00:01:28.004, 2014-09-07),
-                          (3213, '2014 Singapore GP', pobjednik, 60, 02:00:04.795, 00:01:50.417, 2014-09-21),
-                          (3214, '2014 Japan GP', pobjednik, 44, 01:51:43.021, 00:01:51.600, 2014-10-05),
-                          (3215, '2014 Russia GP', pobjednik, 53, 01:31:50.744, 00:01:40.896, 2014-10-12),
-                          (3216, '2014 United States GP', pobjednik, 56, 01:40:04.785, 00:01:41.379, 2014-11-02),
-                          (3217, '2014 Brazil GP', pobjednik, 71, 01:30:02.555, 00:01:13.555, 2014-11-09),
-                          (3218, '2014 Abu Dhabi GP', POBJEDNIK, 55, 01:39:02.619, 00:01:44.496, 2014-11-23),
+                          (3201, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020, 2014-04-06),
+                          (3202, '2014 China GP', pobjednik, 54, 01:33:28.338, 00:01:40.402, 2014-04-20),
+                          (3203, '2014 Monaco GP', pobjednik, 78, 01:49:27.661, 00:01:18.479, 2014-05-25),
+                          (3204, '2014 Austria GP', pobjednik, 71, 01:27:54.976, 00:01:12.142, 2014-06-22),
+                          (3205, '2014 Germany GP', pobjednik, 67, 01:33:42.914, 00:01:19.908, 2014-07-20),
+                          (3206, '2014 Belgium GP', pobjednik, 44, 01:24:36.556, 00:01:50.511, 2014-08-24),
+                          (3207, '2014 Italy GP', pobjednik, 53, 01:19:10.236, 00:01:28.004, 2014-09-07),
+                          (3208, '2014 Singapore GP', pobjednik, 60, 02:00:04.795, 00:01:50.417, 2014-09-21),
+                          (3209, '2014 Abu Dhabi GP', POBJEDNIK, 55, 01:39:02.619, 00:01:44.496, 2014-11-23),
 
 --                         // GODINA: 2015 \\
                           (3300, '2015 Australia GP', pobjednik, 58, 01:31:54.067, 00:01:30.945, 2015-03-15),
-                          (3301, '2015 Malaysia GP', pobjednik, 56, 01:41:05.793, 00:01:42.062, 2015-03-29),
-                          (3302, '2015 China GP', pobjednik, 56, 01:39:42.008, 00:01:42.208, 2015-04-12),
-                          (3303, '2015 Bahrain GP', pobjednik, 57, 01:35:05.809, 00:01:36.311, 2015-04-19),
-                          (3304, '2015 Spain GP', pobjednik, 66, 01:41:12.555, 00:01:28.270, 2015-05-10),
-                          (3305, '2015 Monaco GP', pobjednik, 78, 01:49:18.420, 00:01:18.063, 2015-05-24),
-                          (3306, '2015 Canada GP', pobjednik, 70, 01:31:53.145, 00:01:16.987, 2015-06-07),
-                          (3307, '2015 Austria GP', pobjednik, 71, 01:30:16.930, 00:01:11.235, 2015-06-21),
-                          (3308, '2015 Great Britain GP', pobjednik, 52, 01:31:27.729, 00:01:37.093, 2015-07-05),
-                          (3309, '2015 Hungary GP', pobjednik, 69, 01:46:09.985, 00:01:24.821, 2015-07-26),
-                          (3310, '2015 Belgium GP', pobjednik, 43, 01:23:40.387, 00:01:52.416, 2015-08-23),
-                          (3311, '2015 Italy GP', pobjednik, 53, 01:18:00.688, 00:01:26.672, 2015-09-06),
-                          (3312, '2015 Singapore GP', pobjednik, 61, 02:01:22.118, 00:01:50.041, 2015-09-20),
-                          (3313, '2015 Japan GP', pobjednik, 53, 01:28:06.508, 00:01:36.145, 2015-09-27),
-                          (3314, '2015 Russia GP', pobjednik, 53, 01:37:11.024, 00:01:40.071, 2015-10-11),
-                          (3315, '2015 United States GP', pobjednik, 56, 01:50:52.703, 00:01:40.666, 2015-10-25),
-                          (3316, '2015 Mexico GP', pobjednik, 71, 01:42:35.038, 00:01:20.521, 2015-11-01),
-                          (3317, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832, 2015-11-15),
-                          (3318, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
+                          (3301, '2015 Monaco GP', pobjednik, 78, 01:49:18.420, 00:01:18.063, 2015-05-24),
+                          (3302, '2015 Canada GP', pobjednik, 70, 01:31:53.145, 00:01:16.987, 2015-06-07),
+                          (3303, '2015 Great Britain GP', pobjednik, 52, 01:31:27.729, 00:01:37.093, 2015-07-05),
+                          (3304, '2015 Belgium GP', pobjednik, 43, 01:23:40.387, 00:01:52.416, 2015-08-23),
+                          (3305, '2015 Italy GP', pobjednik, 53, 01:18:00.688, 00:01:26.672, 2015-09-06),
+                          (3306, '2015 Singapore GP', pobjednik, 61, 02:01:22.118, 00:01:50.041, 2015-09-20),
+                          (3307, '2015 Japan GP', pobjednik, 53, 01:28:06.508, 00:01:36.145, 2015-09-27),
+                          (3308, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832, 2015-11-15),
+                          (3309, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
+                          -- Smanjena količina utrka
 
 
 -- SEZONE // 

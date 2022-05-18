@@ -74,10 +74,8 @@ CREATE TABLE staza(
 
 CREATE TABLE kvalifikacija(
    id_quali INTEGER PRIMARY KEY,
-   sesija_kvalifikacije CHAR(5) NOT NULL,
    krugova_vozeno CHAR(5) NOT NULL,
    izlazaka_na_stazu CHAR(5) NOT NULL,
-   datum DATE -- fixat datum
 );
 
 CREATE TABLE trening(
@@ -85,7 +83,6 @@ CREATE TABLE trening(
    odvozeno_krugova CHAR(5) NOT NULL,
    najbrzi_krug CHAR(5) NOT NULL,
    izlazaka_na_stazu CHAR(5) NOT NULL,
-   datum DATE NOT NULL -- datum fixat
 );
 
 CREATE TABLE utrka(
@@ -93,9 +90,8 @@ CREATE TABLE utrka(
    ime_nagrade VARCHAR(30),
    pobjednik INTEGER,
    broj_krugova INTEGER NOT NULL,
-   vrijeme_vozeno TIME NOT NULL, -- fixat
+   vrijeme_vozeno TIME NOT NULL,
    najbrzi_krug TIME NOT NULL,
-   datum DATE NOT NULL, -- fixat
    FOREIGN KEY (pobjednik) REFERENCES vozac(id_vozac)
 );
 
@@ -105,13 +101,17 @@ CREATE TABLE sezona(
 );
 
 CREATE TABLE prvak(
+   id_prvak INTEGER PRIMARY KEY,
    id_vozac_u_timu FOREIGN KEY, -- Vozač za tim
-   id_tim FOREIGN KEY -- Konstruktor
+   id_tim FOREIGN KEY, -- Konstruktor
    id_sezona FOREIGN KEY
 );
 
 CREATE TABLE vikend(
    id_vikend INTEGER PRIMARY KEY,
+   datum_pocetka DATE,
+   datum_kraja DATE,
+   id_staza FOREIGN KEY,
    id_trening FOREIGN KEY,
    id_quali FOREIGN KEY,
    id_utrka FOREIGN KEY,
@@ -196,7 +196,7 @@ INSERT INTO vozac VALUES   (id_vozac, id_auto, ime, prezime, odabrani_broj, datu
                            (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  '3.8.1989.','francusko', 0, 0, 2, 0),
                            (id, id_tim,   id_auto,  'Charles', 'Pic', 99,  '15.2.1990.','francusko', 0, 0, 0, 0),
                            (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2),
-                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', odabrani_broj,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0);
+                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', 21,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0);
    
 
 INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
@@ -318,44 +318,44 @@ INSERT INTO trening  VALUES (id_trening, odvozeno_krugova, najbrzi_krug, izlazak
 -- UTRKE
 INSERT INTO utrka  VALUES
 --                         // GODINA: 2013 \\
-                          (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274, 2013-03-17),
-                          (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199, 2013-03-24),
-                          (3103, '2013 China GP', pobjednik, 56, 01:36:26.945, 00:01:36.808, 2013-04-14),
-                          (3104, '2013 Bahrain GP', pobjednik, 57, 01:36:00.498, 00:01:36.961, 2013-04-21),
-                          (3106, '2013 Monaco GP', pobjednik, 78, 02:17:52.056, 00:01:18.133, 2013-05-26),
-                          (3107, '2013 Canada GP', pobjednik, 70, 01:32:09.143, 00:01:16.182, 2013-06-09),
-                          (3108, '2013 Great Britain GP', pobjednik, 52, 01:32:59.456, 00:01:33.401, 2013-06-30),
-                          (3109, '2013 Germany GP', pobjednik, 60, 01:41:14.711, 00:01:33.468, 2013-07-07),
-                          (3113, '2013 Singapore GP', pobjednik, 61, 01:59:13.132, 00:01:48.574, 2013-09-22),
-                          (3115, '2013 Japan GP', pobjednik, 53, 01:26:49.301, 00:01:34.587, 2013-10-13),
-                          (3116, '2013 India GP', pobjednik, 60, 01:31:12.187, 00:01:27:679, 2013-10-27),
-                          (3117, '2013 Abu Dhabi GP', pobjednik, 55, 01:38:06.106, 00:01:43:434, 2013-11-03),
-                          (3119, '2013 Brazil GP', pobjednik, 71, 01:32:26.300, 00:01:15.436, 2013-11-24),
+                          (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274),
+                          (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199),
+                          (3103, '2013 China GP', pobjednik, 56, 01:36:26.945, 00:01:36.808),
+                          (3104, '2013 Bahrain GP', pobjednik, 57, 01:36:00.498, 00:01:36.961),
+                          (3106, '2013 Monaco GP', pobjednik, 78, 02:17:52.056, 00:01:18.133),
+                          (3107, '2013 Canada GP', pobjednik, 70, 01:32:09.143, 00:01:16.182),
+                          (3108, '2013 Great Britain GP', pobjednik, 52, 01:32:59.456, 00:01:33.401),
+                          (3109, '2013 Germany GP', pobjednik, 60, 01:41:14.711, 00:01:33.468),
+                          (3113, '2013 Singapore GP', pobjednik, 61, 01:59:13.132, 00:01:48.574),
+                          (3115, '2013 Japan GP', pobjednik, 53, 01:26:49.301, 00:01:34.587),
+                          (3116, '2013 India GP', pobjednik, 60, 01:31:12.187, 00:01:27:679),
+                          (3117, '2013 Abu Dhabi GP', pobjednik, 55, 01:38:06.106, 00:01:43:434),
+                          (3119, '2013 Brazil GP', pobjednik, 71, 01:32:26.300, 00:01:15.436),
 
 --                         // GODINA: 2014 \\
-                          (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.478, 2014-03-16),
-                          (3201, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020, 2014-04-06),
-                          (3202, '2014 China GP', pobjednik, 54, 01:33:28.338, 00:01:40.402, 2014-04-20),
-                          (3203, '2014 Monaco GP', pobjednik, 78, 01:49:27.661, 00:01:18.479, 2014-05-25),
-                          (3204, '2014 Austria GP', pobjednik, 71, 01:27:54.976, 00:01:12.142, 2014-06-22),
-                          (3205, '2014 Germany GP', pobjednik, 67, 01:33:42.914, 00:01:19.908, 2014-07-20),
-                          (3206, '2014 Belgium GP', pobjednik, 44, 01:24:36.556, 00:01:50.511, 2014-08-24),
-                          (3207, '2014 Italy GP', pobjednik, 53, 01:19:10.236, 00:01:28.004, 2014-09-07),
-                          (3208, '2014 Singapore GP', pobjednik, 60, 02:00:04.795, 00:01:50.417, 2014-09-21),
-                          (3209, '2014 Abu Dhabi GP', POBJEDNIK, 55, 01:39:02.619, 00:01:44.496, 2014-11-23),
+                          (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.4784),
+                          (3201, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020),
+                          (3202, '2014 China GP', pobjednik, 54, 01:33:28.338, 00:01:40.402),
+                          (3203, '2014 Monaco GP', pobjednik, 78, 01:49:27.661, 00:01:18.4794),
+                          (3204, '2014 Austria GP', pobjednik, 71, 01:27:54.976, 00:01:12.142),
+                          (3205, '2014 Germany GP', pobjednik, 67, 01:33:42.914, 00:01:19.908),
+                          (3206, '2014 Belgium GP', pobjednik, 44, 01:24:36.556, 00:01:50.511),
+                          (3207, '2014 Italy GP', pobjednik, 53, 01:19:10.236, 00:01:28.004),
+                          (3208, '2014 Singapore GP', pobjednik, 60, 02:00:04.795, 00:01:50.417),
+                          (3209, '2014 Abu Dhabi GP', POBJEDNIK, 55, 01:39:02.619, 00:01:44.496),
 
 --                         // GODINA: 2015 \\
-                          (3300, '2015 Australia GP', pobjednik, 58, 01:31:54.067, 00:01:30.945, 2015-03-15),
-                          (3301, '2015 Monaco GP', pobjednik, 78, 01:49:18.420, 00:01:18.063, 2015-05-24),
-                          (3302, '2015 Canada GP', pobjednik, 70, 01:31:53.145, 00:01:16.987, 2015-06-07),
-                          (3303, '2015 Great Britain GP', pobjednik, 52, 01:31:27.729, 00:01:37.093, 2015-07-05),
-                          (3304, '2015 Belgium GP', pobjednik, 43, 01:23:40.387, 00:01:52.416, 2015-08-23),
-                          (3305, '2015 Italy GP', pobjednik, 53, 01:18:00.688, 00:01:26.672, 2015-09-06),
-                          (3306, '2015 Singapore GP', pobjednik, 61, 02:01:22.118, 00:01:50.041, 2015-09-20),
-                          (3307, '2015 Japan GP', pobjednik, 53, 01:28:06.508, 00:01:36.145, 2015-09-27),
-                          (3308, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832, 2015-11-15),
-                          (3309, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
-                          -- Smanjena količina utrka
+                          (3300, '2015 Australia GP', pobjednik, 58, 01:31:54.067, 00:01:30.945),
+                          (3301, '2015 Monaco GP', pobjednik, 78, 01:49:18.420, 00:01:18.063),
+                          (3302, '2015 Canada GP', pobjednik, 70, 01:31:53.145, 00:01:16.987),
+                          (3303, '2015 Great Britain GP', pobjednik, 52, 01:31:27.729, 00:01:37.093),
+                          (3304, '2015 Belgium GP', pobjednik, 43, 01:23:40.387, 00:01:52.416),
+                          (3305, '2015 Italy GP', pobjednik, 53, 01:18:00.688, 00:01:26.672),
+                          (3306, '2015 Singapore GP', pobjednik, 61, 02:01:22.118, 00:01:50.041),
+                          (3307, '2015 Japan GP', pobjednik, 53, 01:28:06.508, 00:01:36.145),
+                          (3308, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832),
+                          (3309, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356);
+                          -- Izbačeni datumi (premješteni u relaciju vikend)
 
 
 -- SEZONE // 

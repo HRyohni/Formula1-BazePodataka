@@ -165,28 +165,9 @@ INSERT INTO tim VALUES  (id_tim, naziv, voditelj, pobjede, osvojeno_podija, sjed
                         (118, 'Caterham F1 Team', 'Tony Fernandes', 0, 0, 'Leafield, Oxfordshire, Velika Britanija', 'Caterham CT5', 94),
                         (119, 'Lotus F1 Team', 'Gérard Lopez', 2, 25, 'Enstone, Oxfordshire, Velika Britanija', 'E23', 77);
 
-                           /*žnj*/
-INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, '16.10.1997.', 'Monako', 0, 16, 631, 7),
-                           (id_vozac, id_tim,id_auta, 'Max', 'Verstappen', 1, '30.0.1997.', 'nizozemsko', 1, 62, 1616.5, 17),
-                           (id, id_tim,   id_auto,  'Sergio', 'Pérez', 11,  '26.1.1990', 0, 15, 896, 6),
-                           (id, id_tim,   id_auto,  'Carlos', 'Sainz', 55,'1.9.1994.', 0, 7, 554.5, 1),
-                           (id, id_tim,   id_auto,  'Lewis', 'Hamilton', 44,'7.1.1985.', 7, 182, 4165.5, 59),
-                           (id, id_tim,   id_auto,  'Valtteri', 'Bottas', 77,'28.8.1989.', 0, 67, 1697, 19),
-                           (id, id_tim,   id_auto,  'Esteban', 'Ocon', 31,'17.9.1996', 0, 2, 272, 0),
-                           (id, id_tim,   id_auto,  'Kevin', 'Magnussen',20,'5.10.1992.','dansko', 0, 1, 173, 2),
-                             /*2017*/
-                           (id, id_tim,   id_auto,  'Felipe', 'Massa', 19,  '25.4.1981.', 'brazilsko', 0, 41, 1167, 15),
-                           (id, id_tim,   id_auto,  'Jolyon', 'Palmer', 30,  '20.1.1991.', 'britansko', 0, 0, 35, 0)
-                           (id, id_tim,   id_auto,  'Pascal', 'Wehrlein', 94,  '18.10.1994.', 'njemačko', 0, 3, 6, 3),
-                           (id, id_tim,   id_auto,  'Daniil', 'Kvyat', 26,  '26.4.1994.', 'ruska', 0, 3, 202, 1),
-                           (id, id_tim,   id_auto,  'Antonio' , 'Giovinazzi', 99,  '14.12.1993.', 'talijanska', 0, 0, 21, 0),
 
-                           /*2016*/
-                           (id, id_tim,   id_auto,  'Jenson', 'Button', 22,  '19.1.1980.', 'britanska', 1, 50, 1235, 8)                           
-                           (id, id_tim,   id_auto,  'Esteban', 'Gutierrez', 21,  '5.8.1991.','meksički', 0, 0, 6, 1),                           
-                           (id, id_tim,   id_auto,  'Rio', 'Haryanto', 88,  '22.1.1993.', 'indonezijsko', 0, 0, 0, 0),
-
-                           /*2015*/
+INSERT INTO vozac VALUES   (id_vozac, id_auto, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
+--                         // 2015 \\
                            (id, id_tim,   id_auto,  'Roberto', 'Merhi', 98,  '22.3.1991.', 'španjolsko', 0, 0, 0, 0),
                            (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  '27.6.1985.', 'njemačko', 1, 57, 1594.5, 20),
                            (id, id_tim,   id_auto,  'Felipe', 'Nasr', 12,  '21.8.1992.', 'brazilsko', 0, 0, 29, 0),
@@ -194,7 +175,7 @@ INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, 
                            (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  '25.9.1991.', 'američko', 0, 2, 81, 0),
                            (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  '28.6.1991.', 'britansko', 0, 0, 0, 0),
                            
-                           /*2014*/
+--                         // 2014 \\
                            (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  '25.4.1990.',' francukso', 0, 0, 51, 0),
                            (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.','venecuelanski', 0, 1, 76, 0),
                            (id, id_tim,   id_auto,  'Romain', 'Grosjean', 8,  '17.4.1986.',' francusko', 0, 10, 391, 1),
@@ -204,7 +185,7 @@ INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, 
                            (id, id_tim,   id_auto,  'Kamui', 'Kobayashi', 10,  '13.9.1986.',' japansko', 0, 1, 125, 1),
                            (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  '28.6.1991.',' britansko', 0, 0, 0, 0),
                            
-                           /*2013*/
+--                         // 2013 \\
                            (id, id_tim,   id_auto,  'Mark', 'Webber', 17,'27.8.1976.','australsko', 0, 42, 1047.5, 19),
                            (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  '27.6.1985.','njemačko', 1, 30, 1594.5, 20),
                            (id, id_tim,   id_auto,  'Felipe', 'Massa', 19,  '25.4.1981.','brazilsko', 0, 41, 1167, 15),
@@ -214,69 +195,34 @@ INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, 
                            (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  '25.4.1990.','francusko', 0, 0, 51, 0),
                            (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  '3.8.1989.','francusko', 0, 0, 2, 0),
                            (id, id_tim,   id_auto,  'Charles', 'Pic', 99,  '15.2.1990.','francusko', 0, 0, 0, 0),
-                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2) /* od ovce car nummber*/
-                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', odabrani_broj,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0), /* na kvadrat*/
-                           
-                           /*2012*/
-                           (id, id_tim,   id_auto,  'Jerome', "d'Ambrosio", 64,'27.12.1985.',' belgijsko', 0, 0, 0, 0), /*nezz jel moze '*/
-                           (id, id_tim,   id_auto,  'Bruno', 'Senna', 13,  '15.10.1983.',' brazilsko', 0, 0, 33, 1),
-                           (id, id_tim,   id_auto,  'Vitaly', 'Petrov', 11,  '8.9.1984.',' rusko', 0, 1, 64, 1),
-                           (id, id_tim,   id_auto,  'Timo', 'Glock', 16,  '18.3.1982.',' njemačko', 0, 3, 51, 1),
-                           (id, id_tim,   id_auto,  'Narain', 'Karthikeyan', odabrani_broj,  '14.1.1977.',' indijsko', 0, 0, 5, 0), /*indijsko?*/
-                           (id, id_tim,   id_auto,  'Pedro', 'de la Rosa', odabrani_broj,  '24.2.1971.',' španjolsko', 0, 1, 35, 1),
-                           (id, id_tim,   id_auto,  'Michael', 'Schumacher', 7,  '3.1.1969.',' njemačko', 7, 155, 1566, 77),
-                           /*(id, id_tim,   id_auto,  'ime', 'prezime', odabrani_broj,  'datum_rodenja',' nacionalnost', osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)*/
+                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2)
+                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', odabrani_broj,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0)
    
---                            // GODINA: 2012 \\
-INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
-/*                             (9000, 'Ferrari F2012 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9001, 'Ferrari F2012 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9002, 'Red Bull RB8 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9003, 'Red Bull RB8 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9004, 'McLaren MP4-27 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9005, 'McLaren MP4-27 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9006, 'Williams FW34 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9007, 'Williams FW34 n.2', '2.4L NA V8', 'Pirelli'),            
-                             (9008, 'Sauber C31 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9009, 'Sauber C31 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9010, 'Toro Rosso STR7 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9011, 'Toro Rosso STR7 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9012, 'Caterham CT01 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9013, 'Caterham CT01 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9014, 'Lotus E20 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9015, 'Lotus E20 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9016, 'HRT F112 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9017, 'HRT F112 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9018, 'Marussia MR01 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9019, 'Marussia MR01 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9020, 'Mercedes AMG W03 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9021, 'Mercedes AMG W03 n.2', '2.4L NA V8', 'Pirelli'),
-                             (9022, 'Sahara Force India VJM05 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9023, 'Sahara Force India VJM05 n.2', '2.4L NA V8', 'Pirelli'), */
 
+INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
 --                            // GODINA: 2013 \\
-                             ( 9024, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9025, 'Ferrari F138 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9026, 'Red Bull RB9 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9027, 'Red Bull RB9 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9028, 'McLaren MP4-28 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9029, 'McLaren MP4-28 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9030, 'Williams FW35 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9031, 'Williams FW35 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9032, 'Sauber C32 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9033, 'Sauber C32 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9034, 'Toro Rosso STR8 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9035, 'Toro Rosso STR8 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9036, 'Caterham CT03 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9037, 'Caterham CT03 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9038, 'Lotus E21 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9039, 'Lotus E21 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9040, 'Marussia MR02 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9041, 'Marussia MR02 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9042, 'Mercedes W04 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9043, 'Mercedes W04 n.2', '2.4L NA V8', 'Pirelli'),
-                             ( 9044, 'Force India VJM06 n.1', '2.4L NA V8', 'Pirelli'),
-                             ( 9045, 'Force India VJM06 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9024, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9025, 'Ferrari F138 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9026, 'Red Bull RB9 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9027, 'Red Bull RB9 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9028, 'McLaren MP4-28 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9029, 'McLaren MP4-28 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9030, 'Williams FW35 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9031, 'Williams FW35 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9032, 'Sauber C32 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9033, 'Sauber C32 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9034, 'Toro Rosso STR8 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9035, 'Toro Rosso STR8 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9036, 'Caterham CT03 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9037, 'Caterham CT03 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9038, 'Lotus E21 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9039, 'Lotus E21 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9040, 'Marussia MR02 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9041, 'Marussia MR02 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9042, 'Mercedes W04 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9043, 'Mercedes W04 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9044, 'Force India VJM06 n.1', '2.4L NA V8', 'Pirelli'),
+                             (9045, 'Force India VJM06 n.2', '2.4L NA V8', 'Pirelli'),
 
 
 -- SPONZORI // LISTA JE SMANJENA ZBOG OGROMNE KOLIČINE PODATAKA GLEDAJUĆI DA SVAKI TIM IMA PO MINIMALNO 20 SPONZORA.
@@ -330,6 +276,7 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            (4048, 'Rexona', 80000000),
                            (4049, 'NOVA Chemicals', 93000000),
                            (4050, 'TAGHeuer', 60000000);
+                           -- Potrebno počistit višak sponzora (novijih od 2015)
 
 
 -- STAZE // SVE OD 2012 DO 2022 // NEKE SU SE MJENJALE KROZ GODINE ALI "FOR SAKE OF BREVITY" NECEMO IH UBACIVATI KAO ODVOJENE STAZE.
@@ -368,7 +315,7 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit 2005-2022', 'Sak
                           (1032, 'Korean International Circuit 2010-2022', 'Yeongam, South Korea', 5615, 2),
                           (1033, 'Buddh International Circuit 2011-2022', 'Greater Noida, India', 5125, 2),
                           (1034, 'Valencia Street Circuit 2008-2012', 'Valencia, Spain', 5419, 2);
-                          -- Ugašene novije staze (nakon 2016.)
+                          -- Ugašene novije staze (nakon 2015.)
 
 
 INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum);
@@ -376,28 +323,7 @@ INSERT INTO trening  VALUES (id_trening, odvozeno_krugova, najbrzi_krug, izlazak
 
 
 -- UTRKE
-INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
-/*                          (3001, '2012 Australia GP', pobjednik, 58, 01:34:09.565, 00:01:29.187, 2012-03-18),
-                          (3002, '2012 Malaysia GP', pobjednik, 56, 02:44:51.812, 00:01:41.680, 2012-03-25),
-                          (3003, '2012 China GP', pobjednik, 56, 01:36:26.929, 00:01:40.967, 2012-04-15),
-                          (3004, '2012 Bahrain GP', pobjednik, 57, 01:35:10.990, 00:01:36.379, 2012-04-22),
-                          (3005, '2012 Spain GP', pobjednik, 66, 01:39:09.145, 00:01:27.906, 2012-05-13),
-                          (3006, '2012 Monaco GP', pobjednik, 78, 01:46:06.557, 00:01:18.805, 2012-05-27),
-                          (3007, '2012 Canada GP', pobjednik, 70, 01:32:29.586, 00:01:15.752, 2012-06-10),
-                          (3008, '2012 Europe GP', pobjednik, 57, 01:44:16.649, 00:01:42.163, 2012-06-24),
-                          (3009, '2012 Great Britain GP', pobjednik, 52, 01:25:11.288, 00:01:34.934, 2012-07-08),
-                          (3010, '2012 Germany GP', pobjednik, 67, 01:31:05.682, 00:01:19.044, 2012-07-22),
-                          (3011, '2012 Hungary GP', pobjednik, 69, 01:41:05.503, 00:01:24.136, 2012-07-29),
-                          (3012, '2012 Belgium GP', pobjednik, 44, 01:29:08.530, 00:01:52.822, 2012-09-02),
-                          (3013, '2012 Italy GP', pobjednik, 53, 01:19:41.221, 00:01:27.239, 2012-09-09),
-                          (3014, '2012 Singapore GP', pobjednik, 59, 02:00:26.144, 00:01:51.033, 2012-09-23),
-                          (3015, '2012 Japan GP', pobjednik, 53, 01:28:56.242, 00:01:35.774, 2012-10-07),
-                          (3016, '2012 Korea GP', pobjednik, 55, 01:36:28.651, 00:01:42.037, 2012-10-14),
-                          (3017, '2012 India GP', pobjednik, 60, 01:31:10.77, 00:01:28.203, 2012-10-28),
-                          (3018, '2012 Abu Dhabi GP', pobjednik, 55, 01:45:58.667, 00:01:43.964, 2012-11-04),
-                          (3019, '2012 United States GP', pobjednik, 56, 01:35:55.269, 00:01:39.347, 2012-11-18),
-                          (3020, '2012 Brazil GP', pobjednik, 71, 01:45:22.656, 00:01:18.069, 2012-11-25), */
-
+INSERT INTO utrka  VALUES
 --                         // GODINA: 2013 \\
                           (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274, 2013-03-17),
                           (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199, 2013-03-24),
@@ -460,29 +386,6 @@ INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
                           (3316, '2015 Mexico GP', pobjednik, 71, 01:42:35.038, 00:01:20.521, 2015-11-01),
                           (3317, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832, 2015-11-15),
                           (3318, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
-
---                         // GODINA: 2016 \\
-/*                          (3400, '2016 Australia GP', pobjednik, 57, 01:48:15.565, 00:01:30.557, 2016-03-20),
-                          (3401, '2016 Bahrain GP', pobjednik, 57, 01:33:34.696, 00:01:34.158, 2016-04-03),
-                          (3402, '2016 China GP', pobjednik, 56, 01:38:53.891, 00:01:35.402, 2016-04-17),
-                          (3403, '2016 Russia GP', pobjednik, 56, 01:32:53.891, 00:01:41.997, 2016-05-01),
-                          (3404, '2016 Spain GP', pobjednik, 66, 01:41:40.017, 00:01:26.948, 2016-05-15),
-                          (3405, '2016 Monaco GP', pobjednik, 78, 01:59:29.133, 00:01:17.937, 2016-05-29),
-                          (3406, '2016 Canada GP', pobjednik, 70, 01:31:05.296, 00:01:15.981, 2016-06-12),
-                          (3407, '2016 Europe GP', pobjednik, 51, 01:32:52.366, 00:01:46.485, 2016-06-19),
-                          (3408, '2016 Austria GP', pobjednik, 71, 01:27:38.107, 00:01:08.411, 2016-07-03),
-                          (3409, '2016 Great Britain GP', pobjednik, 52, 01:34:55.831, 00:01:35.548, 2016-07-10),
-                          (3410, '2016 Hungary GP', pobjednik, 70, 01:40:30.115, 00:01:23.086, 2016-07-10),
-                          (3411, '2016 Germany GP', pobjednik, 67, 01:30:44.200, 00:01:48.442, 2016-07-24),
-                          (3412, '2016 Belgium GP', pobjednik, 44, 01:44:51.058, 00:01:51.583, 2016-07-31),
-                          (3413, '2016 Italy GP', pobjednik, 53, 01:17:28.089, 00:01:25.340, 2016-08-28),
-                          (3414, '2016 Singapore GP', pobjednik, 61, 01:55:48.950, 00:01:47.187, 2016-09-04),
-                          (3415, '2016 Malaysia GP', pobjednik, 56, 01:37:12.776, 00:01:36.424, 2016-09-18)
-                          (3416, '2016 Japan GP', pobjednik, 53, 01:26:43.333, 00:01:35.318, 2016-10-09),
-                          (3417, '2016 United States GP', pobjednik, 56, 01:38:12.618, 00:01:42.386, 2016-10-23),
-                          (3418, '2016 Mexico GP', pobjednik, 71, 01:40:31.402, 00:01:21.134, 2016-10-30),
-                          (3419, '2016 Brasil GP', pobjednik, 71, 03:01:01.355, 00:01:25.305, 2016-11-13),
-                          (3420, '2016 Abu Dhabi GP', pobjednik, 55, 01:38:04.013, 00:01:43.729, 2016-11-27); */
 
 
 -- SEZONE // 

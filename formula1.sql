@@ -229,7 +229,7 @@ INSERT INTO vozac VALUES   (id_vozac, id_tim,id_auta, 'Charles', 'Leclerc', 16, 
    
 --                            // GODINA: 2012 \\
 INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
-                             (9000, 'Ferrari F2012 n.1', '2.4L NA V8', 'Pirelli'),
+/*                             (9000, 'Ferrari F2012 n.1', '2.4L NA V8', 'Pirelli'),
                              (9001, 'Ferrari F2012 n.2', '2.4L NA V8', 'Pirelli'),
                              (9002, 'Red Bull RB8 n.1', '2.4L NA V8', 'Pirelli'),
                              (9003, 'Red Bull RB8 n.2', '2.4L NA V8', 'Pirelli'),
@@ -252,7 +252,7 @@ INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma
                              (9020, 'Mercedes AMG W03 n.1', '2.4L NA V8', 'Pirelli'),
                              (9021, 'Mercedes AMG W03 n.2', '2.4L NA V8', 'Pirelli'),
                              (9022, 'Sahara Force India VJM05 n.1', '2.4L NA V8', 'Pirelli'),
-                             (9023, 'Sahara Force India VJM05 n.2', '2.4L NA V8', 'Pirelli'),
+                             (9023, 'Sahara Force India VJM05 n.2', '2.4L NA V8', 'Pirelli'), */
 
 --                            // GODINA: 2013 \\
                              ( 9024, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
@@ -377,7 +377,7 @@ INSERT INTO trening  VALUES (id_trening, odvozeno_krugova, najbrzi_krug, izlazak
 
 -- UTRKE
 INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
-                          (3001, '2012 Australia GP', pobjednik, 58, 01:34:09.565, 00:01:29.187, 2012-03-18),
+/*                          (3001, '2012 Australia GP', pobjednik, 58, 01:34:09.565, 00:01:29.187, 2012-03-18),
                           (3002, '2012 Malaysia GP', pobjednik, 56, 02:44:51.812, 00:01:41.680, 2012-03-25),
                           (3003, '2012 China GP', pobjednik, 56, 01:36:26.929, 00:01:40.967, 2012-04-15),
                           (3004, '2012 Bahrain GP', pobjednik, 57, 01:35:10.990, 00:01:36.379, 2012-04-22),
@@ -396,7 +396,7 @@ INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
                           (3017, '2012 India GP', pobjednik, 60, 01:31:10.77, 00:01:28.203, 2012-10-28),
                           (3018, '2012 Abu Dhabi GP', pobjednik, 55, 01:45:58.667, 00:01:43.964, 2012-11-04),
                           (3019, '2012 United States GP', pobjednik, 56, 01:35:55.269, 00:01:39.347, 2012-11-18),
-                          (3020, '2012 Brazil GP', pobjednik, 71, 01:45:22.656, 00:01:18.069, 2012-11-25),
+                          (3020, '2012 Brazil GP', pobjednik, 71, 01:45:22.656, 00:01:18.069, 2012-11-25), */
 
 --                         // GODINA: 2013 \\
                           (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274, 2013-03-17),
@@ -462,7 +462,7 @@ INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
                           (3318, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356, 2015-11-29);
 
 --                         // GODINA: 2016 \\
-                          (3400, '2016 Australia GP', pobjednik, 57, 01:48:15.565, 00:01:30.557, 2016-03-20),
+/*                          (3400, '2016 Australia GP', pobjednik, 57, 01:48:15.565, 00:01:30.557, 2016-03-20),
                           (3401, '2016 Bahrain GP', pobjednik, 57, 01:33:34.696, 00:01:34.158, 2016-04-03),
                           (3402, '2016 China GP', pobjednik, 56, 01:38:53.891, 00:01:35.402, 2016-04-17),
                           (3403, '2016 Russia GP', pobjednik, 56, 01:32:53.891, 00:01:41.997, 2016-05-01),
@@ -482,13 +482,11 @@ INSERT INTO utrka  VALUES -- // GODINA: 2012 \\
                           (3417, '2016 United States GP', pobjednik, 56, 01:38:12.618, 00:01:42.386, 2016-10-23),
                           (3418, '2016 Mexico GP', pobjednik, 71, 01:40:31.402, 00:01:21.134, 2016-10-30),
                           (3419, '2016 Brasil GP', pobjednik, 71, 03:01:01.355, 00:01:25.305, 2016-11-13),
-                          (3420, '2016 Abu Dhabi GP', pobjednik, 55, 01:38:04.013, 00:01:43.729, 2016-11-27);
+                          (3420, '2016 Abu Dhabi GP', pobjednik, 55, 01:38:04.013, 00:01:43.729, 2016-11-27); */
 
 
 -- SEZONE // 
 INSERT INTO sezona VALUES (id_sezona, godina);
-                          (2012, 2012),
                           (2013, 2013),
                           (2014, 2014),
-                          (2015, 2015),
-                          (2016, 2016);
+                          (2015, 2015);

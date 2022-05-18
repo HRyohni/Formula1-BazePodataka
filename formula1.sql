@@ -3,20 +3,6 @@ DROP DATABASE IF EXISTS Formula1;
 CREATE DATABASE Formula1;
 USE Formula1;
 
-/*
-tim (id_tim, id_SEF, pobjede, osvojeno_podija, sjediste, kod_sasija)
-vozac(id_vozac, id_tim, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
-auto(id_auto, zavrseno_utrka, vrsta_motora, proizvodac_guma)
-sponzor(id_sponzor, ime, isplacen_novac)
-staza (id_staza, ime_staze, drzava, duzina, broj_drs_zona)
-kvalifikacija(id_kvalifikacija, sesija_kvalifikacije, krugova_vozeno, izlazaka_na_stazu, datum)
-trening (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum)
-utrka(id_utrka, ime_nagrade, broj_krugova, vrijeme_vozeno, najbrzi_pitstop, datum)
-sezona(id_sezona, prvak)
-*/
-
-
--- DEKLARACIJA TABLICA // PROVJERITI!
 CREATE TABLE tim(
    id_tim INTEGER PRIMARY KEY,
    naziv VARCHAR(50),
@@ -105,6 +91,15 @@ CREATE TABLE prvak(
    id_vozac_u_timu FOREIGN KEY, -- Vozač za tim
    id_tim FOREIGN KEY, -- Konstruktor
    id_sezona FOREIGN KEY
+);
+
+CREATE TABLE vrijeme(
+   id_vrijeme INTEGER PRIMARY KEY,
+   vozeno_vrijeme TIME,
+   krug SMALLINT,
+   tip_gume VARCHAR(2),
+   pozicija SMALLINT,
+   id_vozac FOREIGN KEY
 );
 
 CREATE TABLE vikend(
@@ -308,7 +303,6 @@ INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit', 'Sakhir, Bahra
                           (1032, 'Korean International Circuit', 'Yeongam, South Korea', 5615, 2),
                           (1033, 'Buddh International Circuit', 'Greater Noida, India', 5125, 2),
                           (1034, 'Valencia Street Circuit', 'Valencia, Spain', 5419, 2);
-                          -- Izbrisane ugašene staze i datumi promjena staza
 
 
 INSERT INTO kvalifikacija  VALUES (id_kvalifikacija, krugova_vozeno, izlazaka_na_stazu, datum);
@@ -355,7 +349,6 @@ INSERT INTO utrka  VALUES
                           (3307, '2015 Japan GP', pobjednik, 53, 01:28:06.508, 00:01:36.145),
                           (3308, '2015 Brazil GP', pobjednik, 71, 01:31:09.090, 00:01:14.832),
                           (3309, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356);
-                          -- Izbačeni datumi (premješteni u relaciju vikend)
 
 
 -- SEZONE // 

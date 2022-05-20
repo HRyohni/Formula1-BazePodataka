@@ -102,4 +102,4 @@ CREATE TABLE vozac_na_treningu
 
 CREATE TABLE vozac_na_kvalifikaciji
 
-đđ
+dodati vozac u sezoni sa svim mogucim promjenjivim podacima, ni slucajno duplati redundantne podatke pod vozac.

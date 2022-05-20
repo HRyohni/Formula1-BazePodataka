@@ -16,17 +16,16 @@ CREATE TABLE tim(
 
 CREATE TABLE vozac(
    id_vozac INTEGER PRIMARY KEY,
-   id_auto INTEGER NOT NULL;
+   id_auto INTEGER NOT NULL,
    ime VARCHAR(30) NOT NULL,
    prezime VARCHAR(30) NOT NULL,
    odabrani_broj INTEGER NOT NULL,
-   datum_rodenja DATE NOT NULL, -- fixat datum
+   datum_rodenja DATE NOT NULL,
    nacionalnost VARCHAR(30) NOT NULL,
    osvojeno_naslova_prvaka INTEGER NOT NULL,
    osvojeno_podija CHAR(5) NOT NULL,
    osvojeno_bodova CHAR(5) NOT NULL,
    odvozeno_najbrzih_krugova INTEGER NOT NULL,
-
    FOREIGN KEY (id_tim) REFERENCES tim(id_tim)
 );
 
@@ -61,14 +60,14 @@ CREATE TABLE staza(
 CREATE TABLE kvalifikacija(
    id_quali INTEGER PRIMARY KEY,
    krugova_vozeno CHAR(5) NOT NULL,
-   izlazaka_na_stazu CHAR(5) NOT NULL,
+   izlazaka_na_stazu CHAR(5) NOT NULL
 );
 
 CREATE TABLE trening(
    id_trening INTEGER PRIMARY KEY,
    odvozeno_krugova CHAR(5) NOT NULL,
    najbrzi_krug CHAR(5) NOT NULL,
-   izlazaka_na_stazu CHAR(5) NOT NULL,
+   izlazaka_na_stazu CHAR(5) NOT NULL
 );
 
 CREATE TABLE utrka(
@@ -88,9 +87,12 @@ CREATE TABLE sezona(
 
 CREATE TABLE prvak(
    id_prvak INTEGER PRIMARY KEY,
-   id_vozac_u_timu FOREIGN KEY, -- Vozač za tim
-   id_tim FOREIGN KEY, -- Konstruktor
-   id_sezona FOREIGN KEY
+   id_vozac_u_timu INTEGER, -- Vozač za tim
+   id_tim INTEGER, -- Konstruktor
+   id_sezona INTEGER
+   FOREIGN KEY (id_vozac_u_timu) REFERENCES vozac_u_timu(id_vozac_u_timu),
+   FOREIGN KEY (id_tim) REFERENCES tim(id_tim),
+   FOREIGN KEY (id_sezona) REFERENCES sezona(id_sezona)
 );
 
 CREATE TABLE vrijeme(
@@ -99,17 +101,22 @@ CREATE TABLE vrijeme(
    krug SMALLINT,
    tip_gume VARCHAR(2),
    pozicija SMALLINT,
-   id_vozac FOREIGN KEY
+   id_vozac INTEGER,
+   FOREIGN KEY (id_vozac) REFERENCES vozac.id_vozac
 );
 
 CREATE TABLE vikend(
    id_vikend INTEGER PRIMARY KEY,
    datum_pocetka DATE,
    datum_kraja DATE,
-   id_staza FOREIGN KEY,
-   id_trening FOREIGN KEY,
-   id_quali FOREIGN KEY,
-   id_utrka FOREIGN KEY,
+   id_staza INTEGER,
+   id_trening INTEGER,
+   id_quali INTEGER,
+   id_utrka INTEGER,
+   FOREIGN KEY (id_staza) REFERENCES staza(id_staza),
+   FOREIGN KEY (id_trening) REFERENCES trening(id_trening),
+   FOREIGN KEY (id_quali) REFERENCES kvalifikacija(id_quali),
+   FOREIGN KEY (id_utrka) REFERENCES utrka(id_utrka)
 );
 
 
@@ -147,9 +154,9 @@ INSERT INTO tim VALUES  (id_tim, naziv, voditelj, pobjede, osvojeno_podija, sjed
                         (102, 'Mercedes AMG Petronas F1 Team', 'Toto Wolff', 124, 264, 'Brackley, Northamptonshire, Velika Britanija', 'Mercedes F1 W12', 249),
                         (103, 'Scuderia Ferrari', 'Mattia Binotto', 238, 778, 'Maranello, Italija', '	F1-75', 1030),
                         (104, 'Williams Racing', '	Jost Capito', 114, 312, 'Grove, Oxfordshire, Velika Britanija', 'Williams FW43', 744),
-                        (105, 'Scuderia AlphaTauri Honda', 'Franz Tost', 1, 1, 'Faenza, Italija', 'AlphaTauri AT02', 17),
-                        (107, 'Aston Martin Cognizant Formula One Team',' Lawrence Stroll I Otmar Szafnauer', 0, 1, 'Silverstone, Velika Britanija','Aston Martin AMR21', 11),
-                        (108, 'Alpine F1 Team', 'Laurent Rossi / Davide Brivio', 1, 22, 'Enstone, Engleska, Velika Britanija', '	Alpine A521', 20),
+                        -- (105, 'Scuderia AlphaTauri Honda', 'Franz Tost', 1, 1, 'Faenza, Italija', 'AlphaTauri AT02', 17),
+                        -- (107, 'Aston Martin Cognizant Formula One Team',' Lawrence Stroll I Otmar Szafnauer', 0, 1, 'Silverstone, Velika Britanija','Aston Martin AMR21', 11),
+                        -- (108, 'Alpine F1 Team', 'Laurent Rossi / Davide Brivio', 1, 22, 'Enstone, Engleska, Velika Britanija', '	Alpine A521', 20),
                         (111, 'Sauber F1 Team', 'Monisha Kaltenborn', 0, 10, 'Hinwil, Švicarska', 'Sauber C37', 373),
                         (112, 'Force India F1 Team', 'Colin Kolles', 0, 6, 'Silverstone, Northamptonshire, Velika Britanija', 'Force India VJM11', 212),
                         (113, 'Red Bull Toro Rosso Honda', 'Franz Tost', 1, 2, 'Faenza, Italija', 'Toro Rosso STR14', 259),
@@ -163,35 +170,35 @@ INSERT INTO tim VALUES  (id_tim, naziv, voditelj, pobjede, osvojeno_podija, sjed
 
 INSERT INTO vozac VALUES   (id_vozac, id_auto, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost, osvojeno_naslova_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
 --                         // 2015 \\
-                           (id, id_tim,   id_auto,  'Roberto', 'Merhi', 98,  '22.3.1991.', 'španjolsko', 0, 0, 0, 0),
-                           (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  '27.6.1985.', 'njemačko', 1, 57, 1594.5, 20),
-                           (id, id_tim,   id_auto,  'Felipe', 'Nasr', 12,  '21.8.1992.', 'brazilsko', 0, 0, 29, 0),
-                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.', 'venecuelanski', 0, 1, 76, 0),
-                           (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  '25.9.1991.', 'američko', 0, 2, 81, 0),
-                           (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  '28.6.1991.', 'britansko', 0, 0, 0, 0),
+                           (id, id_tim,   id_auto,  'Roberto', 'Merhi', 98,  STR_TO_DATE('22.3.1991.', '%d.%m.&Y.'), 'španjolsko', 0, 0, 0, 0),
+                           (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  STR_TO_DATE('27.6.1985.', '%d.%m.&Y.'), 'njemačko', 1, 57, 1594.5, 20),
+                           (id, id_tim,   id_auto,  'Felipe', 'Nasr', 12,  STR_TO_DATE('21.8.1992.', '%d.%m.&Y.'), 'brazilsko', 0, 0, 29, 0),
+                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  STR_TO_DATE('9.3.1985.', '%d.%m.&Y.'), 'venecuelansko', 0, 1, 76, 0),
+                           (id, id_tim,   id_auto,  'Alexander', 'Rossi', 53,  STR_TO_DATE('25.9.1991.', '%d.%m.&Y.'), 'američko', 0, 2, 81, 0),
+                           (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  STR_TO_DATE('28.6.1991.', '%d.%m.&Y.'), 'britansko', 0, 0, 0, 0),
                            
 --                         // 2014 \\
-                           (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  '25.4.1990.',' francukso', 0, 0, 51, 0),
-                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  '9.3.1985.','venecuelanski', 0, 1, 76, 0),
-                           (id, id_tim,   id_auto,  'Romain', 'Grosjean', 8,  '17.4.1986.',' francusko', 0, 10, 391, 1),
-                           (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  '3.8.1989.',' francusko', 0, 0, 2, 0),
-                           (id, id_tim,   id_auto,  'Adrian', 'Sutil', 99,  '11.1.1983.',' njemčko', 0, 0, 124, 1),
-                           (id, id_tim,   id_auto,  'Max', 'Chilton', 4,  '21.4.1991.',' britansko', 0, 0, 0, 0),
-                           (id, id_tim,   id_auto,  'Kamui', 'Kobayashi', 10,  '13.9.1986.',' japansko', 0, 1, 125, 1),
-                           (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  '28.6.1991.',' britansko', 0, 0, 0, 0),
+                           (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  STR_TO_DATE('25.4.1990.', '%d.%m.&Y.'), ' francukso', 0, 0, 51, 0),
+                           (id, id_tim,   id_auto,  'Pastor', 'Maldonado', 13,  STR_TO_DATE('9.3.1985.', '%d.%m.&Y.'), 'venecuelansko', 0, 1, 76, 0),
+                           (id, id_tim,   id_auto,  'Romain', 'Grosjean', 8,  STR_TO_DATE('17.4.1986.', '%d.%m.&Y.'), ' francusko', 0, 10, 391, 1),
+                           (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  STR_TO_DATE('3.8.1989.', '%d.%m.&Y.'), 'francusko', 0, 0, 2, 0),
+                           (id, id_tim,   id_auto,  'Adrian', 'Sutil', 99,  STR_TO_DATE('11.1.1983.'), 'njemačko', 0, 0, 124, 1),
+                           (id, id_tim,   id_auto,  'Max', 'Chilton', 4,  STR_TO_DATE('21.4.1991.', '%d.%m.&Y.') 'britansko', 0, 0, 0, 0),
+                           (id, id_tim,   id_auto,  'Kamui', 'Kobayashi', 10,  STR_TO_DATE('13.9.1986.', '%d.%m.&Y.') 'japansko', 0, 1, 125, 1),
+                           (id, id_tim,   id_auto,  'Will', 'Stevens', 28,  STR_TO_DATE('28.6.1991.', '%d.%m.&Y.') 'britansko', 0, 0, 0, 0),
                            
 --                         // 2013 \\
-                           (id, id_tim,   id_auto,  'Mark', 'Webber', 17,'27.8.1976.','australsko', 0, 42, 1047.5, 19),
-                           (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6,  '27.6.1985.','njemačko', 1, 30, 1594.5, 20),
-                           (id, id_tim,   id_auto,  'Felipe', 'Massa', 19,  '25.4.1981.','brazilsko', 0, 41, 1167, 15),
-                           (id, id_tim,   id_auto,  'Jenson', 'Button', 22,  '19.1.1980.','britansko', 1, 50, 1235, 8),
-                           (id, id_tim,   id_auto,  'Nico', 'Hulkenberg', 27,  '19.8.1987.','njemačko', 0, 0, 521, 2),
-                           (id, id_tim,   id_auto,  'Paul', 'di Resta', 40,  '16.4.1986.','britansko', 0, 0, 121, 0),
-                           (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25,  '25.4.1990.','francusko', 0, 0, 51, 0),
-                           (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17,  '3.8.1989.','francusko', 0, 0, 2, 0),
-                           (id, id_tim,   id_auto,  'Charles', 'Pic', 99,  '15.2.1990.','francusko', 0, 0, 0, 0),
-                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23,  '19.10.1981.',' finsko', 0, 4, 105, 2),
-                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', 21,  '25.4.1985.',' nizozemsko', 0, 0, 0, 0);
+                           (id, id_tim,   id_auto,  'Mark', 'Webber', 17, STR_TO_DATE('27.8.1976.', '%d.%m.&Y.'), 'australsko', 0, 42, 1047.5, 19),
+                           (id, id_tim,   id_auto,  'Nico', 'Rosberg', 6, STR_TO_DATE('27.6.1985.', '%d.%m.&Y.'), 'njemačko', 1, 30, 1594.5, 20),
+                           (id, id_tim,   id_auto,  'Felipe', 'Massa', 19, STR_TO_DATE('25.4.1981.', '%d.%m.&Y.'), 'brazilsko', 0, 41, 1167, 15),
+                           (id, id_tim,   id_auto,  'Jenson', 'Button', 22, STR_TO_DATE('19.1.1980.', '%d.%m.&Y.'), 'britansko', 1, 50, 1235, 8),
+                           (id, id_tim,   id_auto,  'Nico', 'Hulkenberg', 27, STR_TO_DATE('19.8.1987.', '%d.%m.&Y.'), 'njemačko', 0, 0, 521, 2),
+                           (id, id_tim,   id_auto,  'Paul', 'di Resta', 40, STR_TO_DATE('16.4.1986.', '%d.%m.&Y.'), 'britansko', 0, 0, 121, 0),
+                           (id, id_tim,   id_auto,  'Jean-Eric', 'Vergne', 25, STR_TO_DATE('25.4.1990.', '%d.%m.&Y.'), 'francusko', 0, 0, 51, 0),
+                           (id, id_tim,   id_auto,  'Jules', 'Bianchi', 17, STR_TO_DATE('3.8.1989.', '%d.%m.&Y.'), 'francusko', 0, 0, 2, 0),
+                           (id, id_tim,   id_auto,  'Charles', 'Pic', 99, STR_TO_DATE('15.2.1990.', '%d.%m.&Y.'), 'francusko', 0, 0, 0, 0),
+                           (id, id_tim,   id_auto,  'Heikki', 'Kovalainen', 23, STR_TO_DATE('19.10.1981.', '%d.%m.&Y.'), 'finsko', 0, 4, 105, 2),
+                           (id, id_tim,   id_auto,  'Giedo', 'van der Garde', 21, STR_TO_DATE('25.4.1985.', '%d.%m.&Y.'), 'nizozemsko', 0, 0, 0, 0);
    
 
 INSERT INTO automobil VALUES (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
@@ -225,34 +232,34 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            (4002, 'Tommy Hilfiger', 24000000),
                            (4003, 'Monster Energy',56000000),
                            (4004, 'Oracle', 96500000),
-                           (4005, 'Cash App', 76000000),
+                           -- (4005, 'Cash App', 76000000),
                            (4006, 'AT&T', 23760000),
                            (4007, 'Shell', 136758000),
                            (4008, 'Santander', 12000000),
-                           (4009, 'VELAS', 57000000),
+                           -- (4009, 'VELAS', 57000000),
                            (4010, 'Snapdragon', 9000000),
                            (4011, 'Google', 194986000),
                            (4012, 'Dell', 29000000),
                            (4013, 'Alienware', 19000000),
                            (4014, 'Logitech G', 38760000),
                            (4015, 'SunGod', 560000),
-                           (4016, 'BWT', 112000000),
+                           -- (4016, 'BWT', 112000000),
                            (4017, 'RCI Bank and Services', 98760000),
                            (4018, 'Yahoo', 56000000),
                            (4019, 'Kappa', 780000),
                            (4020, 'Sprinklr', 520000),
-                           (4021, 'AlphaTauri', 230670000),
+                           -- (4021, 'AlphaTauri', 230670000),
                            (4022, 'Honda', 73187500),
                            (4023, 'Pirelli', 4167940000),
                            (4024, 'Ray Ban', 10000000),
                            (4025, 'Siemens', 13000000),
                            (4026, 'Aramco', 79000000),
-                           (4027, 'TikTok', 20000000),
+                           -- (4027, 'TikTok', 20000000),
                            (4028, 'Hackett London',6780000),
                            (4029, 'Lavazza', 30000000),
                            (4030, 'DURACELL', 24000000),
-                           (4031, 'Acronis', 53000000),
-                           (4032, 'Alfa Romeo', 45600000),
+                           -- (4031, 'Acronis', 53000000),
+                           -- (4032, 'Alfa Romeo', 45600000),
                            (4033, 'PKN ORLEN', 39876500),
                            (4034, 'Iveco', 12000000),
                            (4035, 'Puma', 40123000),
@@ -271,10 +278,9 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            (4048, 'Rexona', 80000000),
                            (4049, 'NOVA Chemicals', 93000000),
                            (4050, 'TAGHeuer', 60000000);
-                           -- Potrebno počistit višak sponzora (novijih od 2015)
+                           -- Ugašeni neki noviji sponzori (potrebna provjera)
 
-
--- STAZE // SVE OD 2012 DO 2022 // NEKE SU SE MJENJALE KROZ GODINE ALI "FOR SAKE OF BREVITY" NECEMO IH UBACIVATI KAO ODVOJENE STAZE.
+--                        Staze se ne klasificiraju drukčije nakon što su vođene promjene na njima (npr. dodani zavoji)
 INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit', 'Sakhir, Bahrain', 5412, 3),
                           (1003, 'Albert Park Circuit', 'Melbourne, Australia', 5278, 3),
                           (1006, 'Circuit de Barcelona-Catalunya 2021-2022', 'Montmeló, Spain', 4675, 2),
@@ -352,7 +358,7 @@ INSERT INTO utrka  VALUES
 
 
 -- SEZONE // 
-INSERT INTO sezona VALUES (id_sezona, godina);
+INSERT INTO sezona VALUES (id_sezona, godina),
                           (2013, 2013),
                           (2014, 2014),
                           (2015, 2015);

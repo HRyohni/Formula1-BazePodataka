@@ -7,8 +7,19 @@ CREATE TABLE tim(
    id INTEGER PRIMARY KEY,
    naziv VARCHAR(50),
    voditelj VARCHAR(50),
-   sjediste VARCHAR(50) NOT NULL,
-   kod_sasija VARCHAR(30) NOT NULL,
+   sjediste VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE konstruktor_u_sezoni(
+   id INTEGER PRIMARY KEY,
+   id_sezona INTEGER,
+   id_tim INTEGER,
+   kod_sasija VARCHAR(10),
+   osvojeno_bodova INTEGER, -- Osvojeno bodova kako konstruktor
+   osvojeno_podija INTEGER, -- ^^
+   osvojeno_naslova INTEGER, -- ^^
+   FOREIGN KEY (id_tim) REFERENCES tim(id),
+   FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
 
 CREATE TABLE vozac(
@@ -23,13 +34,13 @@ CREATE TABLE vozac(
 CREATE TABLE vozac_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_vozac INTEGER,
-   id_tim INTEGER,
+   id_kus INTEGER,
    id_auto INTEGER,
    id_sezona INTEGER,
-   osvojeno_podija CHAR(5) NOT NULL,
    osvojeno_bodova CHAR(5) NOT NULL,
+   osvojeno_podija CHAR(5) NOT NULL,
    odvozeno_najbrzih_krugova INTEGER NOT NULL,
-   FOREIGN KEY (id_tim) REFERENCES tim(id),
+   FOREIGN KEY (id_kus) REFERENCES konstruktor_u_sezoni(id),
    FOREIGN KEY (id_vozac) REFERENCES vozac(id),
    FOREIGN KEY (id_auto) REFERENCES automobil(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
@@ -58,12 +69,12 @@ CREATE TABLE staza(
 
 CREATE TABLE vrijeme(
    id INTEGER PRIMARY KEY,
-   id_vozac INTEGER,
+   id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    tip_gume VARCHAR(2),
    pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je OBAVEZNO NULL
-   FOREIGN KEY (id_vozac) REFERENCES vozac.id_vozac
+   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
 
 CREATE TABLE trening(
@@ -150,52 +161,63 @@ ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_automobil CHECK (id >= 9000 AND id <= 9999);
    
-   
 ALTER TABLE vozac
-   ADD CONSTRAINT id_len_ck_vozac CHECK (length(id_vozac) = 4),
-   ADD CONSTRAINT id_rng_ck_vozac CHECK (id_vozac >= 7000 AND id_vozac <= 7999);
+   ADD CONSTRAINT id_len_ck_vozac CHECK (length(id) = 4),
+   ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 7000 AND id <= 7999);
+
+ALTER TABLE konstruktor_u_sezoni
+   ADD CONSTRAINT id_len_ck_kus CHECK (length(id) = 3),
+   ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 200 AND id <= 299)
 
 
 -- Potrebna preprava
 INSERT INTO tim VALUES  -- (id_tim, naziv, voditelj, sjediste, kod_sasija,)
---                      // 2015 \\
-                        (100, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy', 'SF15-T'),
-                        (101, 'Sahara Force India F1 Team', 'Colin Kolles', 'Silverstone, United Kingdom', 'VJM08'),
-                        (102, 'Lotus F1 Team', 'Éric Boullier', 'Enstone, Oxfordshire, United Kingdom', 'E23'),
-                        (103, 'Manor Marussia F1 Team', 'John Booth ', 'Banbury, Oxfordshire, United Kingdom', 'MR03B'),
-                        (104, 'McLaren Honda', 'Eric Boullier', 'Surrey, United Kingdom', 'MP4-30'),
-                        (105, 'Mercedes AMG Petronas F1 Team', 'Totto Wolf', 'Brackley, United Kingdom', 'W06'),
-                        (106, 'Infiniti Red Bull Racing', 'Christian Horner', 'Milton Keynes, United Kingdom.', 'RB11'),
-                        (107, 'Sauber F1 Team', 'Monisha Kaltenborn', 'Hinwil, Switzerland', 'C34'),
-                        (108, 'Scuderia Toro Rosso', 'Franz Tost', 'Faenza, Italy', 'STR10'),
-                        (109, 'Williams Martini Racing', 'Claire Williams', 'Grove, Oxfordshire, United Kingdom', 'FW37'),
-                       
---                      // 2014 \\
-                        (110, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy', 'F14 T'), 
-                        (111, 'Sahara Force India F1 Team', 'Colin Kolles', 'Silverstone, United Kingdom', 'VJM07'), 
-                        (112, 'Lotus F1 Team', 'Éric Boullier', 'Enstone, Oxfordshire, United Kingdom', 'E22'), 
-                        (113, 'Manor Marussia F1 Team', 'John Booth ', 'Banbury, Oxfordshire, United Kingdom', 'MR03'), 
-                        (114, 'McLaren Honda', 'Eric Boullier', 'Surrey, United Kingdom', 'MP4-29'), 
-                        (115, 'Mercedes AMG Petronas F1 Team', 'Totto Wolf', 'Brackley, United Kingdom', 'W05'), 
-                        (116, 'Infiniti Red Bull Racing', 'Christian Horner', 'Milton Keynes, United Kingdom.', 'RB10'), 
-                        (117, 'Sauber F1 Team', 'Monisha Kaltenborn', 'Hinwil, Switzerland', 'C33'), 
-                        (118, 'Scuderia Toro Rosso', 'Franz Tost', 'Faenza, Italy', 'STR9'), 
-                        (119, 'Williams Martini Racing', 'Claire Williams', 'Grove, Oxfordshire, United Kingdom', 'FW36'),
-                        (120, 'Caterham F1 Team', 'Cyril Abiteboul', 'Leafield, Oxfordshire, United Kingdom', 'CT05'),
+                        (100, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy'),
+                        (101, 'Sahara Force India F1 Team', 'Colin Kolles', 'Silverstone, United Kingdom'),
+                        (102, 'Lotus F1 Team', 'Éric Boullier', 'Enstone, Oxfordshire, United Kingdom'),
+                        (103, 'Manor Marussia F1 Team', 'John Booth ', 'Banbury, Oxfordshire, United Kingdom'),
+                        (104, 'McLaren Honda', 'Eric Boullier', 'Surrey, United Kingdom'),
+                        (105, 'Mercedes AMG Petronas F1 Team', 'Totto Wolf', 'Brackley, United Kingdom'),
+                        (106, 'Infiniti Red Bull Racing', 'Christian Horner', 'Milton Keynes, United Kingdom.'),
+                        (107, 'Sauber F1 Team', 'Monisha Kaltenborn', 'Hinwil, Switzerland'),
+                        (108, 'Scuderia Toro Rosso', 'Franz Tost', 'Faenza, Italy'),
+                        (109, 'Williams Martini Racing', 'Claire Williams', 'Grove, Oxfordshire, United Kingdom'),
+                        (110, 'Caterham F1 Team', 'Cyril Abiteboul', 'Leafield, Oxfordshire, United Kingdom'),
 
 
---                      // 2013 \\
-                        (121,'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy', 'F138'), 
-                        (122,'Sahara Force India F1 Team', 'Colin Kolles', 'Silverstone, United Kingdom', 'VJM06'), 
-                        (123,'Lotus F1 Team', 'Éric Boullier', 'Enstone, Oxfordshire, United Kingdom', 'E21'), 
-                        (124,'Manor Marussia F1 Team', 'John Booth ', 'Banbury, Oxfordshire, United Kingdom', 'MR02'), 
-                        (125,'McLaren Honda', 'Eric Boullier', 'Surrey, United Kingdom', 'MP4-28'), 
-                        (126,'Mercedes AMG Petronas F1 Team', 'Totto Wolf', 'Brackley, United Kingdom', 'W04'), 
-                        (127,'Infiniti Red Bull Racing', 'Christian Horner', 'Milton Keynes, United Kingdom.', 'RB9'), 
-                        (128,'Sauber F1 Team', 'Monisha Kaltenborn', 'Hinwil, Switzerland', 'C32'), 
-                        (129,'Scuderia Toro Rosso', 'Franz Tost', 'Faenza, Italy', 'STR8'), 
-                        (130,'Williams Martini Racing', 'Claire Williams', 'Grove, Oxfordshire, United Kingdom', 'FW35'),
-                        (131,'Caterham F1 Team', 'Cyril Abiteboul', 'Leafield, Oxfordshire, United Kingdom', 'CT03');
+INSERT INTO konstruktor_u_sezoni VALUES -- (id, id_sezona, id_tim, kod_sasija, osvojeno_bodova, osvojeno_podija)
+                                        (200, 2013, 100, 'F138', , ),
+                                        (201, 2014, 100, 'F14 T', , ),
+                                        (202, 2015, 100, 'SF15-T', , ),
+                                        (203, 2013, 101, 'VJM06', , ),
+                                        (204, 2014, 101, 'VJM07', , ),
+                                        (205, 2015, 101, 'VJM08', , ),
+                                        (206, 2013, 102, 'E21', , ),
+                                        (207, 2014, 102, 'E22', , ),
+                                        (208, 2015, 102, 'E23', , ),
+                                        (209, 2013, 103, 'MR02', , ),
+                                        (210, 2014, 103, 'MR03', , ),
+                                        (211, 2015, 103, 'MR03B', , ),
+                                        (212, 2013, 104, 'MP4-28', , ),
+                                        (213, 2014, 104, 'MP4-29', , ),
+                                        (214, 2015, 104, 'MP4-30', , ),
+                                        (215, 2013, 105, 'W04', , ),
+                                        (216, 2014, 105, 'W05', , ),
+                                        (217, 2015, 105, 'W06', , ),
+                                        (218, 2013, 106, 'RB9', , ),
+                                        (219, 2014, 106, 'RB10', , ),
+                                        (220, 2015, 106, 'RB11', , ),
+                                        (221, 2013, 107, 'C32', , ),
+                                        (222, 2014, 108, 'C33', , ),
+                                        (223, 2015, 107, 'C34', , ),
+                                        (224, 2013, 108, 'STR8', , ),
+                                        (225, 2014, 108, 'STR9', , ),
+                                        (226, 2015, 108, 'STR10', , ),
+                                        (227, 2013, 109, 'FW35', , ),
+                                        (228, 2014, 109, 'FW36', , ),
+                                        (229, 2015, 109, 'FW37', , ),
+                                        (230, 2013, 110, 'CT03', , ),
+                                        (231, 2014, 110, 'CT05', , );
 
 
 
@@ -237,7 +259,7 @@ INSERT INTO vozac VALUES   -- (id, ime, prezime, odabrani_broj, datum_rodenja, n
                            (7034, 'Carlos', 'Sainz', 55, STR_TO_DATE('01.09.1994.', '%d.%m.%Y.'), 'španjolsko');
 
 
-INSERT INTO vozac_u_sezoni (id, id_vozac, id_tim, id_auto, id_sezona, osvojeno_naslovaosvojeno_naslova_prvaka_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
+INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_tim, id_auto, id_sezona, osvojeno_naslovaosvojeno_naslova_prvaka_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
                            ()
 
 

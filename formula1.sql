@@ -171,8 +171,7 @@ ALTER TABLE konstruktor_u_sezoni
 
 
 -- Potrebna preprava
-INSERT INTO tim VALUES  -- (id_tim, naziv, voditelj, sjediste, kod_sasija,)
-                        (100, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy'),
+INSERT INTO tim VALUES  (100, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Maranello, Italy'),
                         (101, 'Sahara Force India F1 Team', 'Colin Kolles', 'Silverstone, United Kingdom'),
                         (102, 'Lotus F1 Team', 'Éric Boullier', 'Enstone, Oxfordshire, United Kingdom'),
                         (103, 'Manor Marussia F1 Team', 'John Booth ', 'Banbury, Oxfordshire, United Kingdom'),
@@ -185,44 +184,42 @@ INSERT INTO tim VALUES  -- (id_tim, naziv, voditelj, sjediste, kod_sasija,)
                         (110, 'Caterham F1 Team', 'Cyril Abiteboul', 'Leafield, Oxfordshire, United Kingdom'),
 
 
-INSERT INTO konstruktor_u_sezoni VALUES -- (id, id_sezona, id_tim, kod_sasija, osvojeno_bodova, osvojeno_podija)
-                                        (200, 2013, 100, 'F138', , ),
-                                        (201, 2014, 100, 'F14 T', , ),
-                                        (202, 2015, 100, 'SF15-T', , ),
-                                        (203, 2013, 101, 'VJM06', , ),
-                                        (204, 2014, 101, 'VJM07', , ),
-                                        (205, 2015, 101, 'VJM08', , ),
-                                        (206, 2013, 102, 'E21', , ),
-                                        (207, 2014, 102, 'E22', , ),
-                                        (208, 2015, 102, 'E23', , ),
-                                        (209, 2013, 103, 'MR02', , ),
-                                        (210, 2014, 103, 'MR03', , ),
-                                        (211, 2015, 103, 'MR03B', , ),
-                                        (212, 2013, 104, 'MP4-28', , ),
-                                        (213, 2014, 104, 'MP4-29', , ),
-                                        (214, 2015, 104, 'MP4-30', , ),
-                                        (215, 2013, 105, 'W04', , ),
-                                        (216, 2014, 105, 'W05', , ),
-                                        (217, 2015, 105, 'W06', , ),
-                                        (218, 2013, 106, 'RB9', , ),
-                                        (219, 2014, 106, 'RB10', , ),
-                                        (220, 2015, 106, 'RB11', , ),
-                                        (221, 2013, 107, 'C32', , ),
-                                        (222, 2014, 108, 'C33', , ),
-                                        (223, 2015, 107, 'C34', , ),
-                                        (224, 2013, 108, 'STR8', , ),
-                                        (225, 2014, 108, 'STR9', , ),
-                                        (226, 2015, 108, 'STR10', , ),
-                                        (227, 2013, 109, 'FW35', , ),
-                                        (228, 2014, 109, 'FW36', , ),
-                                        (229, 2015, 109, 'FW37', , ),
-                                        (230, 2013, 110, 'CT03', , ),
-                                        (231, 2014, 110, 'CT05', , );
+INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, 'F138', 354, 10),
+                                        (201, 2014, 100, 'F14 T', 216, 2),
+                                        (202, 2015, 100, 'SF15-T', 428, 16),
+                                        (203, 2013, 101, 'VJM06', 77, 0),
+                                        (204, 2014, 101, 'VJM07', 155, 1),
+                                        (205, 2015, 101, 'VJM08', 136, 1),
+                                        (206, 2013, 102, 'E21', 315, 14),
+                                        (207, 2014, 102, 'E22', 10, 0),
+                                        (208, 2015, 102, 'E23', 78, 1),
+                                        (209, 2013, 103, 'MR02', 0, 0),
+                                        (210, 2014, 103, 'MR03', 2, 0),
+                                        (211, 2015, 103, 'MR03B', 0, 0),
+                                        (212, 2013, 104, 'MP4-28', 122, 0),
+                                        (213, 2014, 104, 'MP4-29', 181, 2),
+                                        (214, 2015, 104, 'MP4-30', 27, 0),
+                                        (215, 2013, 105, 'W04', 360, 9),
+                                        (216, 2014, 105, 'W05', 701, 31),
+                                        (217, 2015, 105, 'W06', 703, 32),
+                                        (218, 2013, 106, 'RB9', 596, 24),
+                                        (219, 2014, 106, 'RB10', 405, 12),
+                                        (220, 2015, 106, 'RB11', 187, 3),
+                                        (221, 2013, 107, 'C32', 57, 0),
+                                        (222, 2014, 108, 'C33', 0, 0),
+                                        (223, 2015, 107, 'C34', 36, 0),
+                                        (224, 2013, 108, 'STR8', 33, 0),
+                                        (225, 2014, 108, 'STR9', 30, 0),
+                                        (226, 2015, 108, 'STR10', 67, 0),
+                                        (227, 2013, 109, 'FW35', 5, 0),
+                                        (228, 2014, 109, 'FW36', 320, 9),
+                                        (229, 2015, 109, 'FW37', 257, 4),
+                                        (230, 2013, 110, 'CT03', 0, 0),
+                                        (231, 2014, 110, 'CT05', 0, 0);
 
 
 
-INSERT INTO vozac VALUES   -- (id, ime, prezime, odabrani_broj, datum_rodenja, nacionalnost)
-                           (7000, 'Roberto', 'Merhi', 98,  STR_TO_DATE('22.3.1991.', '%d.%m.&Y.'), 'španjolsko'),
+INSERT INTO vozac VALUES   (7000, 'Roberto', 'Merhi', 98,  STR_TO_DATE('22.3.1991.', '%d.%m.&Y.'), 'španjolsko'),
                            (7001, 'Nico', 'Rosberg', 6,  STR_TO_DATE('27.6.1985.', '%d.%m.&Y.'), 'njemačko'),
                            (7002, 'Felipe', 'Nasr', 12,  STR_TO_DATE('21.8.1992.', '%d.%m.&Y.'), 'brazilsko'),
                            (7003, 'Pastor', 'Maldonado', 13,  STR_TO_DATE('9.3.1985.', '%d.%m.&Y.'), 'venecuelansko'),
@@ -263,7 +260,7 @@ INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_tim, id_auto, id_sezona, osvojen
                            ()
 
 
-INSERT INTO automobil VALUES -- (id_auto, naziv_auto, vrsta_motora, proizvodac_guma);
+INSERT INTO automobil VALUES
 --                            // GODINA: 2013 \\
                              (9000, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
                              (9001, 'Ferrari F138 n.2', '2.4L NA V8', 'Pirelli'),

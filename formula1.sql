@@ -137,37 +137,41 @@ CREATE TABLE prvak(
 -- PROMJENE I OGRANIČENJA NA TABLICAMA
 ALTER TABLE staza
 	ADD CONSTRAINT id_len_ck_staza CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_staza CHECK (id >= 1000 AND id <= 1999),
-   ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m <= 99999);
+   ADD CONSTRAINT id_rng_ck_staza CHECK (id >= 1000 AND id < 2000),
+   ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m < 100000);
    
 ALTER TABLE tim
 	ADD CONSTRAINT id_len_ck_tim CHECK (length(id) = 3),
-   ADD CONSTRAINT id_rng_ck_tim CHECK (id >= 100 AND id <= 999);
+   ADD CONSTRAINT id_rng_ck_tim CHECK (id >= 100 AND id < 1000);
+
+ALTER TABLE konstruktor_u_sezoni
+   ADD CONSTRAINT id_len_ck_kus CHECK (length(id) = 3),
+   ADD CONSTRAINT id_rng_ck_kus CHECK (id >= 200 AND id < 300);
 
 ALTER TABLE sponzor
    ADD CONSTRAINT id_len_ck_sponzor CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_sponzor CHECK (id >= 4000 AND id <= 4999),
+   ADD CONSTRAINT id_rng_ck_sponzor CHECK (id >= 4000 AND id < 5000),
    ADD CONSTRAINT payout_ck_sponzor CHECK (isplacen_novac >= 500000);
 
 ALTER TABLE utrka
    ADD CONSTRAINT id_len_ck_utrka CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_utrka CHECK (id >= 3000 AND id <= 3499);
+   ADD CONSTRAINT id_rng_ck_utrka CHECK (id >= 3000 AND id < 3500);
 
 ALTER TABLE vikend
    ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) BETWEEN 1 AND 2),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 1 AND id <= 99);
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 1 AND id < 100);
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_automobil CHECK (id >= 9000 AND id <= 9999);
+   ADD CONSTRAINT id_rng_ck_automobil CHECK (id >= 9000 AND id < 10000);
    
 ALTER TABLE vozac
    ADD CONSTRAINT id_len_ck_vozac CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 7000 AND id <= 7999);
+   ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 7000 AND id < 7100);
 
-ALTER TABLE konstruktor_u_sezoni
-   ADD CONSTRAINT id_len_ck_kus CHECK (length(id) = 3),
-   ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 200 AND id <= 299)
+ALTER TABLE vozac_u_sezoni
+   ADD CONSTRAINT id_len_cek_vus CHECK (lenght(id) = 4),
+   ADD CONSTRAINT id_rng_ck_vus CHECK (id >= 7100 and id < 7200);
 
 
 -- Potrebna preprava
@@ -256,12 +260,60 @@ INSERT INTO vozac VALUES   (7000, 'Roberto', 'Merhi', 98,  STR_TO_DATE('22.3.199
                            (7034, 'Carlos', 'Sainz', 55, STR_TO_DATE('01.09.1994.', '%d.%m.%Y.'), 'španjolsko');
 
 
-INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_tim, id_auto, id_sezona, osvojeno_naslovaosvojeno_naslova_prvaka_prvaka, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova),
-                           ()
+INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_kus, id_auto, id_sezona, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
+--                         // GODINA: 2015 \\
+                           (7100, 7000, 211, 9215, 2015, 0, 0, 0),
+                           (7101, 7005, 211, 9214, 2015, 0, 0, 0),
+                           (7102, 7012, 208, 9212, 2015, 1, 51, 0),
+                           (7103, , , , 2015, , , ),
+                           (7104, , , , 2015, , , ),
+                           (7105, , , , 2015, , , ),
+                           (7106, , , , 2015, , , ),
+                           (7107, , , , 2015, , , ),
+                           (7108, , , , 2015, , , ),
+                           (7109, , , , 2015, , , ),
+                           (7110, , , , 2015, , , ),
+                           (7111, , , , 2015, , , ),
+                           (7112, , , , 2015, , , ),
+                           (7113, , , , 2015, , , ),
+                           (7114, , , , 2015, , , ),
+                           (7115, , , , 2015, , , ),
+                           (7116, , , , 2015, , , ),
+                           (7117, , , , 2015, , , ),
+                           (7118, , , , 2015, , , ),
+                           (7119, , , , 2015, , , ),
+                           (7120, , , , 2015, , , ),
+                           (7121, , , , 2015, , , ),
+
+--                         // GODINA: 2014 \\
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+                           (7122, , , , 2014, , , ),
+
+--                         // GODINA: 2015 \\
 
 
 INSERT INTO automobil VALUES
---                            // GODINA: 2013 \\
+--                           // GODINA: 2013 \\
                              (9000, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
                              (9001, 'Ferrari F138 n.2', '2.4L NA V8', 'Pirelli'),
                              (9002, 'Red Bull RB9 n.1', '2.4L NA V8', 'Pirelli'),

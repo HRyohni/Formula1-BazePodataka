@@ -15,9 +15,9 @@ CREATE TABLE konstruktor_u_sezoni(
    id_sezona INTEGER,
    id_tim INTEGER,
    kod_sasija VARCHAR(10),
-   osvojeno_bodova INTEGER, -- Osvojeno bodova kako konstruktor
-   osvojeno_podija INTEGER, -- ^^
-   osvojeno_naslova INTEGER, -- ^^
+   osvojeno_bodova INTEGER, /* <- kao konstruktor */
+   osvojeno_podija INTEGER, /* <- kao konstruktor */
+   osvojeno_naslova INTEGER, /* <- kao konstruktor */
    FOREIGN KEY (id_tim) REFERENCES tim(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
@@ -73,7 +73,7 @@ CREATE TABLE vrijeme(
    vozeno_vrijeme TIME,
    krug SMALLINT,
    tip_gume VARCHAR(2),
-   pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je OBAVEZNO NULL
+   pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je NULL
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
 
@@ -188,37 +188,47 @@ INSERT INTO tim VALUES  (100, 'Scuderia Ferrari', 'Maurizio Arrivabene', 'Marane
                         (110, 'Caterham F1 Team', 'Cyril Abiteboul', 'Leafield, Oxfordshire, United Kingdom'),
 
 
-INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, 'F138', 354, 10),
+INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, 'F138', 354, 10), -- // Scuderia Ferrari \\
                                         (201, 2014, 100, 'F14 T', 216, 2),
                                         (202, 2015, 100, 'SF15-T', 428, 16),
-                                        (203, 2013, 101, 'VJM06', 77, 0),
+
+                                        (203, 2013, 101, 'VJM06', 77, 0), -- // Sahara Force India \\
                                         (204, 2014, 101, 'VJM07', 155, 1),
                                         (205, 2015, 101, 'VJM08', 136, 1),
-                                        (206, 2013, 102, 'E21', 315, 14),
+
+                                        (206, 2013, 102, 'E21', 315, 14), -- // Lotus Renault \\
                                         (207, 2014, 102, 'E22', 10, 0),
                                         (208, 2015, 102, 'E23', 78, 1),
-                                        (209, 2013, 103, 'MR02', 0, 0),
+
+                                        (209, 2013, 103, 'MR02', 0, 0), -- // Manor Marussia \\
                                         (210, 2014, 103, 'MR03', 2, 0),
                                         (211, 2015, 103, 'MR03B', 0, 0),
-                                        (212, 2013, 104, 'MP4-28', 122, 0),
+
+                                        (212, 2013, 104, 'MP4-28', 122, 0), -- // McLaren Honda \\
                                         (213, 2014, 104, 'MP4-29', 181, 2),
                                         (214, 2015, 104, 'MP4-30', 27, 0),
-                                        (215, 2013, 105, 'W04', 360, 9),
+
+                                        (215, 2013, 105, 'W04', 360, 9), -- // Mercedes AMG Petronas \\
                                         (216, 2014, 105, 'W05', 701, 31),
                                         (217, 2015, 105, 'W06', 703, 32),
-                                        (218, 2013, 106, 'RB9', 596, 24),
+
+                                        (218, 2013, 106, 'RB9', 596, 24), -- // Red Bull \\
                                         (219, 2014, 106, 'RB10', 405, 12),
                                         (220, 2015, 106, 'RB11', 187, 3),
-                                        (221, 2013, 107, 'C32', 57, 0),
+
+                                        (221, 2013, 107, 'C32', 57, 0), -- // Sauber \\
                                         (222, 2014, 107, 'C33', 0, 0),
                                         (223, 2015, 107, 'C34', 36, 0),
-                                        (224, 2013, 108, 'STR8', 33, 0),
+
+                                        (224, 2013, 108, 'STR8', 33, 0), -- // Scuderia Toro Rosso \\
                                         (225, 2014, 108, 'STR9', 30, 0),
                                         (226, 2015, 108, 'STR10', 67, 0),
-                                        (227, 2013, 109, 'FW35', 5, 0),
+
+                                        (227, 2013, 109, 'FW35', 5, 0), -- // Williams \\
                                         (228, 2014, 109, 'FW36', 320, 9),
                                         (229, 2015, 109, 'FW37', 257, 4),
-                                        (230, 2013, 110, 'CT03', 0, 0),
+
+                                        (230, 2013, 110, 'CT03', 0, 0), -- // Caterham Renault \\
                                         (231, 2014, 110, 'CT05', 0, 0);
 
 
@@ -256,11 +266,8 @@ INSERT INTO vozac VALUES   (7000, 'Roberto', 'Merhi', 98,  STR_TO_DATE('22.3.199
                            (7032, 'Daniil', 'Kvyat', 26, STR_TO_DATE('26.04.1994.', '%d.%m.%Y.'), 'rusko'),
                            (7033, 'Max', 'Verstappen', 33, STR_TO_DATE('30.09.1997.', '%d.%m.%Y.'), 'nizozemsko'),
                            (7034, 'Carlos', 'Sainz', 55, STR_TO_DATE('01.09.1994.', '%d.%m.%Y.'), 'španjolsko');
---                         SVJESTAN SAM RUPE U ID-EVIMA, NE NECEMO POPRAVLJATI 300 TABLICA ZBOG TVOG OCD-A :)
 
-INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_kus, id_auto, id_sezona, osvojeno_podija, osvojeno_bodova, odvozeno_najbrzih_krugova)
---                         // GODINA: 2015 \\
-                           (7100, 7000, 211, 9215, 2015, 0, 0, 0),
+INSERT INTO vozac_u_sezoni (7100, 7000, 211, 9215, 2015, 0, 0, 0), -- // GODINA: 2015 \\
                            (7101, 7005, 211, 9214, 2015, 0, 0, 0),
                            (7102, 7012, 208, 9212, 2015, 1, 51, 0),
                            (7103, 7003, 208, 9213, 2015, 0, 27, 0),
@@ -281,8 +288,7 @@ INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_kus, id_auto, id_sezona, osvojen
                            (7118, 7033, 226, 9210, 2015, 0, 49, 0),
                            (7119, 7034, 226, 9211, 2015, 0, 18, 0),
 
---                         // GODINA: 2014 \\
-                           (7120, 7030, 231, 9112, 2014, 0, 0, 0),
+                           (7120, 7030, 231, 9112, 2014, 0, 0, 0), -- // GODINA: 2014 \\
                            (7121, 7016, 231, 9113, 2014, 0, 0, 0),
                            (7122, 7009, 201, 9100, 2014, 0, 55, 1),
                            (7123, 7007, 201, 9101, 2014, 2, 161, 0),
@@ -305,8 +311,7 @@ INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_kus, id_auto, id_sezona, osvojen
                            (7140, 7019, 228, 9106, 2014, 3, 134, 1),
                            (7141, 7028, 228, 9107, 2014, 6, 186, 1),
 
---                         // GODINA: 2013 \\
-                           (7142, 7006, 218, 9002, 2013, 16, 397, 7),
+                           (7142, 7006, 218, 9002, 2013, 16, 397, 7), -- // GODINA: 2013 \\
                            (7143, 7017, 218, 9003, 2013, 8, 199, 5),
                            (7144, 7007, 200, 9000, 2013, 9, 242, 2),
                            (7145, 7019, 200, 9001, 2013, 1, 112, 0),
@@ -316,22 +321,20 @@ INSERT INTO vozac_u_sezoni -- (id, id_vozac, id_kus, id_auto, id_sezona, osvojen
                            (7149, 7012, 206, 9015, 2013, 6, 132, 0),
                            (7150, 7001, 215, 9018, 2013, 4, 171, 0),
                            (7151, 7018, 215, 9019, 2013, 5, 189, 1),
-                           (7152, , , , 2013, , , ),
-                           (7153, , , , 2013, , , ),
-                           (7154, , , , 2013, , , ),
-                           (7155, , , , 2013, , , ),
-                           (7156, , , , 2013, , , ),
-                           (7157, , , , 2013, , , ),
-                           (7158, , , , 2013, , , ),
-                           (7159, , , , 2013, , , ),
-                           (7160, , , , 2013, , , ),
-                           (7161, , , , 2013, , , ),
-                           (7162, , , , 2013, , , ),
-                           (7163, , , , 2013, , , );
+                           (7152, 7021, 221, 9008, 2013, 0, 54, 0),
+                           (7153, 7027, 221, 9009, 2013, 0, 6, 1),
+                           (7154, 7022, 203, 9020, 2013, 0, 48, 0),
+                           (7155, 7014, 203, 9021, 2013, 0, 29, 0),
+                           (7156, 7003, 227, 9006, 2013, 0, 4, 0),
+                           (7157, 7028, 227, 9007, 2013, 0, 1, 0),
+                           (7158, 7010, 224, 9010, 2013, 0, 13, 0),
+                           (7159, 7029, 224, 9011, 2013, 0, 20, 0),
+                           (7160, 7025, 230, 9012, 2013, 0, 0, 0),
+                           (7161, 7026, 230, 9013, 2013, 0, 0, 0),
+                           (7162, 7024, 209, 9016, 2013, 0, 0, 0),
+                           (7163, 7015, 209, 9017, 2013, 0, 0, 0);
 
-INSERT INTO automobil VALUES
---                           // GODINA: 2013 \\
-                             (9000, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'),
+INSERT INTO automobil VALUES (9000, 'Ferrari F138 n.1', '2.4L NA V8', 'Pirelli'), -- // GODINA: 2013 \\
                              (9001, 'Ferrari F138 n.2', '2.4L NA V8', 'Pirelli'),
                              (9002, 'Red Bull RB9 n.1', '2.4L NA V8', 'Pirelli'),
                              (9003, 'Red Bull RB9 n.2', '2.4L NA V8', 'Pirelli'),
@@ -354,8 +357,7 @@ INSERT INTO automobil VALUES
                              (9020, 'Force India VJM06 n.1', '2.4L NA V8', 'Pirelli'),
                              (9021, 'Force India VJM06 n.2', '2.4L NA V8', 'Pirelli'),
 
---                            // GODINA: 2014\\
-                             (9100, 'Ferrari F14 T n.1', '1.6L TC V6 Hybrid', 'Pirelli'),
+                             (9100, 'Ferrari F14 T n.1', '1.6L TC V6 Hybrid', 'Pirelli'), -- // GODINA: 2014\\
                              (9101, 'Ferrari F14 T n.2', '1.6L TC V6 Hybrid', 'Pirelli'),
                              (9102, 'Red Bull RB10 n.1', '1.6L TC V6 Hybrid', 'Pirelli'),
                              (9103, 'Red Bull RB10 n.2', '1.6L TC V6 Hybrid', 'Pirelli'),
@@ -378,8 +380,7 @@ INSERT INTO automobil VALUES
                              (9120, 'Force India VJM07 n.1', '1.6L TC V6 Hybrid', 'Pirelli'),
                              (9121, 'Force India VJM07 n.2', '1.6L TC V6 Hybrid', 'Pirelli'),
 
---                           //GODINA: 2015\\
-                             (9200, 'Ferrari SF15-T T n.1', '1.6L TC V6 Hybrid', 'Pirelli'),
+                             (9200, 'Ferrari SF15-T T n.1', '1.6L TC V6 Hybrid', 'Pirelli'), -- //GODINA: 2015\\
                              (9201, 'Ferrari SF15-T n.2', '1.6L TC V6 Hybrid', 'Pirelli'),
                              (9202, 'Red Bull RB11 n.1', '1.6L TC V6 Hybrid', 'Pirelli'),
                              (9203, 'Red Bull RB11 n.2', '1.6L TC V6 Hybrid', 'Pirelli'),
@@ -411,7 +412,7 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            (4007, 'Shell', 136758000),
                            (4008, 'Santander', 12000000),
                            -- (4009, 'VELAS', 57000000),
-                           (4010, 'Snapdragon', 9000000),
+                           -- (4010, 'Snapdragon', 9000000),
                            (4011, 'Google', 194986000),
                            (4012, 'Dell', 29000000),
                            (4013, 'Alienware', 19000000),
@@ -425,16 +426,16 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            -- (4021, 'AlphaTauri', 230670000),
                            (4022, 'Honda', 73187500),
                            (4023, 'Pirelli', 4167940000),
-                           (4024, 'Ray Ban', 10000000),
+                           -- (4024, 'Ray Ban', 10000000),
                            (4025, 'Siemens', 13000000),
                            (4026, 'Aramco', 79000000),
                            -- (4027, 'TikTok', 20000000),
                            (4028, 'Hackett London',6780000),
-                           (4029, 'Lavazza', 30000000),
+                           -- (4029, 'Lavazza', 30000000),
                            (4030, 'DURACELL', 24000000),
                            -- (4031, 'Acronis', 53000000),
                            -- (4032, 'Alfa Romeo', 45600000),
-                           (4033, 'PKN ORLEN', 39876500),
+                           -- (4033, 'PKN ORLEN', 39876500),
                            (4034, 'Iveco', 12000000),
                            (4035, 'Puma', 40123000),
                            (4036, 'Haas Automation', 36000000),
@@ -454,7 +455,7 @@ INSERT INTO sponzor VALUES (4001, 'Petronas', 100000000),
                            (4050, 'TAGHeuer', 60000000);
                            -- Ugašeni neki noviji sponzori (potrebna provjera)
 
---                        Staze se ne klasificiraju drukčije nakon što su vođene promjene na njima (npr. dodani zavoji)
+                          -- Staze se ne klasificiraju drukčije nakon što su vođene promjene na njima (npr. dodani zavoji)
 INSERT INTO staza VALUES  (1001, 'Bahrain International Circuit', 'Sakhir, Bahrain', 5412, 3),
                           (1003, 'Albert Park Circuit', 'Melbourne, Australia', 5278, 3),
                           (1006, 'Circuit de Barcelona-Catalunya 2021-2022', 'Montmeló, Spain', 4675, 2),
@@ -489,10 +490,7 @@ INSERT INTO kvalifikacija  VALUES -- (id_kvalifikacija, krugova_vozeno, izlazaka
 INSERT INTO trening  VALUES -- (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
 
 
--- UTRKE
-INSERT INTO utrka  VALUES
---                         // GODINA: 2013 \\
-                          (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274),
+INSERT INTO utrka  VALUES (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274), -- // GODINA: 2013 \\
                           (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199),
                           (3103, '2013 China GP', pobjednik, 56, 01:36:26.945, 00:01:36.808),
                           (3104, '2013 Bahrain GP', pobjednik, 57, 01:36:00.498, 00:01:36.961),
@@ -506,8 +504,7 @@ INSERT INTO utrka  VALUES
                           (3112, '2013 Abu Dhabi GP', pobjednik, 55, 01:38:06.106, 00:01:43:434),
                           (3113, '2013 Brazil GP', pobjednik, 71, 01:32:26.300, 00:01:15.436),
 
---                         // GODINA: 2014 \\
-                          (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.4784),
+                          (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.4784), -- // GODINA: 2014 \\
                           (3201, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020),
                           (3202, '2014 China GP', pobjednik, 54, 01:33:28.338, 00:01:40.402),
                           (3203, '2014 Monaco GP', pobjednik, 78, 01:49:27.661, 00:01:18.4794),
@@ -518,8 +515,7 @@ INSERT INTO utrka  VALUES
                           (3208, '2014 Singapore GP', pobjednik, 60, 02:00:04.795, 00:01:50.417),
                           (3209, '2014 Abu Dhabi GP', POBJEDNIK, 55, 01:39:02.619, 00:01:44.496),
 
---                         // GODINA: 2015 \\
-                          (3300, '2015 Australia GP', pobjednik, 58, 01:31:54.067, 00:01:30.945),
+                          (3300, '2015 Australia GP', pobjednik, 58, 01:31:54.067, 00:01:30.945), -- // GODINA: 2015 \\
                           (3301, '2015 Monaco GP', pobjednik, 78, 01:49:18.420, 00:01:18.063),
                           (3302, '2015 Canada GP', pobjednik, 70, 01:31:53.145, 00:01:16.987),
                           (3303, '2015 Great Britain GP', pobjednik, 52, 01:31:27.729, 00:01:37.093),
@@ -531,7 +527,6 @@ INSERT INTO utrka  VALUES
                           (3309, '2015 Abu Dhabi GP', pobjednik, 55, 01:38:30.175, 00:01:45.356);
 
 
--- SEZONE // 
 INSERT INTO sezona VALUES (id_sezona, godina),
                           (2013, 2013),
                           (2014, 2014),

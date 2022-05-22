@@ -100,7 +100,7 @@ CREATE TABLE utrka(
    vrijeme_vozeno TIME NOT NULL,
    najbrzi_krug TIME NOT NULL,
    id_vrijeme INTEGER,
-   FOREIGN KEY (pobjednik) REFERENCES vozac(id_vozac),
+   FOREIGN KEY (pobjednik) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_vrijeme) REFERENCES vrijeme(id)
 );
 
@@ -490,19 +490,19 @@ INSERT INTO kvalifikacija  VALUES -- (id_kvalifikacija, krugova_vozeno, izlazaka
 INSERT INTO trening  VALUES -- (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
 
 
-INSERT INTO utrka  VALUES (3101, '2013 Australia GP', pobjednik, 58, 01:30:03.225, 00:01:29.274), -- // GODINA: 2013 \\
-                          (3102, '2013 Malaysia GP', pobjednik, 56, 01:38:56.681, 00:01:39.199),
-                          (3103, '2013 China GP', pobjednik, 56, 01:36:26.945, 00:01:36.808),
-                          (3104, '2013 Bahrain GP', pobjednik, 57, 01:36:00.498, 00:01:36.961),
-                          (3105, '2013 Monaco GP', pobjednik, 78, 02:17:52.056, 00:01:18.133),
-                          (3106, '2013 Canada GP', pobjednik, 70, 01:32:09.143, 00:01:16.182),
-                          (3107, '2013 Great Britain GP', pobjednik, 52, 01:32:59.456, 00:01:33.401),
-                          (3108, '2013 Germany GP', pobjednik, 60, 01:41:14.711, 00:01:33.468),
-                          (3109, '2013 Singapore GP', pobjednik, 61, 01:59:13.132, 00:01:48.574),
-                          (3110, '2013 Japan GP', pobjednik, 53, 01:26:49.301, 00:01:34.587),
-                          (3111, '2013 India GP', pobjednik, 60, 01:31:12.187, 00:01:27:679),
-                          (3112, '2013 Abu Dhabi GP', pobjednik, 55, 01:38:06.106, 00:01:43:434),
-                          (3113, '2013 Brazil GP', pobjednik, 71, 01:32:26.300, 00:01:15.436),
+INSERT INTO utrka  VALUES (3101, '2013 Australia GP', 7148, 58, 01:30:03.225, 00:01:29.274), -- // GODINA: 2013 \\
+                          (3102, '2013 Malaysia GP', 7144, 56, 01:38:56.681, 00:01:39.199),
+                          (3103, '2013 China GP', 7142, 56, 01:36:26.945, 00:01:36.808),
+                          (3104, '2013 Bahrain GP', 7144, 57, 01:36:00.498, 00:01:36.961),
+                          (3105, '2013 Monaco GP', 7142, 78, 02:17:52.056, 00:01:18.133),
+                          (3106, '2013 Canada GP', 7150, 70, 01:32:09.143, 00:01:16.182),
+                          (3107, '2013 Great Britain GP', 7142, 52, 01:32:59.456, 00:01:33.401),
+                          (3108, '2013 Germany GP', 7144, 60, 01:41:14.711, 00:01:33.468),
+                          (3109, '2013 Singapore GP', 7144, 61, 01:59:13.132, 00:01:48.574),
+                          (3110, '2013 Japan GP', 7151, 53, 01:26:49.301, 00:01:34.587),
+                          (3111, '2013 India GP', 7144, 60, 01:31:12.187, 00:01:27:679),
+                          (3112, '2013 Abu Dhabi GP', 7144, 55, 01:38:06.106, 00:01:43:434),
+                          (3113, '2013 Brazil GP', 7144, 71, 01:32:26.300, 00:01:15.436),
 
                           (3200, '2014 Australia GP', pobjednik, 57, 01:32:58.710, 00:01:32.4784), -- // GODINA: 2014 \\
                           (3201, '2014 Bahrain GP', pobjednik, 57, 01:39:42.743, 00:01:37.020),

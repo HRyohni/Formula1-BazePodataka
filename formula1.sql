@@ -67,13 +67,10 @@ CREATE TABLE staza(
    broj_drs_zona INTEGER NOT NULL
 );
 
-CREATE TABLE vrijeme(
+CREATE TABLE guma(
    id INTEGER PRIMARY KEY,
-   vozeno_vrijeme TIME,
-   krug SMALLINT,
-   tip_gume VARCHAR(2),
-   pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je NULL
-   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
+   tip_gume VARCHAR(9),
+   kratica VARCHAR(2)
 );
 
 CREATE TABLE trening(
@@ -85,10 +82,39 @@ CREATE TABLE trening(
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
 
+CREATE TABLE tren_vrijeme(
+   id INTEGER PRIMARY KEY,
+   vozeno_vrijeme TIME,
+   krug SMALLINT,
+   id_guma INTEGER,
+   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
+   FOREIGN KEY (id_guma) REFERENCES guma(id)
+);
+
 CREATE TABLE kvalifikacija(
    id INTEGER PRIMARY KEY,
    krugova_vozeno CHAR(5) NOT NULL,
    izlazaka_na_stazu CHAR(5) NOT NULL
+);
+
+CREATE TABLE kval_vrijeme(
+   id INTEGER PRIMARY KEY,
+   vozeno_vrijeme TIME,
+   krug SMALLINT,
+   id_guma INTEGER,
+   vrijeme_na_ljestvici SMALLINT,
+   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
+   FOREIGN KEY (id_guma) REFERENCES guma(id)
+);
+
+CREATE TABLE utrka_vrijeme(
+   id INTEGER PRIMARY KEY,
+   vozeno_vrijeme TIME,
+   krug SMALLINT,
+   id_guma INTEGER,
+   pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je NULL
+   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
+   FOREIGN KEY (id_guma) REFERENCES guma(id)
 );
 
 CREATE TABLE utrka(
@@ -158,7 +184,7 @@ ALTER TABLE utrka
 
 ALTER TABLE vikend
    ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) BETWEEN 1 AND 2),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 1 AND id < 100);
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 10000 AND id < 20000);
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
@@ -175,8 +201,11 @@ ALTER TABLE vozac_u_sezoni
 ALTER TABLE sezona
    ADD CONSTRAINT id_check CHECK (id >= 2013 and id <= 2015);
 
+ALTER TABLE guma
+   ADD CONSTRAINT id_len_ck CHECK (lenght(id) = 1),
+   ADD CONSTRAINT id_rng_ck CHECK (id >= 1 and < 10);
 
--- Potrebna preprava
+
 INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranello, Italy"),
                        (101, "Sahara Force India F1 Team", "Colin Kolles", "Silverstone, United Kingdom"),
                        (102, "Lotus F1 Team", "Éric Boullier", "Enstone, Oxfordshire, United Kingdom"),
@@ -488,6 +517,14 @@ INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrai
                          (1034, "Valencia Street Circuit", "Valencia, Spain", 5419, 2);
 
 
+INSERT INTO guma VALUES (1, "Hard", "H"),
+                        (2, "Medium", "M"),
+                        (3, "Soft", "S"),
+                        (4, "SuperSoft", "SS"),
+                        (5, "Intermediate", "I"),
+                        (6, "Wet", "W");
+
+
 INSERT INTO trening VALUES (), -- (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
                            (),
                              
@@ -516,7 +553,7 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 7148, 58, 01
                          (3203, "72eme Gran Prix de Monaco", 7132, 78, 01:49:27.661, 00:01:18.4794),
                          (3204, "Großer Preis von Österreich", 7132, 71, 01:27:54.976, 00:01:12.142),
                          (3205, "Grosser Preis Santander von Deutschland 2014", 7132, 67, 01:33:42.914, 00:01:19.908),
-                         (3206, "Shell Belgian Grand Prix 2014", 7135, 44, 01:24:36.556, 00:01:50.511),70
+                         (3206, "Shell Belgian Grand Prix 2014", 7135, 44, 01:24:36.556, 00:01:50.511),
                          (3207, "85° Gran Premio d'Italia", 7133, 53, 01:19:10.236, 00:01:28.004),
                          (3208, "Singapore Airlines Singapore Grand Prix 2014", 7133, 60, 02:00:04.795, 00:01:50.417),
                          (3209, "Etihad Airways Abu Dhabi Grand Prix 2014", 7133, 55, 01:39:02.619, 00:01:44.496),

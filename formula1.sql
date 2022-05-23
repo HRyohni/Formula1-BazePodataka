@@ -84,12 +84,14 @@ CREATE TABLE trening(
 
 CREATE TABLE tren_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_tren FOREIGN KEY,
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id)
+   FOREIGN KEY (id_guma) REFERENCES guma(id),
+   FOREIGN KEY (id_tren) REFERENCES trening(id)
 );
 
 CREATE TABLE kvalifikacija(
@@ -100,24 +102,28 @@ CREATE TABLE kvalifikacija(
 
 CREATE TABLE kval_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_kval FOREIGN KEY,
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,
    vrijeme_na_ljestvici SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id)
+   FOREIGN KEY (id_guma) REFERENCES guma(id),
+   FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
 );
 
 CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_utrka FOREIGN KEY,
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,
    pozicija_u_utrci SMALLINT, -- u slučaju da se radi o treningu ili kvalifikacijama pozicija je NULL
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id)
+   FOREIGN KEY (id_guma) REFERENCES guma(id),
+   FOREIGN KEY (id_utrka) REFERENCES utrka(id)
 );
 
 CREATE TABLE utrka(

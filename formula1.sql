@@ -84,6 +84,7 @@ CREATE TABLE trening(
 
 CREATE TABLE tren_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,
@@ -99,6 +100,7 @@ CREATE TABLE kvalifikacija(
 
 CREATE TABLE kval_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,
@@ -109,6 +111,7 @@ CREATE TABLE kval_vrijeme(
 
 CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
+   id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    id_guma INTEGER,

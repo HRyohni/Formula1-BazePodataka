@@ -538,19 +538,19 @@ INSERT INTO trening VALUES (), -- (id_trening, odvozeno_krugova, najbrzi_krug, i
 INSERT INTO kvalifikacija VALUES -- (id_kvalifikacija, krugova_vozeno, izlazaka_na_stazu, datum);
 
 
-INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // GODINA: 2013 \\
-                         (3102, "Petronas Malaysia Grand Prix 2013", 56),
-                         (3103, "UBS Chinese Grand Prix 2013", 56),
-                         (3104, "Gulf Air Bahrain Grand Prix 2013", 57),
-                         (3105, "71e Grand Prix de Monaco", 78),
-                         (3106, "Grand Prix du Canada 2013", 70),
-                         (3107, "Santander British Grand Prix 2013", 52),
-                         (3108, "Grosser Preis Santander von Deutschland 2013", 60),
-                         (3109, "Singtel Singapore Grand Prix 2013", 61),
-                         (3110, "Japanese Grand Prix 2013", 53),
-                         (3111, "Aritel India Grand Prix", 60),
-                         (3112, "Etihad Airways Abu Dhabi Grand Prix", 55),
-                         (3113, "42° Grande Prêmio do Brasil", 71),
+INSERT INTO utrka VALUES (3100, "Rolex Australian Grand Prix 2013", 58), -- // GODINA: 2013 \\
+                         (3101, "Petronas Malaysia Grand Prix 2013", 56),
+                         (3102, "UBS Chinese Grand Prix 2013", 56),
+                         (3103, "Gulf Air Bahrain Grand Prix 2013", 57),
+                         (3104, "71e Grand Prix de Monaco", 78),
+                         (3105, "Grand Prix du Canada 2013", 70),
+                         (3106, "Santander British Grand Prix 2013", 52),
+                         (3107, "Grosser Preis Santander von Deutschland 2013", 60),
+                         (3108, "Singtel Singapore Grand Prix 2013", 61),
+                         (3119, "Japanese Grand Prix 2013", 53),
+                         (3110, "Aritel India Grand Prix", 60),
+                         (3111, "Etihad Airways Abu Dhabi Grand Prix", 55),
+                         (3112, "42° Grande Prêmio do Brasil", 71),
 
                          (3200, "Rolex Australian Grand Prix 2014", 7132, 57, 01:32:58.710, 00:01:32.4784), -- // GODINA: 2014 \\
                          (3201, "Gulf Air Bahrain Grand Prix 2014", 7151, 57, 01:39:42.743, 00:01:37.020),

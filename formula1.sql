@@ -79,9 +79,7 @@ CREATE TABLE tren_vrijeme(
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
-   id_guma INTEGER,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id),
    FOREIGN KEY (id_tren) REFERENCES trening(id)
 );
 
@@ -97,10 +95,7 @@ CREATE TABLE kval_vrijeme(
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,
-   id_guma INTEGER,
-   vrijeme_na_ljestvici SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id),
    FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
 );
 
@@ -113,15 +108,11 @@ CREATE TABLE utrka(
 
 CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
-   id_utrka FOREIGN KEY,
-   id_vus FOREIGN KEY,
-   vozeno_vrijeme TIME,
-   krug SMALLINT,
-   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
-   FOREIGN KEY (id_guma) REFERENCES guma(id),
-   FOREIGN KEY (id_utrka) REFERENCES utrka(id)
+   id_utrka INTEGER,
+   id_vus INTEGER,
+   vozeno_vrijeme_str VARCHAR(30),
+   krug SMALLINT
 );
-
 
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
@@ -196,6 +187,42 @@ ALTER TABLE vozac_u_sezoni
 
 ALTER TABLE sezona
    ADD CONSTRAINT id_check CHECK (id >= 2013 and id <= 2015);
+
+
+-- OVO JE ISJEČAK ZA TABLICE IMPORTIRANE IZ CSV FILE-A
+SHOW VARIABLES LIKE "secure_file_priv"; -- OVA NESMIJE ISPISATI NULL POD VALUES, U DOBIVENI DIREKTORIJ SE UBACUJU .CSV DATOTEKE
+
+LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/utrke-vremena.csv" -- OVDJE IDE DIREKTORIJ KOJI DOBIJES IZ GORNJE KOMANDE, U SLUCAJU GRESKE MOGUCE JE DA TREBA ZAMJENITI SMJER SLASHEVA
+INTO TABLE utrka_vrijeme
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+ALTER TABLE utrka_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
+UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+--  // KRAJ ZA UTRKE VRIJEME
+
+
+LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/kvalifikacije-vremena.csv" -- OVDJE IDE DIREKTORIJ KOJI DOBIJES IZ GORNJE KOMANDE, U SLUCAJU GRESKE MOGUCE JE DA TREBA ZAMJENITI SMJER SLASHEVA
+INTO TABLE kval_vrijeme
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+ALTER TABLE kval_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
+UPDATE kval_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+--  // KRAJ ZA KVALIFIKACIJE VRIJEME
+
+
+LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/treninzi-vremena.csv" -- OVDJE IDE DIREKTORIJ KOJI DOBIJES IZ GORNJE KOMANDE, U SLUCAJU GRESKE MOGUCE JE DA TREBA ZAMJENITI SMJER SLASHEVA
+INTO TABLE kval_vrijeme
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+ALTER TABLE tren_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
+UPDATE tren_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+--  // KRAJ ZA TRENING VRIJEME
 
 
 INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranello, Italy"),
@@ -628,12 +655,3 @@ INSERT INTO sezona VALUES (id_sezona, godina),
                           (2013, 2013),
                           (2014, 2014),
                           (2015, 2015);
-
-
-CREATE TABLE utrka_vrijeme(
-   id INTEGER PRIMARY KEY,
-   id_utrka INTEGER,
-   id_vus INTEGER,
-   vozeno_vrijeme_str VARCHAR(30),
-   krug SMALLINT
-);

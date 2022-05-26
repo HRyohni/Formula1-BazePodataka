@@ -69,10 +69,7 @@ CREATE TABLE staza(
 
 CREATE TABLE trening(
    id INTEGER PRIMARY KEY,
-   id_vus INTEGER,
-   odvozeno_krugova CHAR(5) NOT NULL,
-   najbrzi_krug CHAR(5) NOT NULL,
-   izlazaka_na_stazu CHAR(5) NOT NULL,
+   krugova_vozeno CHAR(5) NOT NULL,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
 
@@ -513,12 +510,81 @@ INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrai
                          (1034, "Valencia Street Circuit", "Valencia, Spain", 5419, 2);
 
 
-INSERT INTO trening VALUES (), -- (id_trening, odvozeno_krugova, najbrzi_krug, izlazaka_na_stazu, datum);
-                           (),
+INSERT INTO trening VALUES ("2013-T3101"), -- (id);
+                           ("2013-T3102"),
+                           ("2013-T3103"),
+                           ("2013-T3104"),
+                           ("2013-T3105"),
+                           ("2013-T3106"),
+                           ("2013-T3107"),
+                           ("2013-T3108"),
+                           ("2013-T3109"),
+                           ("2013-T3110"),
+                           ("2013-T3111"),
+                           ("2013-T3112"),
+                           ("2013-T3113"),
+--                         // KRAJ 2013 \\
+                           ("2014-T3200"),
+                           ("2014-T3201"),
+                           ("2014-T3202"),
+                           ("2014-T3203"),
+                           ("2014-T3204"),
+                           ("2014-T3205"),
+                           ("2014-T3206"),
+                           ("2014-T3207"),
+                           ("2014-T3208"),
+                           ("2014-T3209"),
+--                         // KRAJ 2014 \\
+                           ("2015-T3300"),
+                           ("2015-T3301"),
+                           ("2015-T3302"),
+                           ("2015-T3303"),
+                           ("2015-T3304"),
+                           ("2015-T3305"),
+                           ("2015-T3306"),
+                           ("2015-T3307"),
+                           ("2015-T3308"),
+                           ("2015-T3309");
+--                         // KRAJ 2015 \\
                              
 
+INSERT INTO kvalifikacija VALUES -- (id);
+                           ("2013-Q3101"),
+                           ("2013-Q3102"),
+                           ("2013-Q3103"),
+                           ("2013-Q3104"),
+                           ("2013-Q3105"),
+                           ("2013-Q3106"),
+                           ("2013-Q3107"),
+                           ("2013-Q3108"),
+                           ("2013-Q3109"),
+                           ("2013-Q3110"),
+                           ("2013-Q3111"),
+                           ("2013-Q3112"),
+                           ("2013-Q3113"),
+--                         // KRAJ 2013 \\
+                           ("2014-Q3200"),
+                           ("2014-Q3201"),
+                           ("2014-Q3202"),
+                           ("2014-Q3203"),
+                           ("2014-Q3204"),
+                           ("2014-Q3205"),
+                           ("2014-Q3206"),
+                           ("2014-Q3207"),
+                           ("2014-Q3208"),
+                           ("2014-Q3209"),
+--                         // KRAJ 2014 \\
+                           ("2015-Q3300"),
+                           ("2015-Q3301"),
+                           ("2015-Q3302"),
+                           ("2015-Q3303"),
+                           ("2015-Q3304"),
+                           ("2015-Q3305"),
+                           ("2015-Q3306"),
+                           ("2015-Q3307"),
+                           ("2015-Q3308"),
+                           ("2015-Q3309");
 
-INSERT INTO kvalifikacija VALUES -- (id_kvalifikacija, krugova_vozeno, izlazaka_na_stazu, datum);
 
 
 INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // GODINA: 2013 \\
@@ -562,3 +628,12 @@ INSERT INTO sezona VALUES (id_sezona, godina),
                           (2013, 2013),
                           (2014, 2014),
                           (2015, 2015);
+
+
+CREATE TABLE utrka_vrijeme(
+   id INTEGER PRIMARY KEY,
+   id_utrka INTEGER,
+   id_vus INTEGER,
+   vozeno_vrijeme_str VARCHAR(30),
+   krug SMALLINT
+);

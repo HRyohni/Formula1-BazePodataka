@@ -537,7 +537,7 @@ INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrai
                          (1034, "Valencia Street Circuit", "Valencia, Spain", 5419, 2);
 
 
-INSERT INTO trening VALUES ("2013-T3101"), -- (id);
+INSERT INTO trening VALUES ("2013-T3101"), -- // GODINA: 2013 \\
                            ("2013-T3102"),
                            ("2013-T3103"),
                            ("2013-T3104"),
@@ -550,8 +550,8 @@ INSERT INTO trening VALUES ("2013-T3101"), -- (id);
                            ("2013-T3111"),
                            ("2013-T3112"),
                            ("2013-T3113"),
---                         // KRAJ 2013 \\
-                           ("2014-T3200"),
+
+                           ("2014-T3200"), -- // GODINA: 2014 \\
                            ("2014-T3201"),
                            ("2014-T3202"),
                            ("2014-T3203"),
@@ -561,8 +561,8 @@ INSERT INTO trening VALUES ("2013-T3101"), -- (id);
                            ("2014-T3207"),
                            ("2014-T3208"),
                            ("2014-T3209"),
---                         // KRAJ 2014 \\
-                           ("2015-T3300"),
+
+                           ("2015-T3300"), -- // GODINA: 2015 \\
                            ("2015-T3301"),
                            ("2015-T3302"),
                            ("2015-T3303"),
@@ -572,45 +572,43 @@ INSERT INTO trening VALUES ("2013-T3101"), -- (id);
                            ("2015-T3307"),
                            ("2015-T3308"),
                            ("2015-T3309");
---                         // KRAJ 2015 \\
                              
 
-INSERT INTO kvalifikacija VALUES -- (id);
-                           ("2013-Q3101"),
-                           ("2013-Q3102"),
-                           ("2013-Q3103"),
-                           ("2013-Q3104"),
-                           ("2013-Q3105"),
-                           ("2013-Q3106"),
-                           ("2013-Q3107"),
-                           ("2013-Q3108"),
-                           ("2013-Q3109"),
-                           ("2013-Q3110"),
-                           ("2013-Q3111"),
-                           ("2013-Q3112"),
-                           ("2013-Q3113"),
---                         // KRAJ 2013 \\
-                           ("2014-Q3200"),
-                           ("2014-Q3201"),
-                           ("2014-Q3202"),
-                           ("2014-Q3203"),
-                           ("2014-Q3204"),
-                           ("2014-Q3205"),
-                           ("2014-Q3206"),
-                           ("2014-Q3207"),
-                           ("2014-Q3208"),
-                           ("2014-Q3209"),
---                         // KRAJ 2014 \\
-                           ("2015-Q3300"),
-                           ("2015-Q3301"),
-                           ("2015-Q3302"),
-                           ("2015-Q3303"),
-                           ("2015-Q3304"),
-                           ("2015-Q3305"),
-                           ("2015-Q3306"),
-                           ("2015-Q3307"),
-                           ("2015-Q3308"),
-                           ("2015-Q3309");
+INSERT INTO kvalifikacija VALUES ("2013-Q3101"), -- // GODINA: 2013 \\
+                                 ("2013-Q3102"),
+                                 ("2013-Q3103"),
+                                 ("2013-Q3104"),
+                                 ("2013-Q3105"),
+                                 ("2013-Q3106"),
+                                 ("2013-Q3107"),
+                                 ("2013-Q3108"),
+                                 ("2013-Q3109"),
+                                 ("2013-Q3110"),
+                                 ("2013-Q3111"),
+                                 ("2013-Q3112"),
+                                 ("2013-Q3113"),
+
+                                 ("2014-Q3200"), -- // GODINA: 2014 \\
+                                 ("2014-Q3201"),
+                                 ("2014-Q3202"),
+                                 ("2014-Q3203"),
+                                 ("2014-Q3204"),
+                                 ("2014-Q3205"),
+                                 ("2014-Q3206"),
+                                 ("2014-Q3207"),
+                                 ("2014-Q3208"),
+                                 ("2014-Q3209"),
+
+                                 ("2015-Q3300"), -- // GODINA: 2015 \\
+                                 ("2015-Q3301"),
+                                 ("2015-Q3302"),
+                                 ("2015-Q3303"),
+                                 ("2015-Q3304"),
+                                 ("2015-Q3305"),
+                                 ("2015-Q3306"),
+                                 ("2015-Q3307"),
+                                 ("2015-Q3308"),
+                                 ("2015-Q3309");
 
 
 
@@ -628,16 +626,16 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
                          (3112, "Etihad Airways Abu Dhabi Grand Prix", 55),
                          (3113, "42° Grande Prêmio do Brasil", 71),
 
-                         (3200, "Rolex Australian Grand Prix 2014", 7132, 57, 01:32:58.710, 00:01:32.4784), -- // GODINA: 2014 \\
-                         (3201, "Gulf Air Bahrain Grand Prix 2014", 7151, 57, 01:39:42.743, 00:01:37.020),
-                         (3202, "UBS Chinese Grand Prix 2014", 7151, 54, 01:33:28.338, 00:01:40.402),
-                         (3203, "72eme Gran Prix de Monaco", 7132, 78, 01:49:27.661, 00:01:18.4794),
-                         (3204, "Großer Preis von Österreich", 7132, 71, 01:27:54.976, 00:01:12.142),
-                         (3205, "Grosser Preis Santander von Deutschland 2014", 7132, 67, 01:33:42.914, 00:01:19.908),
-                         (3206, "Shell Belgian Grand Prix 2014", 7135, 44, 01:24:36.556, 00:01:50.511),
-                         (3207, "85° Gran Premio d'Italia", 7133, 53, 01:19:10.236, 00:01:28.004),
-                         (3208, "Singapore Airlines Singapore Grand Prix 2014", 7133, 60, 02:00:04.795, 00:01:50.417),
-                         (3209, "Etihad Airways Abu Dhabi Grand Prix 2014", 7133, 55, 01:39:02.619, 00:01:44.496),
+                         (3200, "Rolex Australian Grand Prix 2014", 57,), -- // GODINA: 2014 \\
+                         (3201, "Gulf Air Bahrain Grand Prix 2014", 57,),
+                         (3202, "UBS Chinese Grand Prix 2014", 54,),
+                         (3203, "72eme Gran Prix de Monaco", 78),
+                         (3204, "Großer Preis von Österreich", 71),
+                         (3205, "Grosser Preis Santander von Deutschland 2014", 67),
+                         (3206, "Shell Belgian Grand Prix 2014", 44,),
+                         (3207, "85° Gran Premio d'Italia", 53,),
+                         (3208, "Singapore Airlines Singapore Grand Prix 2014", 60,),
+                         (3209, "Etihad Airways Abu Dhabi Grand Prix 2014", 55),
 
                          (3300, "Rolex Australian Grand Prix 2015", 58), -- // GODINA: 2015 \\
                          (3301, "73ème Grand Prix de Monaco", 78),

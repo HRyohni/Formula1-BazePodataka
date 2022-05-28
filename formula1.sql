@@ -55,7 +55,7 @@ CREATE TABLE automobil(
 
 CREATE TABLE sponzor(
    id INTEGER PRIMARY KEY,
-   ime VARCHAR(50) NOT NULL,
+   ime VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE sponzor_u_sezoni(
@@ -64,7 +64,7 @@ CREATE TABLE sponzor_u_sezoni(
    id_kus INTEGER,
    isplacen_novac FLOAT NOT NULL,
    status_sponzora VARCHAR(13),
-   id_sezona INTEGER
+   id_sezona INTEGER,
    FOREIGN KEY (id_sponzor) REFERENCES sponzor(id),
    FOREIGN KEY (id_kus) REFERENCES konstruktor_u_sezoni(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
@@ -79,9 +79,7 @@ CREATE TABLE staza(
 );
 
 CREATE TABLE trening(
-   id INTEGER PRIMARY KEY,
-   krugova_vozeno CHAR(5) NOT NULL,
-   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
+   id INTEGER PRIMARY KEY
 );
 
 CREATE TABLE tren_vrijeme(
@@ -95,9 +93,7 @@ CREATE TABLE tren_vrijeme(
 );
 
 CREATE TABLE kvalifikacija(
-   id INTEGER PRIMARY KEY,
-   krugova_vozeno CHAR(5) NOT NULL,
-   izlazaka_na_stazu CHAR(5) NOT NULL
+   id INTEGER PRIMARY KEY
 );
 
 CREATE TABLE kval_vrijeme(
@@ -113,8 +109,7 @@ CREATE TABLE kval_vrijeme(
 CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
    ime_nagrade VARCHAR(30),
-   broj_krugova INTEGER NOT NULL,
-   FOREIGN KEY (pobjednik) REFERENCES vozac_u_sezoni(id)
+   broj_krugova INTEGER NOT NULL
 );
 
 CREATE TABLE utrka_vrijeme(
@@ -163,7 +158,7 @@ ALTER TABLE konstruktor_u_sezoni
 
 ALTER TABLE sponzor
    ADD CONSTRAINT id_len_ck_sponzor CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_sponzor CHECK (id >= 4000 AND id < 5000)
+   ADD CONSTRAINT id_rng_ck_sponzor CHECK (id >= 4000 AND id < 5000);
 
 ALTER TABLE sponzor_u_sezoni
    ADD CONSTRAINT payout_ck_sponzor CHECK (isplacen_novac >= 500000);
@@ -238,7 +233,7 @@ INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranel
                        (107, "Sauber F1 Team", "Monisha Kaltenborn", "Hinwil, Switzerland"),
                        (108, "Scuderia Toro Rosso", "Franz Tost", "Faenza, Italy"),
                        (109, "Williams Martini Racing", "Claire Williams", "Grove, Oxfordshire, United Kingdom"),
-                       (110, "Caterham F1 Team", "Cyril Abiteboul", "Leafield, Oxfordshire, United Kingdom"),
+                       (110, "Caterham F1 Team", "Cyril Abiteboul", "Leafield, Oxfordshire, United Kingdom");
 
 
 INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, "F138", 354, 10), -- // Scuderia Ferrari \\
@@ -299,9 +294,9 @@ INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98,  STR_TO_DATE("22.3.1991.
                          (7010, "Jean-Eric", "Vergne", 25,  STR_TO_DATE("25.4.1990.", "%d.%m.&Y."), " francukso"),
                          (7012, "Romain", "Grosjean", 8,  STR_TO_DATE("17.4.1986.", "%d.%m.&Y."), " francusko"),
                          (7013, "Jules", "Bianchi", 17,  STR_TO_DATE("3.8.1989.", "%d.%m.&Y."), "francusko"),
-                         (7014, "Adrian", "Sutil", 99,  STR_TO_DATE("11.1.1983."), "njemačko"),
-                         (7015, "Max", "Chilton", 4,  STR_TO_DATE("21.4.1991.", "%d.%m.&Y.") "britansko"),
-                         (7016, "Kamui", "Kobayashi", 10,  STR_TO_DATE("13.9.1986.", "%d.%m.&Y.") "japansko"),
+                         (7014, "Adrian", "Sutil", 99,  STR_TO_DATE("11.1.1983.", "%d.%m.&Y."), "njemačko"),
+                         (7015, "Max", "Chilton", 4,  STR_TO_DATE("21.4.1991.", "%d.%m.&Y."), "britansko"),
+                         (7016, "Kamui", "Kobayashi", 10,  STR_TO_DATE("13.9.1986.", "%d.%m.&Y."), "japansko"),
                          (7017, "Mark", "Webber", 17, STR_TO_DATE("27.8.1976.", "%d.%m.&Y."), "australsko"),
                          (7018, "Lewis", "Hamilton", 44, STR_TO_DATE("07.01.1985.", "%d.%m.&Y."), "britansko"),
                          (7019, "Felipe", "Massa", 19, STR_TO_DATE("25.4.1981.", "%d.%m.&Y."), "brazilsko"),
@@ -320,28 +315,28 @@ INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98,  STR_TO_DATE("22.3.1991.
                          (7033, "Max", "Verstappen", 33, STR_TO_DATE("30.09.1997.", "%d.%m.%Y."), "nizozemsko"),
                          (7034, "Carlos", "Sainz", 55, STR_TO_DATE("01.09.1994.", "%d.%m.%Y."), "španjolsko");
 
-INSERT INTO vozac_u_sezoni (7142, 7006, 218, 9002, 2013, 16, 397, 7), -- // GODINA: 2013 \\
-                           (7143, 7017, 218, 9003, 2013, 8, 199, 5),
-                           (7144, 7007, 200, 9000, 2013, 9, 242, 2),
-                           (7145, 7019, 200, 9001, 2013, 1, 112, 0),
-                           (7146, 7020, 212, 9004, 2013, 0, 73, 0),
-                           (7147, 7008, 212, 9005, 2013, 0, 49, 1),
-                           (7148, 7009, 206, 9014, 2013, 8, 183, 2),
-                           (7149, 7012, 206, 9015, 2013, 6, 132, 0),
-                           (7150, 7001, 215, 9018, 2013, 4, 171, 0),
-                           (7151, 7018, 215, 9019, 2013, 5, 189, 1),
-                           (7152, 7021, 221, 9008, 2013, 0, 54, 0),
-                           (7153, 7027, 221, 9009, 2013, 0, 6, 1),
-                           (7154, 7022, 203, 9020, 2013, 0, 48, 0),
-                           (7155, 7014, 203, 9021, 2013, 0, 29, 0),
-                           (7156, 7003, 227, 9006, 2013, 0, 4, 0),
-                           (7157, 7028, 227, 9007, 2013, 0, 1, 0),
-                           (7158, 7010, 224, 9010, 2013, 0, 13, 0),
-                           (7159, 7029, 224, 9011, 2013, 0, 20, 0),
-                           (7160, 7025, 230, 9012, 2013, 0, 0, 0),
-                           (7161, 7026, 230, 9013, 2013, 0, 0, 0),
-                           (7162, 7024, 209, 9016, 2013, 0, 0, 0),
-                           (7163, 7015, 209, 9017, 2013, 0, 0, 0);
+INSERT INTO vozac_u_sezoni VALUES (7142, 7006, 218, 9002, 2013, 16, 397, 7), -- // GODINA: 2013 \\
+								  (7143, 7017, 218, 9003, 2013, 8, 199, 5),
+								  (7144, 7007, 200, 9000, 2013, 9, 242, 2),
+								  (7145, 7019, 200, 9001, 2013, 1, 112, 0),
+								  (7146, 7020, 212, 9004, 2013, 0, 73, 0),
+								  (7147, 7008, 212, 9005, 2013, 0, 49, 1),
+								  (7148, 7009, 206, 9014, 2013, 8, 183, 2),
+								  (7149, 7012, 206, 9015, 2013, 6, 132, 0),
+								  (7150, 7001, 215, 9018, 2013, 4, 171, 0),
+								  (7151, 7018, 215, 9019, 2013, 5, 189, 1),
+								  (7152, 7021, 221, 9008, 2013, 0, 54, 0),
+								  (7153, 7027, 221, 9009, 2013, 0, 6, 1),
+								  (7154, 7022, 203, 9020, 2013, 0, 48, 0),
+								  (7155, 7014, 203, 9021, 2013, 0, 29, 0),
+								  (7156, 7003, 227, 9006, 2013, 0, 4, 0),
+								  (7157, 7028, 227, 9007, 2013, 0, 1, 0),
+								  (7158, 7010, 224, 9010, 2013, 0, 13, 0),
+								  (7159, 7029, 224, 9011, 2013, 0, 20, 0),
+								  (7160, 7025, 230, 9012, 2013, 0, 0, 0),
+								  (7161, 7026, 230, 9013, 2013, 0, 0, 0),
+					              (7162, 7024, 209, 9016, 2013, 0, 0, 0),
+								  (7163, 7015, 209, 9017, 2013, 0, 0, 0),
 
                            (7120, 7030, 231, 9112, 2014, 0, 0, 0), -- // GODINA: 2014 \\
                            (7121, 7016, 231, 9113, 2014, 0, 0, 0),
@@ -385,7 +380,7 @@ INSERT INTO vozac_u_sezoni (7142, 7006, 218, 9002, 2013, 16, 397, 7), -- // GODI
                            (7116, 7029, 220, 9202, 2015, 2, 92, 3),
                            (7117, 7032, 220, 9003, 2015, 1, 95, 0),
                            (7118, 7033, 226, 9210, 2015, 0, 49, 0),
-                           (7119, 7034, 226, 9211, 2015, 0, 18, 0),
+                           (7119, 7034, 226, 9211, 2015, 0, 18, 0);
 
 
 INSERT INTO automobil VALUES (9000, "Ferrari F138 n.1", "2.4L NA V8", "Pirelli"), -- // GODINA: 2013 \\
@@ -453,7 +448,7 @@ INSERT INTO automobil VALUES (9000, "Ferrari F138 n.1", "2.4L NA V8", "Pirelli")
                              (9216, "Mercedes W06 n.1", "1.6L TC V6 Hybrid", "Pirelli"),
                              (9217, "Mercedes W06 n.2", "1.6L TC V6 Hybrid", "Pirelli"),
                              (9218, "Force India VJM08 n.1", "1.6L TC V6 Hybrid", "Pirelli"),
-                             (9219, "Force India VJM08 n.2", "1.6L TC V6 Hybrid", "Pirelli"),     
+                             (9219, "Force India VJM08 n.2", "1.6L TC V6 Hybrid", "Pirelli");
 
 
 -- SPONZORI // LISTA JE SMANJENA ZBOG OGROMNE KOLIČINE PODATAKA GLEDAJUĆI DA SVAKI TIM IMA PO MINIMALNO 20 SPONZORA.
@@ -761,15 +756,15 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
                          (3112, "Etihad Airways Abu Dhabi Grand Prix", 55),
                          (3113, "42° Grande Prêmio do Brasil", 71),
 
-                         (3200, "Rolex Australian Grand Prix 2014", 57,), -- // GODINA: 2014 \\
-                         (3201, "Gulf Air Bahrain Grand Prix 2014", 57,),
-                         (3202, "UBS Chinese Grand Prix 2014", 54,),
+                         (3200, "Rolex Australian Grand Prix 2014", 57), -- // GODINA: 2014 \\
+                         (3201, "Gulf Air Bahrain Grand Prix 2014", 57),
+                         (3202, "UBS Chinese Grand Prix 2014", 54),
                          (3203, "72eme Gran Prix de Monaco", 78),
                          (3204, "Großer Preis von Österreich", 71),
                          (3205, "Grosser Preis Santander von Deutschland 2014", 67),
-                         (3206, "Shell Belgian Grand Prix 2014", 44,),
-                         (3207, "85° Gran Premio d'Italia", 53,),
-                         (3208, "Singapore Airlines Singapore Grand Prix 2014", 60,),
+                         (3206, "Shell Belgian Grand Prix 2014", 44),
+                         (3207, "85° Gran Premio d'Italia", 53),
+                         (3208, "Singapore Airlines Singapore Grand Prix 2014", 60),
                          (3209, "Etihad Airways Abu Dhabi Grand Prix 2014", 55),
 
                          (3300, "Rolex Australian Grand Prix 2015", 58), -- // GODINA: 2015 \\

@@ -86,7 +86,7 @@ CREATE TABLE trening(
 
 CREATE TABLE tren_vrijeme(
    id VARCHAR(9) PRIMARY KEY,
-   id_tren FOREIGN KEY,
+   id_tren FOREIGN KEY, /* <- integer??? */
    id_vus FOREIGN KEY,
    vozeno_vrijeme TIME,
    krug SMALLINT,

@@ -86,8 +86,8 @@ CREATE TABLE trening(
 
 CREATE TABLE tren_vrijeme(
    id VARCHAR(9) PRIMARY KEY,
-   id_tren FOREIGN KEY, /* <- integer??? */
-   id_vus FOREIGN KEY,
+   id_tren INTEGER,
+   id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
@@ -102,8 +102,8 @@ CREATE TABLE kvalifikacija(
 
 CREATE TABLE kval_vrijeme(
    id VARCHAR(9) PRIMARY KEY,
-   id_kval FOREIGN KEY,
-   id_vus FOREIGN KEY,
+   id_kval INTEGER,
+   id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),

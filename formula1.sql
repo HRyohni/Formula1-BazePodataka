@@ -28,6 +28,8 @@ CREATE TABLE vozac(
    nacionalnost VARCHAR(30) NOT NULL
 );
 
+DROP TABLE vozac;
+
 CREATE TABLE vozac_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_vozac INTEGER,
@@ -73,12 +75,12 @@ CREATE TABLE staza(
 );
 
 CREATE TABLE trening(
-   id INTEGER PRIMARY KEY
+   id VARCHAR(10) PRIMARY KEY
 );
 
 CREATE TABLE tren_vrijeme(
    id VARCHAR(9) PRIMARY KEY,
-   id_tren INTEGER,
+   id_tren VARCHAR(10),
    id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
@@ -87,12 +89,12 @@ CREATE TABLE tren_vrijeme(
 );
 
 CREATE TABLE kvalifikacija(
-   id INTEGER PRIMARY KEY
+   id VARCHAR(10) PRIMARY KEY
 );
 
 CREATE TABLE kval_vrijeme(
    id VARCHAR(9) PRIMARY KEY,
-   id_kval INTEGER,
+   id_kval VARCHAR(10),
    id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
@@ -111,14 +113,16 @@ CREATE TABLE utrka_vrijeme(
    id_utrka INTEGER,
    id_vus INTEGER,
    vozeno_vrijeme_str VARCHAR(30),
-   krug SMALLINT
+   krug SMALLINT,
+   FOREIGN KEY (id_utrka) REFERENCES utrka(id),
+   FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
 
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
    datum_pocetka DATE NOT NULL,
    datum_kraja DATE NOT NULL,
-   id_staza INTEGER,
+   id_staza NUMERIC(4,0),
    id_trening VARCHAR(15),
    id_quali VARCHAR(15),
    id_utrka INTEGER,
@@ -174,7 +178,7 @@ ALTER TABLE vozac
    ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 7000 AND id < 7100);
 
 ALTER TABLE vozac_u_sezoni
-   ADD CONSTRAINT id_len_cek_vus CHECK (lenght(id) = 4),
+   ADD CONSTRAINT id_len_cek_vus CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_vus CHECK (id >= 7100 and id < 7200);
 
 ALTER TABLE sezona
@@ -275,31 +279,31 @@ INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, "F138"), -- // Scuderia
 
 
 
-INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98,  STR_TO_DATE("22.3.1991.", "%d.%m.&Y."), "španjolsko"),
-                         (7001, "Nico", "Rosberg", 6,  STR_TO_DATE("27.6.1985.", "%d.%m.&Y."), "njemačko"),
-                         (7002, "Felipe", "Nasr", 12,  STR_TO_DATE("21.8.1992.", "%d.%m.&Y."), "brazilsko"),
-                         (7003, "Pastor", "Maldonado", 13,  STR_TO_DATE("9.3.1985.", "%d.%m.&Y."), "venecuelansko"),
-                         (7004, "Alexander", "Rossi", 53,  STR_TO_DATE("25.9.1991.", "%d.%m.&Y."), "američko"),
-                         (7005, "Will", "Stevens", 28,  STR_TO_DATE("28.6.1991.", "%d.%m.&Y."), "britansko"),
+INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98,  STR_TO_DATE("22.03.1991.", "%d.%m.&Y."), "španjolsko"),
+                         (7001, "Nico", "Rosberg", 6,  STR_TO_DATE("27.06.1985.", "%d.%m.&Y."), "njemačko"),
+                         (7002, "Felipe", "Nasr", 12,  STR_TO_DATE("21.08.1992.", "%d.%m.&Y."), "brazilsko"),
+                         (7003, "Pastor", "Maldonado", 13,  STR_TO_DATE("09.03.1985.", "%d.%m.&Y."), "venecuelansko"),
+                         (7004, "Alexander", "Rossi", 53,  STR_TO_DATE("25.09.1991.", "%d.%m.&Y."), "američko"),
+                         (7005, "Will", "Stevens", 28,  STR_TO_DATE("28.06.1991.", "%d.%m.&Y."), "britansko"),
                          (7006, "Sebastian", "Vettel", 5, STR_TO_DATE("03.07.1987.", "%d.%m.%Y."), "njemačko"),
                          (7007, "Fernando", "Alonso", 14, STR_TO_DATE("29.07.1981.", "%d.%m.%Y."), "španjolsko"),
                          (7008, "Sergio", "Pérez", 11, STR_TO_DATE("26.01.1990", "%d.%m.%Y."), "meksičko"),
                          (7009, "Kimi", "Räikkönen", 7, STR_TO_DATE("17.10.1979", "%d.%m.%Y."), "finsko"),
-                         (7010, "Jean-Eric", "Vergne", 25,  STR_TO_DATE("25.4.1990.", "%d.%m.&Y."), " francukso"),
-                         (7012, "Romain", "Grosjean", 8,  STR_TO_DATE("17.4.1986.", "%d.%m.&Y."), " francusko"),
-                         (7013, "Jules", "Bianchi", 17,  STR_TO_DATE("3.8.1989.", "%d.%m.&Y."), "francusko"),
-                         (7014, "Adrian", "Sutil", 99,  STR_TO_DATE("11.1.1983.", "%d.%m.&Y."), "njemačko"),
-                         (7015, "Max", "Chilton", 4,  STR_TO_DATE("21.4.1991.", "%d.%m.&Y."), "britansko"),
-                         (7016, "Kamui", "Kobayashi", 10,  STR_TO_DATE("13.9.1986.", "%d.%m.&Y."), "japansko"),
-                         (7017, "Mark", "Webber", 17, STR_TO_DATE("27.8.1976.", "%d.%m.&Y."), "australsko"),
+                         (7010, "Jean-Eric", "Vergne", 25,  STR_TO_DATE("25.04.1990.", "%d.%m.&Y."), " francukso"),
+                         (7012, "Romain", "Grosjean", 8,  STR_TO_DATE("17.04.1986.", "%d.%m.&Y."), " francusko"),
+                         (7013, "Jules", "Bianchi", 17,  STR_TO_DATE("03.08.1989.", "%d.%m.&Y."), "francusko"),
+                         (7014, "Adrian", "Sutil", 99,  STR_TO_DATE("11.01.1983.", "%d.%m.&Y."), "njemačko"),
+                         (7015, "Max", "Chilton", 4,  STR_TO_DATE("21.04.1991.", "%d.%m.&Y."), "britansko"),
+                         (7016, "Kamui", "Kobayashi", 10,  STR_TO_DATE("13.09.1986.", "%d.%m.&Y."), "japansko"),
+                         (7017, "Mark", "Webber", 17, STR_TO_DATE("27.08.1976.", "%d.%m.&Y."), "australsko"),
                          (7018, "Lewis", "Hamilton", 44, STR_TO_DATE("07.01.1985.", "%d.%m.&Y."), "britansko"),
-                         (7019, "Felipe", "Massa", 19, STR_TO_DATE("25.4.1981.", "%d.%m.&Y."), "brazilsko"),
-                         (7020, "Jenson", "Button", 22, STR_TO_DATE("19.1.1980.", "%d.%m.&Y."), "britansko"),
-                         (7021, "Nico", "Hülkenberg", 27, STR_TO_DATE("19.8.1987.", "%d.%m.&Y."), "njemačko"),
-                         (7022, "Paul", "di Resta", 40, STR_TO_DATE("16.4.1986.", "%d.%m.&Y."), "britansko"),
-                         (7024, "Jules", "Bianchi", 17, STR_TO_DATE("3.8.1989.", "%d.%m.&Y."), "francusko"),
-                         (7025, "Charles", "Pic", 99, STR_TO_DATE("15.2.1990.", "%d.%m.&Y."), "francusko"),
-                         (7026, "Giedo", "van der Garde", 21, STR_TO_DATE("25.4.1985.", "%d.%m.&Y."), "nizozemsko"),
+                         (7019, "Felipe", "Massa", 19, STR_TO_DATE("25.04.1981.", "%d.%m.&Y."), "brazilsko"),
+                         (7020, "Jenson", "Button", 22, STR_TO_DATE("19.01.1980.", "%d.%m.&Y."), "britansko"),
+                         (7021, "Nico", "Hülkenberg", 27, STR_TO_DATE("19.08.1987.", "%d.%m.&Y."), "njemačko"),
+                         (7022, "Paul", "di Resta", 40, STR_TO_DATE("16.04.1986.", "%d.%m.&Y."), "britansko"),
+                         (7024, "Jules", "Bianchi", 17, STR_TO_DATE("03.08.1989.", "%d.%m.&Y."), "francusko"),
+                         (7025, "Charles", "Pic", 99, STR_TO_DATE("15.02.1990.", "%d.%m.&Y."), "francusko"),
+                         (7026, "Giedo", "van der Garde", 21, STR_TO_DATE("25.04.1985.", "%d.%m.&Y."), "nizozemsko"),
                          (7027, "Esteban", "Gutiérrez", 21, STR_TO_DATE("05.08.1991.", "%d.%m.%Y."), "meksičko"),
                          (7028, "Valtteri", "Bottas", 77, STR_TO_DATE("28.08.1989", "%d.%m.%Y."), "finsko"),
                          (7029, "Daniel", "Ricciardo", 3, STR_TO_DATE("01.07.1989.", "%d.%m.%Y."), "autstralsko"),

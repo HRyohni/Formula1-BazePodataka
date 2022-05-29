@@ -211,7 +211,7 @@ UPDATE kval_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:
 
 
 LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/treninzi-vremena.csv" -- OVDJE IDE DIREKTORIJ KOJI DOBIJES IZ GORNJE KOMANDE, U SLUCAJU GRESKE MOGUCE JE DA TREBA ZAMJENITI SMJER SLASHEVA
-INTO TABLE kval_vrijeme
+INTO TABLE tren_vrijeme
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';

@@ -82,12 +82,12 @@ CREATE TABLE tren_vrijeme(
    id INTEGER PRIMARY KEY,
    id_tren INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme TIME,
+   vozeno_vrijeme VARCHAR(30),
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_tren) REFERENCES trening(id)
 );
-
+DROP TABLE tren_vrijeme;
 CREATE TABLE kvalifikacija(
    id INTEGER PRIMARY KEY
 );
@@ -96,12 +96,12 @@ CREATE TABLE kval_vrijeme(
    id INTEGER PRIMARY KEY,
    id_kval INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme TIME,
+   vozeno_vrijeme VARCHAR(30),
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
 );
-
+DROP TABLE kval_vrijeme;
 CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
    ime_nagrade VARCHAR(50),
@@ -117,12 +117,12 @@ CREATE TABLE utrka_vrijeme(
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
 );
-
+DROP TABLE utrka_vrijeme;
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
    datum_pocetka DATE NOT NULL,
    datum_kraja DATE NOT NULL,
-   id_staza NUMERIC(4,0),
+   id_staza INTEGER,
    id_trening INTEGER,
    id_quali INTEGER,
    id_utrka INTEGER,
@@ -133,7 +133,7 @@ CREATE TABLE vikend(
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
-
+DROP TABLE vikend;
 CREATE TABLE sezona(
    id INTEGER PRIMARY KEY,
    godina INTEGER

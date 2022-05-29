@@ -67,7 +67,7 @@ CREATE TABLE sponzor_u_sezoni(
 );
 
 CREATE TABLE staza(
-   id NUMERIC(4,0) PRIMARY KEY,
+   id INTEGER PRIMARY KEY,
    ime_staze VARCHAR(50) NOT NULL,
    drzava VARCHAR(30) NOT NULL,
    duzina_m INTEGER NOT NULL,
@@ -75,12 +75,12 @@ CREATE TABLE staza(
 );
 
 CREATE TABLE trening(
-   id VARCHAR(10) PRIMARY KEY
+   id INTEGER PRIMARY KEY
 );
 
 CREATE TABLE tren_vrijeme(
-   id VARCHAR(9) PRIMARY KEY,
-   id_tren VARCHAR(10),
+   id INTEGER PRIMARY KEY,
+   id_tren INTEGER,
    id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
@@ -89,12 +89,12 @@ CREATE TABLE tren_vrijeme(
 );
 
 CREATE TABLE kvalifikacija(
-   id VARCHAR(10) PRIMARY KEY
+   id INTEGER PRIMARY KEY
 );
 
 CREATE TABLE kval_vrijeme(
-   id VARCHAR(10) PRIMARY KEY,
-   id_kval VARCHAR(10),
+   id INTEGER PRIMARY KEY,
+   id_kval INTEGER,
    id_vus INTEGER,
    vozeno_vrijeme TIME,
    krug SMALLINT,
@@ -104,7 +104,7 @@ CREATE TABLE kval_vrijeme(
 
 CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
-   ime_nagrade VARCHAR(30),
+   ime_nagrade VARCHAR(50),
    broj_krugova INTEGER NOT NULL
 );
 
@@ -123,8 +123,8 @@ CREATE TABLE vikend(
    datum_pocetka DATE NOT NULL,
    datum_kraja DATE NOT NULL,
    id_staza NUMERIC(4,0),
-   id_trening VARCHAR(15),
-   id_quali VARCHAR(15),
+   id_trening INTEGER,
+   id_quali INTEGER,
    id_utrka INTEGER,
    id_sezona INTEGER,
    FOREIGN KEY (id_staza) REFERENCES staza(id),
@@ -661,78 +661,78 @@ INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrai
                          (1034, "Valencia Street Circuit", "Valencia, Spain", 5419, 2);
 
 
-INSERT INTO trening VALUES ("2013-T3101"), -- // GODINA: 2013 \\
-                           ("2013-T3102"),
-                           ("2013-T3103"),
-                           ("2013-T3104"),
-                           ("2013-T3105"),
-                           ("2013-T3106"),
-                           ("2013-T3107"),
-                           ("2013-T3108"),
-                           ("2013-T3109"),
-                           ("2013-T3110"),
-                           ("2013-T3111"),
-                           ("2013-T3112"),
-                           ("2013-T3113"),
+INSERT INTO trening VALUES (20133101), -- // GODINA: 2013 \\
+                           (20133102),
+                           (20133103),
+                           (20133104),
+                           (20133105),
+                           (20133106),
+                           (20133107),
+                           (20133108),
+                           (20133109),
+                           (20133110),
+                           (20133111),
+                           (20133112),
+                           (20133113),
 
-                           ("2014-T3200"), -- // GODINA: 2014 \\
-                           ("2014-T3201"),
-                           ("2014-T3202"),
-                           ("2014-T3203"),
-                           ("2014-T3204"),
-                           ("2014-T3205"),
-                           ("2014-T3206"),
-                           ("2014-T3207"),
-                           ("2014-T3208"),
-                           ("2014-T3209"),
+                           (20143200), -- // GODINA: 2014 \\
+                           (20143201),
+                           (20143202),
+                           (20143203),
+                           (20143204),
+                           (20143205),
+                           (20143206),
+                           (20143207),
+                           (20143208),
+                           (20143209),
 
-                           ("2015-T3300"), -- // GODINA: 2015 \\
-                           ("2015-T3301"),
-                           ("2015-T3302"),
-                           ("2015-T3303"),
-                           ("2015-T3304"),
-                           ("2015-T3305"),
-                           ("2015-T3306"),
-                           ("2015-T3307"),
-                           ("2015-T3308"),
-                           ("2015-T3309");
+                           (20153300), -- // GODINA: 2015 \\
+                           (20153301),
+                           (20153302),
+                           (20153303),
+                           (20153304),
+                           (20153305),
+                           (20153306),
+                           (20153307),
+                           (20153308),
+                           (20153309);
                              
 
-INSERT INTO kvalifikacija VALUES ("2013-Q3101"), -- // GODINA: 2013 \\
-                                 ("2013-Q3102"),
-                                 ("2013-Q3103"),
-                                 ("2013-Q3104"),
-                                 ("2013-Q3105"),
-                                 ("2013-Q3106"),
-                                 ("2013-Q3107"),
-                                 ("2013-Q3108"),
-                                 ("2013-Q3109"),
-                                 ("2013-Q3110"),
-                                 ("2013-Q3111"),
-                                 ("2013-Q3112"),
-                                 ("2013-Q3113"),
+INSERT INTO kvalifikacija VALUES (30133101), -- // GODINA: 2013 \\
+                                 (30133102),
+                                 (30133103),
+                                 (30133104),
+                                 (30133105),
+                                 (30133106),
+                                 (30133107),
+                                 (30133108),
+                                 (30133109),
+                                 (30133110),
+                                 (30133111),
+                                 (30133112),
+                                 (30133113),
 
-                                 ("2014-Q3200"), -- // GODINA: 2014 \\
-                                 ("2014-Q3201"),
-                                 ("2014-Q3202"),
-                                 ("2014-Q3203"),
-                                 ("2014-Q3204"),
-                                 ("2014-Q3205"),
-                                 ("2014-Q3206"),
-                                 ("2014-Q3207"),
-                                 ("2014-Q3208"),
-                                 ("2014-Q3209"),
+                                 (30143200), -- // GODINA: 2014 \\
+                                 (30143201),
+                                 (30143202),
+                                 (30143203),
+                                 (30143204),
+                                 (30143205),
+                                 (30143206),
+                                 (30143207),
+                                 (30143208),
+                                 (30143209),
 
-                                 ("2015-Q3300"), -- // GODINA: 2015 \\
-                                 ("2015-Q3301"),
-                                 ("2015-Q3302"),
-                                 ("2015-Q3303"),
-                                 ("2015-Q3304"),
-                                 ("2015-Q3305"),
-                                 ("2015-Q3306"),
-                                 ("2015-Q3307"),
-                                 ("2015-Q3308"),
-                                 ("2015-Q3309");
+                                 (30153300), -- // GODINA: 2015 \\
+                                 (30153301),
+                                 (30153302),
+                                 (30153303),
+                                 (30153304),
+                                 (30153305),
+                                 (30153306),
+                                 (30153307),
+                                 (30153308),
+                                 (30153309);
 
 
 

@@ -648,7 +648,7 @@ INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrai
                          (1019, "Suzuka Circuit", "Suzuka, Japan", 5807, 1),
                          (1020, "Circuit of the Americas", "Austin, USA", 5514, 2),
                          (1021, "Autódromo Hermanos Rodríguez", "Mexico City, Mexico", 4304, 1),
-                         (1022, "Interlagos Circuit", "São Paulo, Brazil", 4309, 2),
+                         (1022, "Autódromo José Carlos Pace", "São Paulo, Brazil", 4309, 2),
                          (1023, "Yas Marina Circuit", "Yas Island", 5281, 2),
                          (1024, "Autodromo do Algarve", "Portimão, Portugal", 4653, 2),
                          (1025, "Losail International Circuit", "Lusail, Qatar", 5380, 1),

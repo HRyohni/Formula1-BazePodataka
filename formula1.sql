@@ -93,7 +93,7 @@ CREATE TABLE kvalifikacija(
 );
 
 CREATE TABLE kval_vrijeme(
-   id VARCHAR(9) PRIMARY KEY,
+   id VARCHAR(10) PRIMARY KEY,
    id_kval VARCHAR(10),
    id_vus INTEGER,
    vozeno_vrijeme TIME,
@@ -166,8 +166,8 @@ ALTER TABLE utrka
    ADD CONSTRAINT id_rng_ck_utrka CHECK (id >= 3000 AND id < 3500);
 
 ALTER TABLE vikend
-   ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) BETWEEN 1 AND 2),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 10000 AND id < 20000);
+   ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) = 4),
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000);
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
@@ -279,31 +279,31 @@ INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, "F138"), -- // Scuderia
 
 
 
-INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98,  STR_TO_DATE("22.03.1991.", "%d.%m.&Y."), "španjolsko"),
-                         (7001, "Nico", "Rosberg", 6,  STR_TO_DATE("27.06.1985.", "%d.%m.&Y."), "njemačko"),
-                         (7002, "Felipe", "Nasr", 12,  STR_TO_DATE("21.08.1992.", "%d.%m.&Y."), "brazilsko"),
-                         (7003, "Pastor", "Maldonado", 13,  STR_TO_DATE("09.03.1985.", "%d.%m.&Y."), "venecuelansko"),
-                         (7004, "Alexander", "Rossi", 53,  STR_TO_DATE("25.09.1991.", "%d.%m.&Y."), "američko"),
-                         (7005, "Will", "Stevens", 28,  STR_TO_DATE("28.06.1991.", "%d.%m.&Y."), "britansko"),
+INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98, STR_TO_DATE("22.03.1991.", "%d.%m.%Y."), "španjolsko"),
+                         (7001, "Nico", "Rosberg", 6, STR_TO_DATE("27.06.1985.", "%d.%m.%Y."), "njemačko"),
+                         (7002, "Felipe", "Nasr", 12, STR_TO_DATE("21.08.1992.", "%d.%m.%Y."), "brazilsko"),
+                         (7003, "Pastor", "Maldonado", 13, STR_TO_DATE("09.03.1985.", "%d.%m.%Y."), "venecuelansko"),
+                         (7004, "Alexander", "Rossi", 53, STR_TO_DATE("25.09.1991.", "%d.%m.%Y."), "američko"),
+                         (7005, "Will", "Stevens", 28, STR_TO_DATE("28.06.1991.", "%d.%m.%Y."), "britansko"),
                          (7006, "Sebastian", "Vettel", 5, STR_TO_DATE("03.07.1987.", "%d.%m.%Y."), "njemačko"),
                          (7007, "Fernando", "Alonso", 14, STR_TO_DATE("29.07.1981.", "%d.%m.%Y."), "španjolsko"),
                          (7008, "Sergio", "Pérez", 11, STR_TO_DATE("26.01.1990", "%d.%m.%Y."), "meksičko"),
                          (7009, "Kimi", "Räikkönen", 7, STR_TO_DATE("17.10.1979", "%d.%m.%Y."), "finsko"),
-                         (7010, "Jean-Eric", "Vergne", 25,  STR_TO_DATE("25.04.1990.", "%d.%m.&Y."), " francukso"),
-                         (7012, "Romain", "Grosjean", 8,  STR_TO_DATE("17.04.1986.", "%d.%m.&Y."), " francusko"),
-                         (7013, "Jules", "Bianchi", 17,  STR_TO_DATE("03.08.1989.", "%d.%m.&Y."), "francusko"),
-                         (7014, "Adrian", "Sutil", 99,  STR_TO_DATE("11.01.1983.", "%d.%m.&Y."), "njemačko"),
-                         (7015, "Max", "Chilton", 4,  STR_TO_DATE("21.04.1991.", "%d.%m.&Y."), "britansko"),
-                         (7016, "Kamui", "Kobayashi", 10,  STR_TO_DATE("13.09.1986.", "%d.%m.&Y."), "japansko"),
-                         (7017, "Mark", "Webber", 17, STR_TO_DATE("27.08.1976.", "%d.%m.&Y."), "australsko"),
-                         (7018, "Lewis", "Hamilton", 44, STR_TO_DATE("07.01.1985.", "%d.%m.&Y."), "britansko"),
-                         (7019, "Felipe", "Massa", 19, STR_TO_DATE("25.04.1981.", "%d.%m.&Y."), "brazilsko"),
-                         (7020, "Jenson", "Button", 22, STR_TO_DATE("19.01.1980.", "%d.%m.&Y."), "britansko"),
-                         (7021, "Nico", "Hülkenberg", 27, STR_TO_DATE("19.08.1987.", "%d.%m.&Y."), "njemačko"),
-                         (7022, "Paul", "di Resta", 40, STR_TO_DATE("16.04.1986.", "%d.%m.&Y."), "britansko"),
-                         (7024, "Jules", "Bianchi", 17, STR_TO_DATE("03.08.1989.", "%d.%m.&Y."), "francusko"),
-                         (7025, "Charles", "Pic", 99, STR_TO_DATE("15.02.1990.", "%d.%m.&Y."), "francusko"),
-                         (7026, "Giedo", "van der Garde", 21, STR_TO_DATE("25.04.1985.", "%d.%m.&Y."), "nizozemsko"),
+                         (7010, "Jean-Eric", "Vergne", 25, STR_TO_DATE("25.04.1990.", "%d.%m.%Y."), " francukso"),
+                         (7012, "Romain", "Grosjean", 8, STR_TO_DATE("17.04.1986.", "%d.%m.%Y."), " francusko"),
+                         (7013, "Jules", "Bianchi", 17, STR_TO_DATE("03.08.1989.", "%d.%m.%Y."), "francusko"),
+                         (7014, "Adrian", "Sutil", 99, STR_TO_DATE("11.01.1983.", "%d.%m.%Y."), "njemačko"),
+                         (7015, "Max", "Chilton", 4, STR_TO_DATE("21.04.1991.", "%d.%m.%Y."), "britansko"),
+                         (7016, "Kamui", "Kobayashi", 10, STR_TO_DATE("13.09.1986.", "%d.%m.%Y."), "japansko"),
+                         (7017, "Mark", "Webber", 17, STR_TO_DATE("27.08.1976.", "%d.%m.%Y."), "australsko"),
+                         (7018, "Lewis", "Hamilton", 44, STR_TO_DATE("07.01.1985.", "%d.%m.%Y."), "britansko"),
+                         (7019, "Felipe", "Massa", 19, STR_TO_DATE("25.04.1981.", "%d.%m.%Y."), "brazilsko"),
+                         (7020, "Jenson", "Button", 22, STR_TO_DATE("19.01.1980.", "%d.%m.%Y."), "britansko"),
+                         (7021, "Nico", "Hülkenberg", 27, STR_TO_DATE("19.08.1987.", "%d.%m.%Y."), "njemačko"),
+                         (7022, "Paul", "di Resta", 40, STR_TO_DATE("16.04.1986.", "%d.%m.%Y."), "britansko"),
+                         (7024, "Jules", "Bianchi", 17, STR_TO_DATE("03.08.1989.", "%d.%m.%Y."), "francusko"),
+                         (7025, "Charles", "Pic", 99, STR_TO_DATE("15.02.1990.", "%d.%m.%Y."), "francusko"),
+                         (7026, "Giedo", "van der Garde", 21, STR_TO_DATE("25.04.1985.", "%d.%m.%Y."), "nizozemsko"),
                          (7027, "Esteban", "Gutiérrez", 21, STR_TO_DATE("05.08.1991.", "%d.%m.%Y."), "meksičko"),
                          (7028, "Valtteri", "Bottas", 77, STR_TO_DATE("28.08.1989", "%d.%m.%Y."), "finsko"),
                          (7029, "Daniel", "Ricciardo", 3, STR_TO_DATE("01.07.1989.", "%d.%m.%Y."), "autstralsko"),
@@ -774,44 +774,43 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
 
 
 -- (id, datum_pocetak, datum_kraj, id_staza, trening_id, kvalifikacija_id, utrka_id, sezona);
-INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.&Y."), STR_TO_DATE("17.03.2013.", "%d.%m.&Y."), 1003, "2013-T3101", "2013-Q3101", 3101, 2013), -- // GODINA: 2013 \\
-                          (8001, STR_TO_DATE("22.03.2013.", "%d.%m.&Y."), STR_TO_DATE("24.03.2013.", "%d.%m.&Y."), 1031, "2013-T3102", "2013-Q3102", 3102, 2013),
-                          (8002, STR_TO_DATE("12.04.2013.", "%d.%m.&Y."), STR_TO_DATE("14.04.2013.", "%d.%m.&Y."), 1030, "2013-T3103", "2013-Q3103", 3103, 2013),
-                          (8003, STR_TO_DATE("19.04.2013.", "%d.%m.&Y."), STR_TO_DATE("21.04.2013.", "%d.%m.&Y."), 1001, "2013-T3104", "2013-Q3104", 3104, 2013),
-                          (8004, STR_TO_DATE("24.05.2013.", "%d.%m.&Y."), STR_TO_DATE("26.05.2013.", "%d.%m.&Y."), 1007, "2013-T3105", "2013-Q3105", 3105, 2013),
-                          (8005, STR_TO_DATE("07.06.2013.", "%d.%m.&Y."), STR_TO_DATE("09.06.2013.", "%d.%m.&Y."), 1009, "2013-T3106", "2013-Q3106", 3106, 2013),
-                          (8006, STR_TO_DATE("28.06.2013.", "%d.%m.&Y."), STR_TO_DATE("30.06.2013.", "%d.%m.&Y."), 1010, "2013-T3107", "2013-Q3107", 3107, 2013),
-                          (8007, STR_TO_DATE("05.07.2013.", "%d.%m.&Y."), STR_TO_DATE("07.07.2013.", "%d.%m.&Y."), 1027, "2013-T3108", "2013-Q3108", 3108, 2013),
-                          (8008, STR_TO_DATE("20.09.2013.", "%d.%m.&Y."), STR_TO_DATE("22.09.2013.", "%d.%m.&Y."), 1018, "2013-T3109", "2013-Q3109", 3109, 2013),
-                          (8009, STR_TO_DATE("11.10.2013.", "%d.%m.&Y."), STR_TO_DATE("13.10.2013.", "%d.%m.&Y."), 1019, "2013-T3110", "2013-Q3110", 3110, 2013),
-                          (8010, STR_TO_DATE("25.10.2013.", "%d.%m.&Y."), STR_TO_DATE("27.10.2013.", "%d.%m.&Y."), 1033, "2013-T3111", "2013-Q3111", 3111, 2013),
-                          (8011, STR_TO_DATE("01.11.2013.", "%d.%m.&Y."), STR_TO_DATE("03.11.2013.", "%d.%m.&Y."), 1023, "2013-T3112", "2013-Q3112", 3112, 2013),
-                          (8012, STR_TO_DATE("22.11.2013.", "%d.%m.&Y."), STR_TO_DATE("24.11.2013.", "%d.%m.&Y."), 1022, "2013-T3113", "2013-Q3113", 3113, 2013),
+INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO_DATE("17.03.2013.", "%d.%m.%Y."), 1003, "2013-T3101", "2013-Q3101", 3101, 2013), -- // GODINA: 2013 \\
+                          (8001, STR_TO_DATE("22.03.2013.", "%d.%m.%Y."), STR_TO_DATE("24.03.2013.", "%d.%m.%Y."), 1031, "2013-T3102", "2013-Q3102", 3102, 2013),
+                          (8002, STR_TO_DATE("12.04.2013.", "%d.%m.%Y."), STR_TO_DATE("14.04.2013.", "%d.%m.%Y."), 1030, "2013-T3103", "2013-Q3103", 3103, 2013),
+                          (8003, STR_TO_DATE("19.04.2013.", "%d.%m.%Y."), STR_TO_DATE("21.04.2013.", "%d.%m.%Y."), 1001, "2013-T3104", "2013-Q3104", 3104, 2013),
+                          (8004, STR_TO_DATE("24.05.2013.", "%d.%m.%Y."), STR_TO_DATE("26.05.2013.", "%d.%m.%Y."), 1007, "2013-T3105", "2013-Q3105", 3105, 2013),
+                          (8005, STR_TO_DATE("07.06.2013.", "%d.%m.%Y."), STR_TO_DATE("09.06.2013.", "%d.%m.%Y."), 1009, "2013-T3106", "2013-Q3106", 3106, 2013),
+                          (8006, STR_TO_DATE("28.06.2013.", "%d.%m.%Y."), STR_TO_DATE("30.06.2013.", "%d.%m.%Y."), 1010, "2013-T3107", "2013-Q3107", 3107, 2013),
+                          (8007, STR_TO_DATE("05.07.2013.", "%d.%m.%Y."), STR_TO_DATE("07.07.2013.", "%d.%m.%Y."), 1027, "2013-T3108", "2013-Q3108", 3108, 2013),
+                          (8008, STR_TO_DATE("20.09.2013.", "%d.%m.%Y."), STR_TO_DATE("22.09.2013.", "%d.%m.%Y."), 1018, "2013-T3109", "2013-Q3109", 3109, 2013),
+                          (8009, STR_TO_DATE("11.10.2013.", "%d.%m.%Y."), STR_TO_DATE("13.10.2013.", "%d.%m.%Y."), 1019, "2013-T3110", "2013-Q3110", 3110, 2013),
+                          (8010, STR_TO_DATE("25.10.2013.", "%d.%m.%Y."), STR_TO_DATE("27.10.2013.", "%d.%m.%Y."), 1033, "2013-T3111", "2013-Q3111", 3111, 2013),
+                          (8011, STR_TO_DATE("01.11.2013.", "%d.%m.%Y."), STR_TO_DATE("03.11.2013.", "%d.%m.%Y."), 1023, "2013-T3112", "2013-Q3112", 3112, 2013),
+                          (8012, STR_TO_DATE("22.11.2013.", "%d.%m.%Y."), STR_TO_DATE("24.11.2013.", "%d.%m.%Y."), 1022, "2013-T3113", "2013-Q3113", 3113, 2013),
 
-                          (8013, STR_TO_DATE("14.03.2014.", "%d.%m.&Y."), STR_TO_DATE("16.03.2014.", "%d.%m.&Y."), 1003, "2014-T3200", "2014-Q3200", 3200, 2014), -- // GODINA: 2014 \\
-                          (8014, STR_TO_DATE("04.04.2014.", "%d.%m.&Y."), STR_TO_DATE("06.04.2014.", "%d.%m.&Y."), 1001, "2014-T3201", "2014-Q3201", 3201, 2014),
-                          (8015, STR_TO_DATE("18.04.2014.", "%d.%m.&Y."), STR_TO_DATE("20.04.2014.", "%d.%m.&Y."), 1030, "2014-T3202", "2014-Q3202", 3202, 2014),
-                          (8016, STR_TO_DATE("23.05.2014.", "%d.%m.&Y."), STR_TO_DATE("25.05.2014.", "%d.%m.&Y."), 1007, "2014-T3203", "2014-Q3203", 3203, 2014),
-                          (8017, STR_TO_DATE("20.06.2014.", "%d.%m.&Y."), STR_TO_DATE("22.06.2014.", "%d.%m.&Y."), 1011, "2014-T3204", "2014-Q3204", 3204, 2014),
-                          (8018, STR_TO_DATE("18.07.2014.", "%d.%m.&Y."), STR_TO_DATE("20.07.2014.", "%d.%m.&Y."), 1027, "2014-T3205", "2014-Q3205", 3205, 2014),
-                          (8019, STR_TO_DATE("22.08.2014.", "%d.%m.&Y."), STR_TO_DATE("24.08.2014.", "%d.%m.&Y."), 1014, "2014-T3206", "2014-Q3206", 3206, 2014),
-                          (8020, STR_TO_DATE("05.09.2014.", "%d.%m.&Y."), STR_TO_DATE("07.09.2014.", "%d.%m.&Y."), 1016, "2014-T3207", "2014-Q3207", 3207, 2014),
-                          (8021, STR_TO_DATE("19.09.2014.", "%d.%m.&Y."), STR_TO_DATE("21.09.2014.", "%d.%m.&Y."), 1018, "2014-T3208", "2014-Q3208", 3208, 2014),
-                          (8022, STR_TO_DATE("21.11.2014.", "%d.%m.&Y."), STR_TO_DATE("23.11.2014.", "%d.%m.&Y."), 1023, "2014-T3209", "2014-Q3209", 3209, 2014),
+                          (8013, STR_TO_DATE("14.03.2014.", "%d.%m.%Y."), STR_TO_DATE("16.03.2014.", "%d.%m.%Y."), 1003, "2014-T3200", "2014-Q3200", 3200, 2014), -- // GODINA: 2014 \\
+                          (8014, STR_TO_DATE("04.04.2014.", "%d.%m.%Y."), STR_TO_DATE("06.04.2014.", "%d.%m.%Y."), 1001, "2014-T3201", "2014-Q3201", 3201, 2014),
+                          (8015, STR_TO_DATE("18.04.2014.", "%d.%m.%Y."), STR_TO_DATE("20.04.2014.", "%d.%m.%Y."), 1030, "2014-T3202", "2014-Q3202", 3202, 2014),
+                          (8016, STR_TO_DATE("23.05.2014.", "%d.%m.%Y."), STR_TO_DATE("25.05.2014.", "%d.%m.%Y."), 1007, "2014-T3203", "2014-Q3203", 3203, 2014),
+                          (8017, STR_TO_DATE("20.06.2014.", "%d.%m.%Y."), STR_TO_DATE("22.06.2014.", "%d.%m.%Y."), 1011, "2014-T3204", "2014-Q3204", 3204, 2014),
+                          (8018, STR_TO_DATE("18.07.2014.", "%d.%m.%Y."), STR_TO_DATE("20.07.2014.", "%d.%m.%Y."), 1027, "2014-T3205", "2014-Q3205", 3205, 2014),
+                          (8019, STR_TO_DATE("22.08.2014.", "%d.%m.%Y."), STR_TO_DATE("24.08.2014.", "%d.%m.%Y."), 1014, "2014-T3206", "2014-Q3206", 3206, 2014),
+                          (8020, STR_TO_DATE("05.09.2014.", "%d.%m.%Y."), STR_TO_DATE("07.09.2014.", "%d.%m.%Y."), 1016, "2014-T3207", "2014-Q3207", 3207, 2014),
+                          (8021, STR_TO_DATE("19.09.2014.", "%d.%m.%Y."), STR_TO_DATE("21.09.2014.", "%d.%m.%Y."), 1018, "2014-T3208", "2014-Q3208", 3208, 2014),
+                          (8022, STR_TO_DATE("21.11.2014.", "%d.%m.%Y."), STR_TO_DATE("23.11.2014.", "%d.%m.%Y."), 1023, "2014-T3209", "2014-Q3209", 3209, 2014),
 
-                          (8023, STR_TO_DATE("13.03.2015.", "%d.%m.&Y."), STR_TO_DATE("15.03.2015.", "%d.%m.&Y."), 1003, "2015-T3300", "2015-Q3300", 3300, 2015), -- // GODINA: 2015 \\
-                          (8024, STR_TO_DATE("22.05.2015.", "%d.%m.&Y."), STR_TO_DATE("24.05.2015.", "%d.%m.&Y."), 1007, "2015-T3301", "2015-Q3301", 3301, 2015),
-                          (8025, STR_TO_DATE("05.06.2015.", "%d.%m.&Y."), STR_TO_DATE("07.06.2015.", "%d.%m.&Y."), 1009, "2015-T3302", "2015-Q3302", 3302, 2015),
-                          (8026, STR_TO_DATE("03.07.2015.", "%d.%m.&Y."), STR_TO_DATE("05.07.2015.", "%d.%m.&Y."), 1010, "2015-T3303", "2015-Q3303", 3303, 2015),
-                          (8027, STR_TO_DATE("21.08.2015.", "%d.%m.&Y."), STR_TO_DATE("23.08.2015.", "%d.%m.&Y."), 1014, "2015-T3304", "2015-Q3304", 3304, 2015),
-                          (8028, STR_TO_DATE("04.06.2015.", "%d.%m.&Y."), STR_TO_DATE("06.09.2015.", "%d.%m.&Y."), 1016, "2015-T3305", "2015-Q3305", 3305, 2015),
-                          (8029, STR_TO_DATE("18.09.2015.", "%d.%m.&Y."), STR_TO_DATE("20.09.2015.", "%d.%m.&Y."), 1018, "2015-T3306", "2015-Q3306", 3306, 2015),
-                          (8030, STR_TO_DATE("25.09.2015.", "%d.%m.&Y."), STR_TO_DATE("27.09.2015.", "%d.%m.&Y."), 1019, "2015-T3307", "2015-Q3307", 3307, 2015),
-                          (8031, STR_TO_DATE("13.11.2015.", "%d.%m.&Y."), STR_TO_DATE("15.11.2015.", "%d.%m.&Y."), 1022, "2015-T3308", "2015-Q3308", 3308, 2015),
-                          (8032, STR_TO_DATE("27.11.2015.", "%d.%m.&Y."), STR_TO_DATE("29.11.2015.", "%d.%m.&Y."), 1023, "2015-T3309", "2015-Q3309", 3309, 2015);
+                          (8023, STR_TO_DATE("13.03.2015.", "%d.%m.%Y."), STR_TO_DATE("15.03.2015.", "%d.%m.%Y."), 1003, "2015-T3300", "2015-Q3300", 3300, 2015), -- // GODINA: 2015 \\
+                          (8024, STR_TO_DATE("22.05.2015.", "%d.%m.%Y."), STR_TO_DATE("24.05.2015.", "%d.%m.%Y."), 1007, "2015-T3301", "2015-Q3301", 3301, 2015),
+                          (8025, STR_TO_DATE("05.06.2015.", "%d.%m.%Y."), STR_TO_DATE("07.06.2015.", "%d.%m.%Y."), 1009, "2015-T3302", "2015-Q3302", 3302, 2015),
+                          (8026, STR_TO_DATE("03.07.2015.", "%d.%m.%Y."), STR_TO_DATE("05.07.2015.", "%d.%m.%Y."), 1010, "2015-T3303", "2015-Q3303", 3303, 2015),
+                          (8027, STR_TO_DATE("21.08.2015.", "%d.%m.%Y."), STR_TO_DATE("23.08.2015.", "%d.%m.%Y."), 1014, "2015-T3304", "2015-Q3304", 3304, 2015),
+                          (8028, STR_TO_DATE("04.06.2015.", "%d.%m.%Y."), STR_TO_DATE("06.09.2015.", "%d.%m.%Y."), 1016, "2015-T3305", "2015-Q3305", 3305, 2015),
+                          (8029, STR_TO_DATE("18.09.2015.", "%d.%m.%Y."), STR_TO_DATE("20.09.2015.", "%d.%m.%Y."), 1018, "2015-T3306", "2015-Q3306", 3306, 2015),
+                          (8030, STR_TO_DATE("25.09.2015.", "%d.%m.%Y."), STR_TO_DATE("27.09.2015.", "%d.%m.%Y."), 1019, "2015-T3307", "2015-Q3307", 3307, 2015),
+                          (8031, STR_TO_DATE("13.11.2015.", "%d.%m.%Y."), STR_TO_DATE("15.11.2015.", "%d.%m.%Y."), 1022, "2015-T3308", "2015-Q3308", 3308, 2015),
+                          (8032, STR_TO_DATE("27.11.2015.", "%d.%m.%Y."), STR_TO_DATE("29.11.2015.", "%d.%m.%Y."), 1023, "2015-T3309", "2015-Q3309", 3309, 2015);
 
 
-INSERT INTO sezona VALUES (id_sezona, godina),
-                          (2013, 2013),
+INSERT INTO sezona VALUES (2013, 2013),
                           (2014, 2014),
                           (2015, 2015);

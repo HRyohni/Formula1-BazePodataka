@@ -86,7 +86,7 @@ CREATE TABLE tren_vrijeme(
    id INTEGER PRIMARY KEY,
    id_tren INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30) NOT NULL,
+   vozeno_vrijeme_str VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_tren) REFERENCES trening(id)
@@ -100,7 +100,7 @@ CREATE TABLE kval_vrijeme(
    id INTEGER PRIMARY KEY,
    id_kval INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30) NOT NULL,
+   vozeno_vrijeme_str VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
@@ -116,7 +116,7 @@ CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
    id_utrka INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30) NOT NULL,
+   vozeno_vrijeme_str VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)

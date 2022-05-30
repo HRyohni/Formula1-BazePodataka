@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS Formula1_test;
 CREATE DATABASE Formula1_test;
 USE Formula1_test;
 
+
 CREATE TABLE tim(
    id INTEGER PRIMARY KEY,
    naziv VARCHAR(50),
@@ -23,7 +24,6 @@ CREATE TABLE konstruktor_u_sezoni(
    FOREIGN KEY (id_tim) REFERENCES tim(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
-
 
 CREATE TABLE vozac(
    id INTEGER PRIMARY KEY,
@@ -52,8 +52,6 @@ CREATE TABLE vozac_u_sezoni(
    FOREIGN KEY (id_auto) REFERENCES automobil(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
-
-
 
 CREATE TABLE sponzor(
    id INTEGER PRIMARY KEY,
@@ -118,7 +116,7 @@ CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
    id_utrka INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme_str VARCHAR(30),
+   vozeno_vrijeme VARCHAR(30),
    krug SMALLINT,
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
@@ -139,8 +137,6 @@ CREATE TABLE vikend(
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
-
-
 
 
 -- PROMJENE I OGRANIČENJA NA TABLICAMA
@@ -237,9 +233,6 @@ INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranel
                        (110, "Caterham F1 Team", "Cyril Abiteboul", "Leafield, Oxfordshire, United Kingdom");
 
 
-
-
-
 INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98, STR_TO_DATE("22.03.1991.", "%d.%m.%Y."), "španjolsko"),
                          (7001, "Nico", "Rosberg", 6, STR_TO_DATE("27.06.1985.", "%d.%m.%Y."), "njemačko"),
                          (7002, "Felipe", "Nasr", 12, STR_TO_DATE("21.08.1992.", "%d.%m.%Y."), "brazilsko"),
@@ -273,7 +266,6 @@ INSERT INTO vozac VALUES (7000, "Roberto", "Merhi", 98, STR_TO_DATE("22.03.1991.
                          (7032, "Daniil", "Kvyat", 26, STR_TO_DATE("26.04.1994.", "%d.%m.%Y."), "rusko"),
                          (7033, "Max", "Verstappen", 33, STR_TO_DATE("30.09.1997.", "%d.%m.%Y."), "nizozemsko"),
                          (7034, "Carlos", "Sainz", 55, STR_TO_DATE("01.09.1994.", "%d.%m.%Y."), "španjolsko");
-
 
 
 INSERT INTO automobil VALUES (9000, "Ferrari F138 n.1", "2.4L NA V8", "Pirelli"), -- // GODINA: 2013 \\
@@ -429,9 +421,6 @@ INSERT INTO sponzor VALUES (4001, "Petronas"),
                            (4082, "Reebok");
 
 
-
-
-
                           -- Staze se ne klasificiraju drukčije nakon što su vođene promjene na njima (npr. dodani zavoji)
 INSERT INTO staza VALUES (1001, "Bahrain International Circuit", "Sakhir, Bahrain", 5412, 3),
                          (1003, "Albert Park Circuit", "Melbourne, Australia", 5278, 3),
@@ -537,7 +526,6 @@ INSERT INTO kvalifikacija VALUES (30133101), -- // GODINA: 2013 \\
                                  (30153309);
 
 
-
 INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // GODINA: 2013 \\
                          (3102, "Petronas Malaysia Grand Prix 2013", 56),
                          (3103, "UBS Chinese Grand Prix 2013", 56),
@@ -573,9 +561,6 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
                          (3307, "Japanese Grand Prix 2015", 53),
                          (3308, "44° Grande Prêmio do Brasil", 71),
                          (3309, "Etihad Airways Abu Dhabi Grand Prix", 55);
-
-
-
 
 
 INSERT INTO sezona VALUES (2013, 2013),
@@ -695,9 +680,6 @@ INSERT INTO vozac_u_sezoni VALUES (7142, 7006, 218, 9002, 2013), -- // GODINA: 2
                                   (7119, 7034, 226, 9211, 2015);
 
 
-
-
-                                 -- (id, id_sponzor, id_kus, isplacen_novac, status_sponzora, id_sezona)
 INSERT INTO sponzor_u_sezoni VALUES (5000, 4010, 200, 78000000, "Suradnik", 2013), -- // GODINA: 2013 \\
                                     (5001, 4007, 200, 81000000, "Suradnik", 2013),
                                     (5002, 4044, 200, 55000000, "Suradnik", 2013),
@@ -793,9 +775,6 @@ INSERT INTO sponzor_u_sezoni VALUES (5000, 4010, 200, 78000000, "Suradnik", 2013
                                     (5229, 4028, 229, 49000000, "Suradnik", 2015);
 
 
-
-
--- (id, datum_pocetak, datum_kraj, id_staza, trening_id, kvalifikacija_id, utrka_id, sezona);
 INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO_DATE("17.03.2013.", "%d.%m.%Y."), 1003, 20133101, 30133101, 3101, 2013), -- // GODINA: 2013 \\
                           (8001, STR_TO_DATE("22.03.2013.", "%d.%m.%Y."), STR_TO_DATE("24.03.2013.", "%d.%m.%Y."), 1031, 20133102, 30133102, 3102, 2013),
                           (8002, STR_TO_DATE("12.04.2013.", "%d.%m.%Y."), STR_TO_DATE("14.04.2013.", "%d.%m.%Y."), 1030, 20133103, 30133103, 3103, 2013),
@@ -831,5 +810,3 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
                           (8030, STR_TO_DATE("25.09.2015.", "%d.%m.%Y."), STR_TO_DATE("27.09.2015.", "%d.%m.%Y."), 1019, 20153307, 30153307, 3307, 2015),
                           (8031, STR_TO_DATE("13.11.2015.", "%d.%m.%Y."), STR_TO_DATE("15.11.2015.", "%d.%m.%Y."), 1022, 20153308, 30153308, 3308, 2015),
                           (8032, STR_TO_DATE("27.11.2015.", "%d.%m.%Y."), STR_TO_DATE("29.11.2015.", "%d.%m.%Y."), 1023, 20153309, 30153309, 3309, 2015);
-select * 
-from sponzor_u_sezoni;

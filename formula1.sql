@@ -818,32 +818,70 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
 SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, max(sus.isplacen_novac) AS najveca_isplata
    FROM sponzor, sponzor_u_sezoni AS sus;
    
-/* Prikažite najbrži krug utrke u sezoni 2013. godine. */
-SELECT min(vozeno_vrijeme) AS najbrzi_krug_2013
-   FROM utrka_vrijeme;
+/* Prikažite vrijeme najbržeg kruga utrke u sezoni 2013. godine. */
+SELECT MIN(vozeno_vrijeme) AS prosjek
+	FROM utrka_vrijeme
+    WHERE id_utrka IN (SELECT v.id_utrka
+		FROM vikend AS v
+		INNER JOIN utrka AS u
+		ON (u.id = v.id_utrka)
+		WHERE id_sezona = 2013);
 
 /* Nađite prosjek trajanja kruga u 2014. godini. */
-SELECT avg(vozeno_vrijeme) AS prosjek_trajanja_kruga_2014
-   FROM utrka_vrijeme
-   WHERE id_sezona = 2014;
 
-/* Ispišite tim koji ima najviše pobjeda. */
-SELECT *, count(*) AS broj_pobjeda
-   FROM utrka_vrijeme
-   GROUP BY id_tim1
-   ORDER BY broj_pobjeda ASC;
+SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
+	FROM utrka_vrijeme
+    WHERE id_utrka IN (SELECT v.id_utrka
+		FROM vikend AS v
+		INNER JOIN utrka AS u
+		ON (u.id = v.id_utrka)
+		WHERE id_sezona = 2014);
+
+-- OR --
+
+SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
+	FROM vikend AS v
+    INNER JOIN utrka AS u ON (v.id_utrka = u.id)
+		INNER JOIN utrka_vrijeme AS uv ON (u.id = uv.id_utrka)
+	WHERE id_sezona = 2014;
+
 
 /* Ispišite tim koji ima najmanje sponzora. */
-SELECT *, count(*) AS broj_sponzora
-   FROM sponzor_u_sezoni
-   GROUP BY id_tim
-   ORDER BY broj_sponzora ASC;
+SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
+	FROM sponzor_u_sezoni AS ss
+    INNER JOIN konstruktor_u_sezoni AS ks ON (ks.id = ss.id_kus)
+    GROUP BY id_tim
+    ORDER BY kolicina_sponzora ASC
+    LIMIT 1;
+
 
 /* Ispišite koliko je prosjek broja sponzora po timu. */
-SELECT avg(broj_sponzora) AS prosjek_broja_sponzora
-   FROM sponzor_u_sezoni;
+SELECT AVG(k.kolicina_sponzora) AS prosjek
+		FROM (SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
+			FROM sponzor_u_sezoni AS ss
+			INNER JOIN konstruktor_u_sezoni AS ks ON (ks.id = ss.id_kus)
+			GROUP BY id_tim
+			ORDER BY kolicina_sponzora) AS k;
+            
+            
+/* Popis staza i najbrze vrijeme na stazi */
+SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
+	FROM staza AS s
+		INNER JOIN vikend AS v ON (s.id = v.id_staza)
+			INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+				INNER JOIN utrka_vrijeme AS uv ON ( uv.id_utrka = u.id)
+	GROUP BY s.ime_staze;
 
-/* Ispišite koliko je pobjeda imao Ferrari 2014. god. */
+
+/* staza sa najbrzim vremenom */
+SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
+	FROM staza AS s
+		INNER JOIN vikend AS v ON (s.id = v.id_staza)
+			INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+				INNER JOIN utrka_vrijeme AS uv ON ( uv.id_utrka = u.id)
+	GROUP BY s.ime_staze
+    ORDER BY vrijeme
+    LIMIT 1;
 
 
 /* Ispišite average osvojeno_bodova za svaki tim u svakoj godini. */
@@ -853,9 +891,6 @@ SELECT avg(broj_sponzora) AS prosjek_broja_sponzora
 
 
 /* Ispis svih vozaca koji imaju preko x pobjeda. */
-
-
-/* Popis staza sa najbrzim vozacem na toj stazi */
 
 
 /* Top 3 najuspijesnije momcadi */
@@ -868,3 +903,7 @@ SELECT avg(broj_sponzora) AS prosjek_broja_sponzora
 
 
 /* Vjv da dodes 1. A bio si u pol positionu (br pobjeda sa br pol pozitiona se dijele) postotak kolikl ima sanse da budes prvi */
+
+/* Ko je pobjednik 2014. sezone */
+    
+/* Ispišite tim koji ima najviše pobjeda. */

@@ -10,6 +10,11 @@ CREATE TABLE tim(
    sjediste VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE sezona(
+   id INTEGER PRIMARY KEY,
+   godina INTEGER
+);
+
 CREATE TABLE konstruktor_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_sezona INTEGER,
@@ -19,6 +24,7 @@ CREATE TABLE konstruktor_u_sezoni(
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
 
+
 CREATE TABLE vozac(
    id INTEGER PRIMARY KEY,
    ime VARCHAR(30) NOT NULL,
@@ -26,6 +32,13 @@ CREATE TABLE vozac(
    odabrani_broj SMALLINT,
    datum_rodenja DATE NOT NULL,
    nacionalnost VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE automobil(
+   id INTEGER PRIMARY KEY,
+   naziv_auto VARCHAR(30) NOT NULL,
+   vrsta_motora VARCHAR(40) NOT NULL,
+   proizvodac_guma VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE vozac_u_sezoni(
@@ -40,12 +53,7 @@ CREATE TABLE vozac_u_sezoni(
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
 
-CREATE TABLE automobil(
-   id INTEGER PRIMARY KEY,
-   naziv_auto VARCHAR(30) NOT NULL,
-   vrsta_motora VARCHAR(40) NOT NULL,
-   proizvodac_guma VARCHAR(30) NOT NULL
-);
+
 
 CREATE TABLE sponzor(
    id INTEGER PRIMARY KEY,
@@ -132,10 +140,6 @@ CREATE TABLE vikend(
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
 
-CREATE TABLE sezona(
-   id INTEGER PRIMARY KEY,
-   godina INTEGER
-);
 
 
 -- PROMJENE I OGRANIČENJA NA TABLICAMA

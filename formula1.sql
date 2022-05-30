@@ -6,21 +6,21 @@ USE Formula1_test;
 
 CREATE TABLE tim(
    id INTEGER PRIMARY KEY,
-   naziv VARCHAR(50),
-   voditelj VARCHAR(50),
+   naziv VARCHAR(50) NOT NULL UNIQUE,
+   voditelj VARCHAR(50) NOT NULL,
    sjediste VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE sezona(
    id INTEGER PRIMARY KEY,
-   godina INTEGER
+   godina INTEGER NOT NULL
 );
 
 CREATE TABLE konstruktor_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_sezona INTEGER,
    id_tim INTEGER,
-   kod_sasija VARCHAR(10),
+   kod_sasija VARCHAR(10) NOT NULL UNIQUE,
    FOREIGN KEY (id_tim) REFERENCES tim(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
 );
@@ -38,7 +38,7 @@ CREATE TABLE automobil(
    id INTEGER PRIMARY KEY,
    naziv_auto VARCHAR(30) NOT NULL,
    vrsta_motora VARCHAR(40) NOT NULL,
-   proizvodac_guma VARCHAR(30) NOT NULL
+   proizvodac_guma VARCHAR(30) DEFAULT 'Pirelli'
 );
 
 CREATE TABLE vozac_u_sezoni(
@@ -62,9 +62,9 @@ CREATE TABLE sponzor_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_sponzor INTEGER,
    id_kus INTEGER,
-   isplacen_novac FLOAT NOT NULL,
-   status_sponzora VARCHAR(13),
    id_sezona INTEGER,
+   isplacen_novac FLOAT NOT NULL,
+   status_sponzora VARCHAR(13) DEFAULT 'Suradnik',
    FOREIGN KEY (id_sponzor) REFERENCES sponzor(id),
    FOREIGN KEY (id_kus) REFERENCES konstruktor_u_sezoni(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
@@ -72,10 +72,10 @@ CREATE TABLE sponzor_u_sezoni(
 
 CREATE TABLE staza(
    id INTEGER PRIMARY KEY,
-   ime_staze VARCHAR(50) NOT NULL,
+   ime_staze VARCHAR(50) NOT NULL UNIQUE,
    drzava VARCHAR(30) NOT NULL,
    duzina_m INTEGER NOT NULL,
-   broj_drs_zona INTEGER NOT NULL
+   broj_drs_zona INTEGER NOT NULL DEFAULT 2
 );
 
 CREATE TABLE trening(
@@ -86,7 +86,7 @@ CREATE TABLE tren_vrijeme(
    id INTEGER PRIMARY KEY,
    id_tren INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30),
+   vozeno_vrijeme VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_tren) REFERENCES trening(id)
@@ -100,7 +100,7 @@ CREATE TABLE kval_vrijeme(
    id INTEGER PRIMARY KEY,
    id_kval INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30),
+   vozeno_vrijeme VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
@@ -108,7 +108,7 @@ CREATE TABLE kval_vrijeme(
 
 CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
-   ime_nagrade VARCHAR(50),
+   ime_nagrade VARCHAR(50) NOT NULL UNIQUE,
    broj_krugova INTEGER NOT NULL
 );
 
@@ -116,7 +116,7 @@ CREATE TABLE utrka_vrijeme(
    id INTEGER PRIMARY KEY,
    id_utrka INTEGER,
    id_vus INTEGER,
-   vozeno_vrijeme VARCHAR(30),
+   vozeno_vrijeme VARCHAR(30) NOT NULL,
    krug SMALLINT,
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
@@ -125,7 +125,7 @@ CREATE TABLE utrka_vrijeme(
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
    datum_pocetka DATE NOT NULL,
-   datum_kraja DATE NOT NULL,
+   datum_kraja DATE NOT NULL, 
    id_staza INTEGER,
    id_trening INTEGER,
    id_quali INTEGER,
@@ -143,7 +143,7 @@ CREATE TABLE vikend(
 ALTER TABLE staza
 	ADD CONSTRAINT id_len_ck_staza CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_staza CHECK (id >= 1000 AND id < 2000),
-   ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m < 100000);
+   ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m < 7000);
    
 ALTER TABLE tim
 	ADD CONSTRAINT id_len_ck_tim CHECK (length(id) = 3),
@@ -166,7 +166,8 @@ ALTER TABLE utrka
 
 ALTER TABLE vikend
    ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000);
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000),
+   ADD CONSTRAINT date_rng_ck  CHECK (datum_pocetka + INTERVAL 3 DAY == datum_kraja); -- Provjeriti
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),

@@ -7,18 +7,9 @@ Ispišite koliko je prosjek broja sponzora po timu.
 Ispišite koliko je pobjeda imao Ferrari 2014. god.
 Ispišite average osvojeno_bodova za svaki tim u svakoj godini.
 Ispišite najviše osvojeno_bodova za svaki tim u svakoj godini.
-1. Svi x sa manje od y
-2. Svi x u rokud od do y
-3. Svi x koji imaju manje od y prikazano u dvije tablice
-4. Ispis svih vozaca koji imaju preko x pobjeda
-5. Unija zadatak
-6. Nesto sa caseom
-7 inner join zadatak
-8 barem jedna pobjeda
-9 zad sa count funkcijom
 Popis staza sa najbrzim vozacem na toj stazi
 Top 3 najuspijesnije momcadi
-Driver championship(neka bude pogled view)
+Driver championship (neka bude pogled view)
 Constructor championship
-Gdje je bila najmanja razlika izmedu bodova(tesko, mozda se nezna)
-Vjv da dodes 1. A bio si u pol positionu(br pobjeda sa br pol pozitiona se dijele)postotak kolikl ima sanse da budes prvi
+Gdje je bila najmanja razlika izmedu bodova (tesko, mozda se nezna)
+Vjv da dodes 1. A bio si u pole positionu (br pobjeda sa br pol pozitiona se dijele)postotak kolikl ima sanse da budes prvi

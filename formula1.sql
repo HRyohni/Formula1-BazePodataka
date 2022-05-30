@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS Formula1_test;
+DROP DATABASE IF EXISTS Formula1;
 
-CREATE DATABASE Formula1_test;
-USE Formula1_test;
+CREATE DATABASE Formula1;
+USE Formula1;
 
 
 CREATE TABLE tim(
@@ -62,9 +62,9 @@ CREATE TABLE sponzor_u_sezoni(
    id INTEGER PRIMARY KEY,
    id_sponzor INTEGER,
    id_kus INTEGER,
-   id_sezona INTEGER,
-   isplacen_novac FLOAT NOT NULL,
+   isplacen_novac INTEGER NOT NULL,
    status_sponzora VARCHAR(13) DEFAULT 'Suradnik',
+   id_sezona INTEGER,
    FOREIGN KEY (id_sponzor) REFERENCES sponzor(id),
    FOREIGN KEY (id_kus) REFERENCES konstruktor_u_sezoni(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
@@ -538,7 +538,7 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
                          (3109, "Singtel Singapore Grand Prix 2013", 61),
                          (3110, "Japanese Grand Prix 2013", 53),
                          (3111, "Aritel India Grand Prix", 60),
-                         (3112, "Etihad Airways Abu Dhabi Grand Prix", 55),
+                         (3112, "Etihad Airways Abu Dhabi Grand Prix 2013", 55),
                          (3113, "42° Grande Prêmio do Brasil", 71),
 
                          (3200, "Rolex Australian Grand Prix 2014", 57), -- // GODINA: 2014 \\
@@ -561,7 +561,7 @@ INSERT INTO utrka VALUES (3101, "Rolex Australian Grand Prix 2013", 58), -- // G
                          (3306, "Singapore Airlines Singapore Grand Prix 2015", 61),
                          (3307, "Japanese Grand Prix 2015", 53),
                          (3308, "44° Grande Prêmio do Brasil", 71),
-                         (3309, "Etihad Airways Abu Dhabi Grand Prix", 55);
+                         (3309, "Etihad Airways Abu Dhabi Grand Prix 2015", 55);
 
 
 INSERT INTO sezona VALUES (2013, 2013),
@@ -684,7 +684,7 @@ INSERT INTO vozac_u_sezoni VALUES (7142, 7006, 218, 9002, 2013), -- // GODINA: 2
 INSERT INTO sponzor_u_sezoni VALUES (5000, 4010, 200, 78000000, "Suradnik", 2013), -- // GODINA: 2013 \\
                                     (5001, 4007, 200, 81000000, "Suradnik", 2013),
                                     (5002, 4044, 200, 55000000, "Suradnik", 2013),
-                                    (5003, 4063, 203, 122000000, "Sponzor imena", 2013),
+                                    (5003, 4063, 203, 122000000, "Sponzor imena", 2013),_test
                                     (5004, 4082, 203, 22000000, "Suradnik", 2013),
                                     (5005, 4065, 203, 73000000, "Suradnik", 2013),
                                     (5006, 4027, 206, 33000000, "Suradnik", 2013),
@@ -811,3 +811,60 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
                           (8030, STR_TO_DATE("25.09.2015.", "%d.%m.%Y."), STR_TO_DATE("27.09.2015.", "%d.%m.%Y."), 1019, 20153307, 30153307, 3307, 2015),
                           (8031, STR_TO_DATE("13.11.2015.", "%d.%m.%Y."), STR_TO_DATE("15.11.2015.", "%d.%m.%Y."), 1022, 20153308, 30153308, 3308, 2015),
                           (8032, STR_TO_DATE("27.11.2015.", "%d.%m.%Y."), STR_TO_DATE("29.11.2015.", "%d.%m.%Y."), 1023, 20153309, 30153309, 3309, 2015);
+
+
+-- UPITI
+/* Navedite sponzora sa najviše isplaćenog novca(id_sponzor,isplacen_novac) */
+SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, max(sus.isplacen_novac) AS najveca_isplata
+   FROM sponzor, sponzor_u_sezoni AS sus;
+   
+/* Prikažite najbrži krug utrke u sezoni 2013. godine. */
+SELECT min(vozeno_vrijeme) AS najbrzi_krug_2013
+   FROM utrka_vrijeme;
+
+/* Nađite prosjek trajanja kruga u 2014. godini. */
+SELECT avg(vozeno_vrijeme) AS prosjek_trajanja_kruga_2014
+   FROM utrka_vrijeme
+   WHERE id_sezona = 2014;
+
+/* Ispišite tim koji ima najviše pobjeda. */
+SELECT *, count(*) AS broj_pobjeda
+   FROM utrka_vrijeme
+   GROUP BY id_tim1
+   ORDER BY broj_pobjeda ASC;
+
+/* Ispišite tim koji ima najmanje sponzora. */
+SELECT *, count(*) AS broj_sponzora
+   FROM sponzor_u_sezoni
+   GROUP BY id_tim
+   ORDER BY broj_sponzora ASC;
+
+/* Ispišite koliko je prosjek broja sponzora po timu. */
+SELECT avg(broj_sponzora) AS prosjek_broja_sponzora
+   FROM sponzor_u_sezoni;
+
+/* Ispišite koliko je pobjeda imao Ferrari 2014. god. */
+
+
+/* Ispišite average osvojeno_bodova za svaki tim u svakoj godini. */
+
+
+/* Ispišite najviše osvojeno_bodova za svaki tim u svakoj godini. */
+
+
+/* Ispis svih vozaca koji imaju preko x pobjeda. */
+
+
+/* Popis staza sa najbrzim vozacem na toj stazi */
+
+
+/* Top 3 najuspijesnije momcadi */
+
+
+/* Driver championship (neka bude pogled view) */
+
+
+/* Constructor championship Gdje je bila najmanja razlika izmedu bodova (tesko, mozda se nezna) */
+
+
+/* Vjv da dodes 1. A bio si u pol positionu (br pobjeda sa br pol pozitiona se dijele) postotak kolikl ima sanse da budes prvi */

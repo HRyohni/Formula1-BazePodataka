@@ -26,162 +26,137 @@
  
 # Opis tablica
 ### Tim
-| Atribut  | Tip podataka | Opis            | Primjer | Kontrola unosa |
-|----------|--------------|-----------------|---------|----------------|
-| Id       | Integer      | Šifra tima      |         |                |
-| Naziv    | Varchar      | Naziv tima      |         |                |
-| Voditelj | Varchar      | Naziv voditelja |         |                |
-| sjediste | varchar      | Sjediste tima   |         |                |	
+| Atribut         | Tip podataka   | Opis                   | Primjer             | Kontrola unosa |
+|-----------------|----------------|------------------------|---------------------|----------------|
+|     Id          |     Integer    |     Šifra tima         | 100                 |                |
+|     Naziv       |     Varchar    |     Naziv tima         | Scuderia Ferrari    |                |
+|     Voditelj    |     Varchar    |     Naziv voditelja    | Maurizio Arrivabene |                |
+|     sjediste    |     varchar    |     Sjediste tima      | Maranello, Italy    | not null       |
 
 
 
 ### Konstuktor_u_sezoni
-
-| Atribut          | Tip podataka        | Opis             | Primjer | Kontrola unosa |
-|------------------|---------------------|------------------|---------|----------------|
-| id               | INTEGER PRIMARY KEY | Šifra tima       | 200     |                |
-| id_sezona        | INTEGER             | Šifra sezone     | 2013    |                |
-| id_tim           | INTEGER             | Šifra tima       | 100     |                |
-| kod_sasija       | VARCHAR             | Šifra šasije     | F138    |                |
-| Osvojeno_bodova  | INTEGER             | Osvojeno bodova  | 354     |                |
-| osvojeno_podija  | INTEGER             | Osvojeno podija  | 10      |                |
-| osvojeno_naslova | INTEGER             | Osvojeno naslova |         |                |		
-
+|     Atribut    |     Tip podataka    |     Opis                         |     Primjer    |     Kontrola unosa    |
+|----------------|---------------------|----------------------------------|----------------|-----------------------|
+| id             | PRIMARY KEY INTEGER | šifra konstruktora u sezoni      | 200            |                       |
+| id_sezona      | INTEGER             | šifra sezone                     | 2013           |                       |
+| id_tim         | INTEGER             | šifra tima                       | 100            |                       |
+| kod_sasija     | VARCHAR             | kod šasije konstruktora u sezoni | F138           |                       |
 
  
 
 ### Vozac
-| Atribut       | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|---------------|---------------------|------|---------|----------------|
-| Id            | Integer primary key |      |         |                |
-| Ime           | varchar             |      |         |                |
-| Prezime       | Varchar             |      |         |                |
-| Odabrani_broj | Samllint            |      |         |                |
-| Datum_rodenja | Date                |      |         |                |
-| Nacionalnost  | varchar             |      |         |                |		
+|     Atribut          |     Tip podataka           |     Opis             |     Primjer    |     Kontrola unosa    |
+|----------------------|----------------------------|----------------------|----------------|-----------------------|
+|     Id               |     Integer primary key    | šifra vozača         | 7000           |                       |
+|     Ime              |     varchar                | ime vozača           | Roberto        | not null              |
+|     Prezime          |     Varchar                | prezime vozača       | Merhi          | not null              |
+|     Odabrani_broj    |     Samllint               | odabrani broj vozača | 98             |                       |
+|     Datum_rodenja    |     Date                   | datum rođenja vozača | 22.03.1991.    | not null              |
+|     Nacionalnost     |     varchar                | nacionalnost vozača  | španjolsko     | not null              |
+
 
 
 ### Vozac_u_sezoni
-| Atribut                   | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|---------------------------|---------------------|------|---------|----------------|
-| Id                        | Integer primary key |      |         |                |
-| Id_vozac                  | integer             |      |         |                |
-| Id_kus                    | Integer             |      |         |                |
-| Id_auta                   | Integer             |      |         |                |
-| Id_sezona                 | Integer             |      |         |                |
-| Osvojeno_bodova           | Char                |      |         |                |
-| Osvojeno_podija           | Char                |      |         |                |
-| Odvozeno_najbrzih_krugova | Integer             |      |         |                |	
-
+|     Atribut    |     Tip podataka    |     Opis                    |     Primjer    |     Kontrola unosa    |
+|----------------|---------------------|-----------------------------|----------------|-----------------------|
+| id             | PRIMARY KEY INTEGER | šifra vozača u sezoni       | 7142           |                       |
+| id_vozac       | INTEGER             | šifra vozača                | 7006           |                       |
+| id_kus         | INTEGER             | šifra konstruktora u sezoni | 218            |                       |
+| id_auto        | INTEGER             | šifra auta                  | 9002           |                       |
+| id_sezona      | INTEGER             | šifra sezone                | 2013           |                       |
 
 
 ### Automobile
-| Atribut         | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|-----------------|---------------------|------|---------|----------------|
-| Id              | Integer primary key |      |         |                |
-| Naziv_auta      | Varchar             |      |         |                |
-| Vrsta_motora    | Varchar             |      |         |                |
-| Proizvodac_guma | varchar             |      |         |                |
-
+|     Atribut     |     Tip podataka    |     Opis                      |     Primjer      |     Kontrola unosa    |
+|-----------------|---------------------|-------------------------------|------------------|-----------------------|
+| id              | INTEGER PRIMARY KEY | šifra automobila              | 9000             |                       |
+| naziv_auto      | VARCHAR             | naziv automobila              | Ferrari F138 n.1 | NOT NULL              |
+| vrsta_motora    | VARCHAR             | vrsta motora u automobilu     | 2.4L NA V8       | NOT NULL              |
+| proizvodac_guma | VARCHAR             | proizvođač guma na automobilu | Pirelli          | NOT NULL              |
 
 ### Sponsor
-| Atribut        | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|----------------|---------------------|------|---------|----------------|
-| Id             | Integer primary key |      |         |                |
-| Ime            | Varchar             |      |         |                |
-| Isplacen_novac | integer             |      |         |                |		
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis    |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|----------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra sponzora | 4001              |                          |
+| ime               | VARCHAR                | ime sponzora   | Petronas          | NOT NULL                 |
 
 ### Staza
-| Atribut       | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|---------------|---------------------|------|---------|----------------|
-| Id            | Integer primary key |      |         |                |
-| Ime_staze     | Varchar             |      |         |                |
-| Drzava        | Varchar             |      |         |                |
-| Duzina_m      | Integer             |      |         |                |
-| Broj_drs_zona | integer             |      |         |                |	
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis                    |    <br>Primjer                |    <br>Kontrola unosa    |
+|-------------------|------------------------|--------------------------------|-------------------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra staze                    | 1001                          |                          |
+| ime_staze         | VARCHAR                | ime staze                      | Bahrain International Circuit | NOT NULL                 |
+| drzava            | VARCHAR                | država u kojoj se staza nalazi | Sakhir, Bahrain               | NOT NULL                 |
+| duzina_m          | INTEGER                | dužina staze                   | 5412                          | NOT NULL                 |
+| broj_drs_zona     | INTEGER                | ?                              | 3                             | NOT NULL                 |
 
 ### Trening
-| Atribut        | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|----------------|---------------------|------|---------|----------------|
-| Id             | Integer primary key |      |         |                |
-| Krugova_vozeno | char                |      |         |                |
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis    |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|----------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra treninga | 20133101          |                          |
  
 
 ### Tren_vrijeme
-| Atribut        | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|----------------|---------------------|------|---------|----------------|
-| Id             | Varchar primary key |      |         |                |
-| Id_tren        | Integer             |      |         |                |
-| Id_vus         | Integer             |      |         |                |
-| Vozeno_vrijeme | Time                |      |         |                |
-| Krug           | smallint            |      |         |                |			
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis           |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|-----------------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra kvalifikacije   | 100000            |                          |
+| id_kval           | INTEGER                | šifra treninga        | 20133101          |                          |
+| id_vus            | INTEGER                | šifra vozača u sezoni | 7142              |                          |
+| vozeno_vrijeme    | VARCHAR                | voženo vrijeme        | 1:31:348          |                          |
+| krug              | SMALLINT               | broj krugova          | 1                 |                          |		
 
 
 ### Kvalifikacija
-| Atribut           | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|-------------------|---------------------|------|---------|----------------|
-| Id                | Integer primary key |      |         |                |
-| Krugova_vozeno    | Char                |      |         |                |
-| Izlazaka_na_stazu | char                |      |         |                |
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis         |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|---------------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra kvalifikacije | 100000            | 30133101                 |     |                |
 
 ### Kval_vrijeme
-| Atribut        | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|----------------|---------------------|------|---------|----------------|
-| Id             | Varchar primary key |      |         |                |
-| Id_kval        | Integer             |      |         |                |
-| Id_vus         | Integer             |      |         |                |
-| Vozeno_vrijeme | Time                |      |         |                |
-| Krug           | Smallint            |      |         |                |		
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis                    |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|--------------------------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra kvalifikacija vrijeme    | 200000            |                          |
+| id_kval           | INTEGER                | šifra kvalifikacija            | 30133101          |                          |
+| id_vus            | INTEGER                | šifra vozača u sezoni          | 7142              |                          |
+| vozeno_vrijeme    | VARCHAR                | voženo vrijeme u kvalifikaciji | 1:31:369          |                          |
+| krug              | SMALLINT               | krug u kvalifikaciji           | 1                 |                          |
  
 
 ### Utrka
-| Atribut      | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|--------------|---------------------|------|---------|----------------|
-| Id           | Varchar primary key |      |         |                |
-| Ime_nagrade  | Varchar             |      |         |                |
-| Broj_krugova | integer             |      |         |                |	
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis          |    <br>Primjer                   |    <br>Kontrola unosa    |
+|-------------------|------------------------|----------------------|----------------------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra utrke          | 3101                             |                          |
+| ime_nagrade       | VARCHAR                | ime nagrade te utrke | Rolex Australian Grand Prix 2013 |                          |
+| broj_krugova      | INTEGER                | broj krugova u utrci | 58                               | NOT NULL                 |         |                |	
 
 ### Utrka_vrijeme
-| Atribut            | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|--------------------|---------------------|------|---------|----------------|
-| Id                 | Integer primary key |      |         |                |
-| Id_utrka           | Integer             |      |         |                |
-| Id_vus             | Integer             |      |         |                |
-| Vozeno_vrijeme_str | Varchar             |      |         |                |
-| Krug               | smallint            |      |         |                |
+|    <br>Atribut     |    <br>Tip podataka    |    <br>Opis                    |    <br>Primjer    |    <br>Kontrola unosa    |
+|--------------------|------------------------|--------------------------------|-------------------|--------------------------|
+| id                 | INTEGER PRIMARY KEY    | šifra utrka-vrijeme            | 20000             |                          |
+| id_utrka           | INTEGER                | šifra utrke                    | 3101              |                          |
+| id_vus             | INTEGER                | šifra vozača u sezoni          | 7142              |                          |
+| vozeno_vrijeme_str | VARCHAR                | voženo vrijeme u utrka-vrijeme | 1:30:698          |                          |
+| krug               | SMALLINT               | broj krugova u utrka-vrijeme   | 1                 |                          |        |                |
 
 ### Vikend
-| Atribut       | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|---------------|---------------------|------|---------|----------------|
-| Id            | Integer primary key |      |         |                |
-| Datum_pocetka | Date                |      |         |                |
-| Datum_kraja   | Date                |      |         |                |
-| Id_staza      | Integer             |      |         |                |
-| Id_trening    | integer             |      |         |                |
-| Id_quali      | Integer             |      |         |                |
-| Id_utrka      | integer             |      |         |                |
-| Id_sezona     | integer             |      |         |                |		
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis         |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|---------------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra vikenda       | 8000              |                          |
+| datum_pocetka     | DATE                   | datum početka       | 15.03.2013.       | NOT NULL                 |
+| datum_kraja       | DATE                   | datum kraja         | 17.03.2013.       | NOT NULL                 |
+| id_staza          | INTEGER                | šifra staze         | 1003              |                          |
+| id_trening        | INTEGER                | šifra treninga      | 20133101          |                          |
+| id_quali          | INTEGER                | šifra kvalifikacije | 30133101          |                          |
+| id_utrka          | INTEGER                | šifra utrke         | 3101              |                          |
+| id_sezona         | INTEGER                | šifra sezone        | 2013              |                          |
  
 
 ### Sezona
-| Atribut | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|---------|---------------------|------|---------|----------------|
-| Id      | Integer primary key |      |         |                |
-| Godina  | integer             |      |         |                |			
-
+|    <br>Atribut    |    <br>Tip podataka    |    <br>Opis    |    <br>Primjer    |    <br>Kontrola unosa    |
+|-------------------|------------------------|----------------|-------------------|--------------------------|
+| id                | INTEGER PRIMARY KEY    | šifra sezone   | 2013              |                          |
+| godina            | INTEGER                | godina sezone  | 2013              |                          |
 
 ### Prvak
-| Atribut           | Tip podataka        | Opis | Primjer | Kontrola unosa |
-|-------------------|---------------------|------|---------|----------------|
-| Id                | Integer primary key |      |         |                |
-| Id_vozac_u_sezoni | Integer             |      |         |                |
-| Id_tim            | Integer             |      |         |                |
-| Id_sezona         | integer             |      |         |                |
 
  
 Pregled poslovnih pravila u bazi

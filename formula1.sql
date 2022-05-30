@@ -828,7 +828,6 @@ SELECT MIN(vozeno_vrijeme) AS prosjek
 		WHERE id_sezona = 2013);
 
 /* Nađite prosjek trajanja kruga u 2014. godini. */
-
 SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 	FROM utrka_vrijeme
     WHERE id_utrka IN (SELECT v.id_utrka
@@ -837,7 +836,7 @@ SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 		ON (u.id = v.id_utrka)
 		WHERE id_sezona = 2014);
 
--- OR --
+-- ILI --
 
 SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 	FROM vikend AS v
@@ -873,12 +872,12 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	GROUP BY s.ime_staze;
 
 
-/* staza sa najbrzim vremenom */
+/* Staza sa najbrzim vremenom */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
 		INNER JOIN vikend AS v ON (s.id = v.id_staza)
 			INNER JOIN utrka AS u ON (u.id = v.id_utrka)
-				INNER JOIN utrka_vrijeme AS uv ON ( uv.id_utrka = u.id)
+				INNER JOIN utrka_vrijeme AS uv ON (uv.id_utrka = u.id)
 	GROUP BY s.ime_staze
     ORDER BY vrijeme
     LIMIT 1;
@@ -904,6 +903,8 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 
 /* Vjv da dodes 1. A bio si u pol positionu (br pobjeda sa br pol pozitiona se dijele) postotak kolikl ima sanse da budes prvi */
 
+
 /* Ko je pobjednik 2014. sezone */
-    
+
+
 /* Ispišite tim koji ima najviše pobjeda. */

@@ -88,7 +88,7 @@
 | ime_staze         | VARCHAR                | ime staze                      | Bahrain International Circuit | NOT NULL                 |
 | drzava            | VARCHAR                | država u kojoj se staza nalazi | Sakhir, Bahrain               | NOT NULL                 |
 | duzina_m          | INTEGER                | dužina staze                   | 5412                          | NOT NULL                 |
-| broj_drs_zona     | INTEGER                | ?                              | 3                             | NOT NULL                 |
+| broj_drs_zona     | INTEGER                | broj drs zona                  | 3                             | NOT NULL                 |
 
 ### Trening
 |    <br>Atribut    |    <br>Tip podataka    |    <br>Opis    |    <br>Primjer    |    <br>Kontrola unosa    |

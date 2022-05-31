@@ -4,7 +4,7 @@ Fakultet informatike u Puli
 
 
 
-![Sveučilište Jurja Dobrile u Puli – Wikipedija](C:\Users\Stevke\Desktop\slike spa\Unipu-logo-lat-16539134729612.png)
+![Sveučilište Jurja Dobrile u Puli – Wikipedija](https://cdn.discordapp.com/attachments/759467826440044585/981096052390244352/170px-Unipu-logo-lat.png)
 
 
 

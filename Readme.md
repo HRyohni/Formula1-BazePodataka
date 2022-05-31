@@ -277,7 +277,7 @@ CREATE TABLE sponzor_u_sezoni(
 
 Relacija staza se sastoji od sljedećih atributa;
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
 - **ime_staze** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dvije staze s istim nazivom
 
@@ -304,7 +304,7 @@ CREATE TABLE staza(
 
 Relacija trening se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
 Relaciju smo stvorili zbog
 
@@ -348,7 +348,7 @@ CREATE TABLE tren_vrijeme(
 
 Relacija kvalifikacije se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 ```mysql
 CREATE TABLE kvalifikacija(
@@ -361,7 +361,7 @@ CREATE TABLE kvalifikacija(
 
 Relacija kval_vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
 - **id_kval**  podatak tipa *integer*,  to je strani ključ iz relacije **kvalifikacija**
 
@@ -391,7 +391,7 @@ CREATE TABLE kval_vrijeme(
 
 Relacija utrka vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **ime_nagrade** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dvije nagrade s istim nazivom
 
@@ -413,7 +413,7 @@ CREATE TABLE utrka(
 
 Relacija utrka_vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **id_utrka** podatak tipa *integer* , to je strani ključ iz relacije **utrka**
 
@@ -442,7 +442,7 @@ CREATE TABLE utrka_vrijeme(
 
 Relacija vikend se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **datum_pocetak** podatak tipa *date*, prilagodili smo ga sljedećem standardu *"%d.%m.%Y."*, gdje se u bazu prvo upisuju dani, mjeseci pa godine.
 
@@ -452,7 +452,7 @@ Relacija vikend se sastoji od sljedećih atributa:
 
 - **id_trening** podatak tipa *integer* , to je strani ključ iz relacije **trening**
 
-- **id_quali **podatak tipa *integer* , to je strani ključ iz relacije **kvalifikacija**
+- **id_quali** podatak tipa *integer* , to je strani ključ iz relacije **kvalifikacija**
 - **id_utrka** podatak tipa *integer* , to je strani ključ iz relacije **utrka**
 - **id_sezona** podatak tipa *integer* , to je strani ključ iz relacije **sezona**
 

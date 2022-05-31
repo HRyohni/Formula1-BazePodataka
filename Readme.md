@@ -652,36 +652,49 @@ ALTER TABLE sezona
    ADD CONSTRAINT id_check CHECK (id >= 2013 and id <= 2015);
 ```
 
-## Učitavanje podataka
+## Učitavanje podataka iz CSV datoteka
 
-*#0*#
 
+Kako bi učitali CSV datoteke u našu bazu podataka moramo prije dobiti direktorij iz kojeg MySQL učitava podatke.
+To činimo sa sljedećom komandom:
+```
+	SHOW VARIABLES LIKE "secure_file_priv";
+```
+Adresu ispisanu pod *values* ubacujemo u file explorer i u direktorij ubacamo csv datoteke.
+
+Sa sljedećom linijom koda učitavamo podatke iz datoteke koja se nalazi na definiranoj adresi, specificiramo u koju tablicu učitavamo podatke i naglasimo na koji način se odvajaju podaci jedni od drugih.
 ```mysql
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/utrke-vremena.csv"
-INTO TABLE utrka_vrijeme
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+	LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/utrke-vremena.csv"
+	INTO TABLE utrka_vrijeme
+	FIELDS TERMINATED BY ','
+	ENCLOSED BY '"'
+	LINES TERMINATED BY '\n';
+```
 
-ALTER TABLE utrka_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
-UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+Nakon učitavanja, sa **ALTER TABLE** dodajemo novu kolonu, to jest atribut gdje ćemo konvertirati vozeno vrijeme iz **VARCHAR** u **TIME** specificirajući format u kojem prezentira vrijeme.
+```
+	ALTER TABLE utrka_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
+	UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
 ```
 
 
+## Učitavanje podataka INSERT INTO komandom
 
-```mysql
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/treninzi-vremena.csv"
-INTO TABLE tren_vrijeme
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
 
-ALTER TABLE tren_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
-UPDATE tren_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+Kako bi učitavali podatke u tablice koristimo komandu **INSERT INTO** ime tablice **VALUES** te u zagradama pišemo podatke u redoslijedu kao što smo ih specificirali pri stvaranju tablica. Primjer:
 ```
-
-
-
+	INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranello, Italy"),
+			       (101, "Sahara Force India F1 Team", "Colin Kolles", "Silverstone, United Kingdom"),
+			       (102, "Lotus F1 Team", "Éric Boullier", "Enstone, Oxfordshire, United Kingdom"),
+			       (103, "Manor Marussia F1 Team", "John Booth ", "Banbury, Oxfordshire, United Kingdom"),
+			       (104, "McLaren Honda", "Eric Boullier", "Surrey, United Kingdom"),
+			       (105, "Mercedes AMG Petronas F1 Team", "Totto Wolf", "Brackley, United Kingdom"),
+			       (106, "Infiniti Red Bull Racing", "Christian Horner", "Milton Keynes, United Kingdom."),
+			       (107, "Sauber F1 Team", "Monisha Kaltenborn", "Hinwil, Switzerland"),
+			       (108, "Scuderia Toro Rosso", "Franz Tost", "Faenza, Italy"),
+			       (109, "Williams Martini Racing", "Claire Williams", "Grove, Oxfordshire, United Kingdom"),
+			       (110, "Caterham F1 Team", "Cyril Abiteboul", "Leafield, Oxfordshire, United Kingdom");
+```
 
 
 ## Upiti

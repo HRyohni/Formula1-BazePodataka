@@ -166,7 +166,8 @@ ALTER TABLE utrka
 
 ALTER TABLE vikend
    ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000); -- Provjeriti
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000);
+   ADD CONSTRAINT date_rng_ck  CHECK (datum_pocetka + INTERVAL 2 DAY = datum_kraja);
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
@@ -813,39 +814,30 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
 
 
 -- UPITI
-/* Ispišite sve vozače koji su američke nacionalnosti */
+/* Ispišite podatke vozača koji su američke nacionalnosti */
 SELECT *
   FROM vozac
   WHERE nacionalnost = "američko";
 
 
-/* Ispiši sve vikende od 1.- 6. mjeseca te ih posložite od najmanje do najviše broja krugova */
-SELECT *
-	FROM vikend AS v
-    INNER JOIN utrka AS u ON (u.id = v.id_utrka)
-    WHERE datum_pocetka <=STR_TO_DATE("01.06.2014", "%d.%m.%Y.")
-    ORDER BY broj_krugova ASC;
-
-
 /* Ispišite najdužu stazu za vikend */
 SELECT ime_staze, max(duzina_m) as najduza
 	FROM vikend AS v
-    INNER JOIN staza AS u ON (u.id = v.id_staza)
-    ;
+    INNER JOIN staza AS u ON (u.id = v.id_staza);
 
 
-/* Navedite sponzora sa najviše isplaćenog novca (id_sponzor, isplacen_novac) */
-SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
-   FROM sponzor, sponzor_u_sezoni AS sus;
-
-
-/* Prikažite staze kraće od 5km */
+/* Prikažite podatke staza kraćih od 5km */
 SELECT *
 	FROM staza
     WHERE duzina_m < 5000;
 
 
-/* Prikažite najdulju stazu u kalendaru */
+/* Navedite sponzora sa najviše isplaćenog novca (id_sponzor, najveca_isplata) */
+SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
+   FROM sponzor, sponzor_u_sezoni AS sus;
+
+
+/* Prikažite najdulju stazu u kalendaru (id_staza, ime_staze, max_duzina, broj_drs_zona) */
 SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
    FROM staza
    GROUP BY duzina_m
@@ -853,10 +845,10 @@ SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
    LIMIT 1;
 
 
-/* Prikažite vrijeme najbržeg kruga utrke u sezoni 2013. godine. */
-SELECT MIN(vozeno_vrijeme) AS prosjek
-	FROM utrka_vrijeme
-    WHERE id_utrka IN (SELECT v.id_utrka
+/* Prikažite vrijeme najbržeg kruga utrke u sezoni 2013. godine te u kojoj utrci je odvožen. (id_utrka, ime_nagrade, najbrzi_krug_2013) */
+SELECT uv.id_utrka, u.ime_nagrade, MIN(vozeno_vrijeme) AS najbrzi_krug_2013
+	FROM utrka_vrijeme AS uv, utrka AS u
+    WHERE uv.id_utrka = u.id AND id_utrka IN (SELECT v.id_utrka
 		FROM vikend AS v
 		INNER JOIN utrka AS u
 		ON (u.id = v.id_utrka)
@@ -867,12 +859,12 @@ SELECT MIN(vozeno_vrijeme) AS prosjek
 SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 	FROM utrka_vrijeme
     WHERE id_utrka IN (SELECT v.id_utrka
-		FROM vikend AS v
-		INNER JOIN utrka AS u
-		ON (u.id = v.id_utrka)
-		WHERE id_sezona = 2014);
+		                  FROM vikend AS v
+		                  INNER JOIN utrka AS u
+		                  ON (u.id = v.id_utrka)
+		                  WHERE id_sezona = 2014);
 
--- ILI --
+-- ILI
 
 SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 	FROM vikend AS v
@@ -890,8 +882,16 @@ SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
     LIMIT 1;
 
 
+/* Ispiši sve vikende od prije 1.6.2014. te ih sortirajte od najmanje do najviše broja krugova (id_vikend, datum_pocetka, datum_kraja, ime_nagrade, broj_krugova) */
+SELECT v.id, v.datum_pocetka, v.datum_kraja, u.ime_nagrade, u.broj_krugova
+	FROM vikend AS v
+    INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+    WHERE datum_pocetka < STR_TO_DATE("01.07.2014", "%d.%m.%Y.") AND datum_pocetka > STR_TO_DATE("01.01.2014", "%d.%m.%Y.")
+    ORDER BY broj_krugova ASC;
+
+
 /* Ispišite koliko je prosjek broja sponzora po timu. */
-SELECT AVG(k.kolicina_sponzora) AS prosjek
+SELECT AVG(k.kolicina_sponzora) AS prosjek_sponzora_po_timu
 		FROM (SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
 			FROM sponzor_u_sezoni AS ss
 			INNER JOIN konstruktor_u_sezoni AS ks ON (ks.id = ss.id_kus)
@@ -899,16 +899,16 @@ SELECT AVG(k.kolicina_sponzora) AS prosjek
 			ORDER BY kolicina_sponzora) AS k;
 
 
-/* Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi */
+/* Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi (ime_staze, vrijeme) */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
 		INNER JOIN vikend AS v ON (s.id = v.id_staza)
 			INNER JOIN utrka AS u ON (u.id = v.id_utrka)
-				INNER JOIN utrka_vrijeme AS uv ON ( uv.id_utrka = u.id)
+				INNER JOIN utrka_vrijeme AS uv ON (uv.id_utrka = u.id)
 	GROUP BY s.ime_staze;
 
 
-/* Prikažite stazu koja se najkraće vozi jednim krugom */
+/* Prikažite stazu koja se najkraće vozi jednim krugom (ime_staze, vrijeme) */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
 		INNER JOIN vikend AS v ON (s.id = v.id_staza)

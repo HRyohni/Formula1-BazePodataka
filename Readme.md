@@ -777,6 +777,8 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 
 
 /* Prikažite koji je automobil dodijeljen pojedinom vozaču (vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, automobil.naziv, automobil.vrsta_motora) */
-SELECT vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, auto.naziv_auto, auto.vrsta_motora
-	FROM vozac_u_sezoni AS vus, vozac, automobil AS auto
-    WHERE vus.id_vozac = vozac.id AND vus.id_auto = auto.id;
+```
+	SELECT vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, auto.naziv_auto, auto.vrsta_motora
+		FROM vozac_u_sezoni AS vus, vozac, automobil AS auto
+    	WHERE vus.id_vozac = vozac.id AND vus.id_auto = auto.id;
+```

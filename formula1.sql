@@ -820,12 +820,6 @@ SELECT *
   WHERE nacionalnost = "američko";
 
 
-/* Ispišite najdužu stazu za vikend */
-SELECT ime_staze, max(duzina_m) as najduza
-	FROM vikend AS v
-    INNER JOIN staza AS u ON (u.id = v.id_staza);
-
-
 /* Prikažite podatke staza kraćih od 5km */
 SELECT *
 	FROM staza
@@ -882,7 +876,7 @@ SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
     LIMIT 1;
 
 
-/* Ispiši sve vikende od prije 1.6.2014. te ih sortirajte od najmanje do najviše broja krugova (id_vikend, datum_pocetka, datum_kraja, ime_nagrade, broj_krugova) */
+/* Ispiši sve vikende prije 1.7. u sezoni 2014. te ih sortirajte od najmanje do najviše broja krugova (id_vikend, datum_pocetka, datum_kraja, ime_nagrade, broj_krugova) */
 SELECT v.id, v.datum_pocetka, v.datum_kraja, u.ime_nagrade, u.broj_krugova
 	FROM vikend AS v
     INNER JOIN utrka AS u ON (u.id = v.id_utrka)

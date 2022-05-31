@@ -899,3 +899,6 @@ SELECT *
 
 
 ## Zaključak
+
+
+Smatramo da je projekt uspješan neovisno što je umanjena verzija Formule 1. Zbog količine podataka vjerujem da smo tablice mogli poboljšati i eliminirati još redundantnosti uz više planiranja i testiranja. Sa implementacijom naprednijih funkcija poput triggera mogli smo ubaciti pravila kažnjavanja prekršaja ali smo ih odlučili izbjeći po preporuci asistenta.

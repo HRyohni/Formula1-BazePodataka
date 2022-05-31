@@ -684,7 +684,7 @@ INSERT INTO vozac_u_sezoni VALUES (7142, 7006, 218, 9002, 2013), -- // GODINA: 2
 INSERT INTO sponzor_u_sezoni VALUES (5000, 4010, 200, 78000000, "Suradnik", 2013), -- // GODINA: 2013 \\
                                     (5001, 4007, 200, 81000000, "Suradnik", 2013),
                                     (5002, 4044, 200, 55000000, "Suradnik", 2013),
-                                    (5003, 4063, 203, 122000000, "Sponzor imena", 2013),_test
+                                    (5003, 4063, 203, 122000000, "Sponzor imena", 2013),
                                     (5004, 4082, 203, 22000000, "Suradnik", 2013),
                                     (5005, 4065, 203, 73000000, "Suradnik", 2013),
                                     (5006, 4027, 206, 33000000, "Suradnik", 2013),
@@ -814,8 +814,8 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
 
 
 -- UPITI
-/* Navedite sponzora sa najviše isplaćenog novca(id_sponzor,isplacen_novac) */
-SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, max(sus.isplacen_novac) AS najveca_isplata
+/* Navedite sponzora sa najviše isplaćenog novca (id_sponzor, isplacen_novac) */
+SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
    FROM sponzor, sponzor_u_sezoni AS sus;
    
 /* Prikažite vrijeme najbržeg kruga utrke u sezoni 2013. godine. */
@@ -863,7 +863,7 @@ SELECT AVG(k.kolicina_sponzora) AS prosjek
 			ORDER BY kolicina_sponzora) AS k;
             
             
-/* Popis staza i najbrze vrijeme na stazi */
+/* Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
 		INNER JOIN vikend AS v ON (s.id = v.id_staza)
@@ -872,7 +872,7 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	GROUP BY s.ime_staze;
 
 
-/* Staza sa najbrzim vremenom */
+/* Prikažite stazu koja se najkraće vozi jednim krugom */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
 		INNER JOIN vikend AS v ON (s.id = v.id_staza)

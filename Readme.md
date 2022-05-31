@@ -708,6 +708,10 @@ SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) A
 ```sql
 /* Prikažite najdulju stazu u kalendaru (id_staza, ime_staze, max_duzina, broj_drs_zona) */
 SELECT id, ime_staze, duzina_m AS max_duzina, broj_drs_zona
+
+```sql
+/* Prikažite najdulju stazu u kalendaru (id_staza, ime_staze, max_duzina, broj_drs_zona) */
+SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
    FROM staza
    GROUP BY duzina_m
    ORDER BY duzina_m DESC
@@ -728,10 +732,13 @@ SELECT uv.id_utrka, u.ime_nagrade, MIN(vozeno_vrijeme) AS najbrzi_krug_2013
 		ON (u.id = v.id_utrka)
 		WHERE id_sezona = 2013);
 ```
+
 <br>
 
 6. Upit (2 varijante):
 - Ovim upitom se pronalazi prosjek trajanja kruga u 2014. godini spajanjem tablica vikend, utrka i utrka_vrijeme theta joinom, odnosno inner joinom tako da se u podupitu odabiru samo utrke iz sezone 2014. i nadalje računaju operacijom `AVG()`.
+=======
+
 
 ```sql
 /* Nađite prosjek trajanja kruga u 2014. godini. */
@@ -751,10 +758,13 @@ SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 		INNER JOIN utrka_vrijeme AS uv ON (u.id = uv.id_utrka)
 	WHERE id_sezona = 2014;
 ```
+
 <br>
 
 7. Upit:
 - Ovim upitom se ispisuje tim koji ima najmanje sponzora spajanje tablica sponzor_u_sezoni (koja ima zapis o tome koji tim sponzorira pojedini sponzor), tim i konstruktor u sezoni inner joinom, grupiranjem po pojedinom id-ju timu/konstruktoru i uzlaznim sortiranjem podataka (broja sponzora) uz ograničenje na prikaz jednog podatka.
+=======
+
 
 ```sql
 /* Ispišite tim koji ima najmanje sponzora. */

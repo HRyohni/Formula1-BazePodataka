@@ -876,7 +876,7 @@ SELECT COUNT(id_sponzor) AS kolicina_sponzora, id_sponzor
     LIMIT 1;
 
 
-/* Ispiši sve vikende prije 1.7. u sezoni 2014. te ih sortirajte od najmanje do najviše broja krugova (id_vikend, datum_pocetka, datum_kraja, ime_nagrade, broj_krugova) */
+/* Ispišite sve vikende prije 1.7. u sezoni 2014. te ih sortirajte od najmanje do najviše broja krugova (id_vikend, datum_pocetka, datum_kraja, ime_nagrade, broj_krugova) */
 SELECT v.id, v.datum_pocetka, v.datum_kraja, u.ime_nagrade, u.broj_krugova
 	FROM vikend AS v
     INNER JOIN utrka AS u ON (u.id = v.id_utrka)

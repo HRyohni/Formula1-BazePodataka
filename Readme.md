@@ -47,7 +47,53 @@ Cilj naše baze podataka je prikazat pojednostavljenu statistiku Formule 1. Prik
 
 
 
+## ER dijagram
 
+
+
+![ERD](https://cdn.discordapp.com/attachments/959129607041318933/981260131905962034/Formula1.png)
+
+
+
+### Opis dijagrama
+
+Skup entiteta **vikend** je povezan s skupom entiteta **sezona** više naprema jedan, jer možemo više **vikend(*race-a*)** provest unutar jedne sezone, dok unutar jedne **sezone** provodimo više **vikend(*race-a*)**. 
+
+Skup entiteta **vikend** je povezan s skupom entiteta **utrka** jedan naprema jedan, jer unutar **vikend(*race-a*)** se može vozit samo jedna **utrka**, dok se jedna utrka vozi unutar jednog **vikend(*race-a*)**. 
+
+Skup entiteta **utrka** povezan je s skupom entiteta **utrka_vrijeme** jedan naprema više, jer svake **utrke** možemo imat više vremena unutar **utrka_vrijeme**. Iz ovog odnosa veza možemo izlučit podatak opisnog atributa ***ostvareno_mjesto*** tako da uzmemo najbrže ostvareno vrijeme i rangiramo ostala vremena prema njemu.
+
+  Skup entiteta **utrka_vrijeme** je povezan s skupom entiteta **vozac_u-sezoni** više naprema više, jer unutar **utrka_vrijeme**, vrijeme se ostvaruje više puta zbog količine vozača unutar **vozac_u-sezoni**, samim time imamo više vremena unutar **utrka_vrijeme**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **automobil** više naprema jedan, jer svaki **vozac_u_sezoni** može voziti jedan **automobil**, dok jednog **automobila** može voziti više **vozaca_u_sezoni**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **vozac** jedan naprema jedan jer svaki **vozac** se nalazi unutar jedne sezone, što samo intuitivno opisuje naziv naše relacije **vozac_u_sezoni**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **konstruktor_u_sezoni** više naprema jedan, jer svaki vozač može imati samo jednog **konstruktora_u_sezoni**(*drugi naziv za tim: Ferrari, Red Bull itd*), dok unutar jednog **konstruktora_u_sezoni** možemo pronaći više **vozac_u-sezoni**. 
+
+Skup entiteta  **konstruktor_u_sezoni** je povezan s skupom entiteta **tim** jedan naprema jedan, jer svaki **konstruktor_u_sezoni** se nalazi unutar jednog **tima**. 
+
+Dodali smo odnos slabih veza jer bez **tima** skup entiteta **konstruktor_u_sezoni** ne bi imao pretjerano smisla.
+
+Skup entiteta **sponzor_u_sezoni** je povezan s skupom entiteta **sponzor** jedan naprema jedan, preko istog principa kako smo povezali skupove entiteta **vozac_u_sezoni** i **vozac**.  
+
+Skup entiteta **sponzor_u_sezoni** je povezan s skupom entiteta **sezona** više naprema jedan, jer unutar svake **sezone** nalazi se više sponzora, dok se svi ti **sponzori_u_sezoni** ne mogu pronaći u više **sezona** istovremeno.
+
+Skup entiteta **vozac_u_sezoni** je povezan s skupom entiteta **sezona** više naprema jedan, jer unutar jedne **sezone** pronalazimo više **vozača**, dok **vozaci_u_sezoni** se nalaze istovremeno u samo jednoj sezoni.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **trening** jedan naprema jedan, iz razloga jer unutar svakog **vikenda** provodi se samo jedan **trening**.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **kvalifikacija** jedan naprema jedan, iz razloga jer unutar svakog **vikenda** provodi se samo jedna **kvalifikacija**.
+
+Skup entiteta  **trening** je povezan s skupom entiteta **tren_vrijeme** jedan naprema jedan, iz razloga jer unutar svakog **treninga** proizlazi samo jedno ***trening**_**vrijeme***, dok ***trening_vrijeme*** se odnosi samo na jedan **trening**.
+
+Skup entiteta  **kvalifikacija** je povezan s skupom entiteta **kval_vrijeme** jedan naprema jedan, iz razloga jer unutar svake **kvalifikacije** proizlazi samo jedno ***kvalifikacijsko**_**vrijeme***, dok ***kvalifikacijsko_vrijeme*** se odnosi samo na jedanu **kvalifikaciju**.
+
+Skup entiteta  **tren_vrijeme** je povezan s skupom entiteta **vozac_u_sezoni** jedan naprema više, jer svako ***trening_vremena*** se povezuju na više **vozaca_u_sezoni**, dok jedan **vozac_u_sezoni** ima samo jedno ***trening_vrijeme***.
+
+Skup entiteta  **kval_vrijeme** je povezan s skupom entiteta **vozac_u_sezoni** jedan naprema više, jer svako ***kvalifikacijsko_vrijeme*** se povezuju na više **vozaca_u_sezoni**, dok jedan **vozac_u_sezoni** ima samo jedno ***kvalifikacijsko_vrijeme***.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **staza** jedan naprema više, jer svaki **vikend(*race*)** se odvija na samo jednoj **stazi**, dok na jednoj **stazi** se može izvršit više utrka bilo to iz **Formule 1** ili iz lokalnih natjecanja. 
 
 
 
@@ -849,3 +895,7 @@ SELECT *
 		FROM vozac_u_sezoni AS vus, vozac, automobil AS auto
     	WHERE vus.id_vozac = vozac.id AND vus.id_auto = auto.id;
 ```
+
+
+
+## Zaključak

@@ -125,7 +125,7 @@ CREATE TABLE utrka_vrijeme(
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
    datum_pocetka DATE NOT NULL,
-   datum_kraja DATE NOT NULL, 
+   datum_kraja DATE NOT NULL,
    id_staza INTEGER,
    id_trening INTEGER,
    id_quali INTEGER,
@@ -144,7 +144,7 @@ ALTER TABLE staza
 	ADD CONSTRAINT id_len_ck_staza CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_staza CHECK (id >= 1000 AND id < 2000),
    ADD CONSTRAINT duzina_rng_ck_staza CHECK (duzina_m >= 1000 AND duzina_m < 7000);
-   
+
 ALTER TABLE tim
 	ADD CONSTRAINT id_len_ck_tim CHECK (length(id) = 3),
    ADD CONSTRAINT id_rng_ck_tim CHECK (id >= 100 AND id < 1000);
@@ -171,7 +171,7 @@ ALTER TABLE vikend
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_automobil CHECK (id >= 9000 AND id < 10000);
-   
+
 ALTER TABLE vozac
    ADD CONSTRAINT id_len_ck_vozac CHECK (length(id) = 4),
    ADD CONSTRAINT id_rng_ck_vozac CHECK (id >= 7000 AND id < 7100);
@@ -487,7 +487,7 @@ INSERT INTO trening VALUES (20133101), -- // GODINA: 2013 \\
                            (20153307),
                            (20153308),
                            (20153309);
-                             
+
 
 INSERT INTO kvalifikacija VALUES (30133101), -- // GODINA: 2013 \\
                                  (30133102),
@@ -610,7 +610,7 @@ INSERT INTO konstruktor_u_sezoni VALUES (200, 2013, 100, "F138"), -- // Scuderia
 
                                         (230, 2013, 110, "CT03"), -- // Caterham Renault \\
                                         (231, 2014, 110, "CT05");
-                          
+
 
 INSERT INTO vozac_u_sezoni VALUES (7142, 7006, 218, 9002, 2013), -- // GODINA: 2013 \\
 								          (7143, 7017, 218, 9003, 2013),
@@ -711,7 +711,7 @@ INSERT INTO sponzor_u_sezoni VALUES (5000, 4010, 200, 78000000, "Suradnik", 2013
                                     (5030, 4055, 230, 63000000, "Suradnik", 2013),
                                     (5031, 4012, 230, 35000000, "Suradnik", 2013),
                                     (5032, 4075, 230, 34000000, "Suradnik", 2013),
-                                    
+
                                     (5100, 4007, 201, 60000000, "Suradnik", 2014), -- // GODINA: 2014 \\
                                     (5101, 4044, 201, 18000000, "Suradnik", 2014),
                                     (5102, 4008, 201, 65000000, "Suradnik", 2014),
@@ -813,6 +813,27 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
 
 
 -- UPITI
+/* Ispišite sve vozače koji su američke nacionalnosti */
+SELECT *
+  FROM vozac
+  WHERE nacionalnost = "američko";
+
+
+/* Ispiši sve vikende od 1.- 6. mjeseca te ih posložite od najmanje do najviše broja krugova */
+SELECT *
+	FROM vikend AS v
+    INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+    WHERE datum_pocetka <=STR_TO_DATE("01.06.2014", "%d.%m.%Y.")
+    ORDER BY broj_krugova ASC;
+
+
+/* Ispišite najdužu stazu za vikend */
+SELECT ime_staze, max(duzina_m) as najduza
+	FROM vikend AS v
+    INNER JOIN staza AS u ON (u.id = v.id_staza)
+    ;
+
+
 /* Navedite sponzora sa najviše isplaćenog novca (id_sponzor, isplacen_novac) */
 SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
    FROM sponzor, sponzor_u_sezoni AS sus;
@@ -824,7 +845,7 @@ SELECT *
     WHERE duzina_m < 5000;
 
 
-/* Prikažite najdulju stazu u kalendaru */  
+/* Prikažite najdulju stazu u kalendaru */
 SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
    FROM staza
    GROUP BY duzina_m
@@ -876,8 +897,8 @@ SELECT AVG(k.kolicina_sponzora) AS prosjek
 			INNER JOIN konstruktor_u_sezoni AS ks ON (ks.id = ss.id_kus)
 			GROUP BY id_tim
 			ORDER BY kolicina_sponzora) AS k;
-            
-            
+
+
 /* Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s
@@ -896,8 +917,8 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	GROUP BY s.ime_staze
     ORDER BY vrijeme
     LIMIT 1;
-    
-    
+
+
 /* Prikažite koji je automobil dodijeljen pojedinom vozaču (vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, automobil.naziv, automobil.vrsta_motora) */
 SELECT vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, auto.naziv_auto, auto.vrsta_motora
 	FROM vozac_u_sezoni AS vus, vozac, automobil AS auto

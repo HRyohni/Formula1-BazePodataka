@@ -41,7 +41,7 @@ Mentor: doc. dr. sc. Goran Oreški
 
 ## Uvod
 
- U priloženoj dokumentaciji prezentirat ćemo naš projektni zadatak iz kolegija Baze podataka 1. Tema projekta je baze podataka Formule 1. Kao prvi korak izrade baze podataka došli smo do zaključka da ćemo koristit podatke iz: 2013, 2014 i 2015 sezone Formule 1. Temeljni razlog je da limitiramo količinu podataka koje ćemo upisivat unutar naše baze podataka. Nakon ograničenja raspona sezona kreirali smo osnovne relacije koju se se naknadno mijenjale kroz izradu projekta. 
+ U priloženoj dokumentaciji prezentirat ćemo naš projektni zadatak iz kolegija Baze podataka 1. Tema projekta je baze podataka Formule 1. Kao prvi korak izrade baze podataka došli smo do zaključka da ćemo koristit podatke iz: 2013, 2014 i 2015 sezone Formule 1. Temeljni razlog je da limitiramo količinu podataka koje ćemo upisivat unutar naše baze podataka. Nakon ograničenja raspona sezona kreirali smo osnovne relacije koju se se naknadno mijenjale kroz izradu projekta.
 
 Cilj naše baze podataka je prikazat pojednostavljenu statistiku Formule 1. Prikazujemo najosnovnije podatke vezano uz svaki *tim*, *vozača*, *sponzora* itd. unutar pojedinih *sezona*, unatoč našoj namjeri da stvorimo pojednostavljenu bazu podataka naišli smo do problema pri upisivanju brzine svakog odvoženog kruga vozača unutar svake utrke, naime količina podataka koju smo trebali sami zapisat je bila prevelika te smo si olakšali rad pomoću generatora informacija u obliku *python* koda koji ćemo objasnit naknadno u dokumentaciji. Zbog već navedenih problema odlučili smo blago napustit podatke iz pravog svijeta, ali ne i generalnu realističnost projekta.  
 
@@ -59,9 +59,9 @@ Relacija tim se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
 
-- **naziv** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dva tima s istim nazivom 
+- **naziv** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dva tima s istim nazivom
 
-- **voditelj** podatak tipa varchar koji je limitiran na 50 znakova 
+- **voditelj** podatak tipa varchar koji je limitiran na 50 znakova
 
 - **sjediste** podatak tipa varchar koji je limitiran na 50 znakova
 
@@ -73,7 +73,7 @@ CREATE TABLE tim(
    naziv VARCHAR(50) NOT NULL UNIQUE,
    voditelj VARCHAR(50) NOT NULL,
    sjediste VARCHAR(50) NOT NULL
-    
+
 );
 ```
 
@@ -85,15 +85,15 @@ Relacija sezona se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
 
-- **godina** podatak tipa *integer* 
+- **godina** podatak tipa *integer*
 
-Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka. 
+Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
 ```sql
 CREATE TABLE sezona(
    id INTEGER PRIMARY KEY,
    godina INTEGER NOT NULL
-    
+
 );
 ```
 
@@ -103,11 +103,11 @@ CREATE TABLE sezona(
 
 ### Relacija konstruktor_u_sezoni
 
-Relacija konstruktor_u_sezoni se sastoji od sljedećih atributa: 
+Relacija konstruktor_u_sezoni se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
 
-- **id_sezona** podatak tipa *integer*, to je strani ključ iz relacije **sezona** 
+- **id_sezona** podatak tipa *integer*, to je strani ključ iz relacije **sezona**
 
 - **id_tim** podatak tipa *integer*, to je strani ključ iz relacije **tim**
 
@@ -123,13 +123,13 @@ CREATE TABLE konstruktor_u_sezoni(
    kod_sasija VARCHAR(10) NOT NULL UNIQUE,
    FOREIGN KEY (id_tim) REFERENCES tim(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
-    
+
 );
 ```
 
 
 
-### Relacija vozac 
+### Relacija vozac
 
 Relacija vozac se sastoji od sljedećih atributa:
 
@@ -137,7 +137,7 @@ Relacija vozac se sastoji od sljedećih atributa:
 
 - **ime** podatak tipa *varchar* koji je limitiran na 30 znakova
 
-- **prezime** podatak tipa *varchar* koji je limitiran na 30 znakova 
+- **prezime** podatak tipa *varchar* koji je limitiran na 30 znakova
 
 - **odabrani_broj** podatak tipa *smallint* koji prima cjelobrojne podatke malih vrijednosti
 - **datum_rodenja** podatak tipa *date*, prilagodili smo ga sljedećem standardu *"%d.%m.%Y."*, gdje se u bazu prvo upisuju dani, mjeseci pa godine.
@@ -153,7 +153,7 @@ CREATE TABLE vozac(
    odabrani_broj SMALLINT,
    datum_rodenja DATE NOT NULL,
    nacionalnost VARCHAR(30) NOT NULL
-    
+
 );
 ```
 
@@ -167,9 +167,9 @@ Relacija automobil se sastoji od sljedećih atributa:
 
 - **naziv_auto** podatak tipa *varchar* koji je limitiran na 30 znakova
 
-- **vrsta_motora** podatak tipa *varchar* koji je limitiran na 40 znakova 
+- **vrsta_motora** podatak tipa *varchar* koji je limitiran na 40 znakova
 
-- **proizvodac_guma** podatak tipa *varchar* koji je limitiran na 40 znakova, ograničen je naredbom *default* koja automatski postavlja vrijednost *" Pirelli "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost 
+- **proizvodac_guma** podatak tipa *varchar* koji je limitiran na 40 znakova, ograničen je naredbom *default* koja automatski postavlja vrijednost *" Pirelli "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
@@ -179,7 +179,7 @@ CREATE TABLE automobil(
    naziv_auto VARCHAR(30) NOT NULL,
    vrsta_motora VARCHAR(40) NOT NULL,
    proizvodac_guma VARCHAR(30) DEFAULT 'Pirelli'
-    
+
 );
 ```
 
@@ -191,7 +191,7 @@ Relacija automobil se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer,* koji je primarni ključ unutar relacije
 
-- **id_vozac** podatak tipa *integer*, to je strani ključ iz relacije **vozac** 
+- **id_vozac** podatak tipa *integer*, to je strani ključ iz relacije **vozac**
 
 - **id_kus** podatak tipa *integer*, to je strani ključ iz relacije **konstruktor_u_sezoni**
 
@@ -199,7 +199,7 @@ Relacija automobil se sastoji od sljedećih atributa:
 
 - **id_sezona** podatak tipa *integer*, to je strani ključ iz relacije **sezona**
 
-   
+
 
 ```sql
 CREATE TABLE vozac_u_sezoni(
@@ -212,7 +212,7 @@ CREATE TABLE vozac_u_sezoni(
    FOREIGN KEY (id_vozac) REFERENCES vozac(id),
    FOREIGN KEY (id_auto) REFERENCES automobil(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
-    
+
 );
 ```
 
@@ -232,7 +232,7 @@ Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip po
 CREATE TABLE sponzor(
    id INTEGER PRIMARY KEY,
    ime VARCHAR(50) NOT NULL
-    
+
 );
 ```
 
@@ -248,11 +248,11 @@ Relacija sponzor se sastoji od sljedećih atributa:
 
 - **id_kus** podatak tipa *integer*, to je strani ključ iz relacije **konstruktor_u_sezoni**
 
-- **id_sezona** podatak tipa *integer*, to je strani ključ iz relacije **sezona** 
+- **id_sezona** podatak tipa *integer*, to je strani ključ iz relacije **sezona**
 
 - **isplacen_novac** podatak tipa *integer*  
 
-- **status_sponzora**  podatak tipa *varchar* koji je limitiran na 13 znakova, ograničen je naredbom *default* koja automatski postavlja vrijednost *" Suradnik "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost 
+- **status_sponzora**  podatak tipa *varchar* koji je limitiran na 13 znakova, ograničen je naredbom *default* koja automatski postavlja vrijednost *" Suradnik "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
@@ -267,7 +267,7 @@ CREATE TABLE sponzor_u_sezoni(
    FOREIGN KEY (id_sponzor) REFERENCES sponzor(id),
    FOREIGN KEY (id_kus) REFERENCES konstruktor_u_sezoni(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
-    
+
 );
 ```
 
@@ -277,14 +277,14 @@ CREATE TABLE sponzor_u_sezoni(
 
 Relacija staza se sastoji od sljedećih atributa;
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
 - **ime_staze** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dvije staze s istim nazivom
 
 - **drzava** podatak tipa *varchar* koji je limitiran na 50 znakova
 
-- **duzina_m** podatak tipa *integer* 
--  **broj_drs_zona** podatak tipa *integer*, ograničen je naredbom *default* koja automatski postavlja vrijednost  *" 2 "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost 
+- **duzina_m** podatak tipa *integer*
+-  **broj_drs_zona** podatak tipa *integer*, ograničen je naredbom *default* koja automatski postavlja vrijednost  *" 2 "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
@@ -295,7 +295,7 @@ CREATE TABLE staza(
    drzava VARCHAR(30) NOT NULL,
    duzina_m INTEGER NOT NULL,
    broj_drs_zona INTEGER NOT NULL DEFAULT 2
-    
+
 );
 
 ```
@@ -304,14 +304,14 @@ CREATE TABLE staza(
 
 Relacija trening se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
-Relaciju smo stvorili zbog 
+Relaciju smo stvorili zbog
 
 ```sql
 CREATE TABLE trening(
    id INTEGER PRIMARY KEY
-    
+
 );
 ```
 
@@ -321,7 +321,7 @@ Relacija trening_vrijeme se sastoji od sljedećih atributa:
 
 - **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
 
-- **id_tren** podatak tipa *integer*,  to je strani ključ iz relacije **trening** 
+- **id_tren** podatak tipa *integer*,  to je strani ključ iz relacije **trening**
 
 - **id_vus** podatak tipa *integer*,  to je strani ključ iz relacije **vozac_u_sezoni**
 
@@ -340,7 +340,7 @@ CREATE TABLE tren_vrijeme(
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_tren) REFERENCES trening(id)
-    
+
 );
 ```
 
@@ -348,12 +348,12 @@ CREATE TABLE tren_vrijeme(
 
 Relacija kvalifikacije se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 ```sql
 CREATE TABLE kvalifikacija(
    id INTEGER PRIMARY KEY
-    
+
 );
 ```
 
@@ -361,7 +361,7 @@ CREATE TABLE kvalifikacija(
 
 Relacija kval_vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
 
 - **id_kval**  podatak tipa *integer*,  to je strani ključ iz relacije **kvalifikacija**
 
@@ -381,7 +381,7 @@ CREATE TABLE kval_vrijeme(
    krug SMALLINT,
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id),
    FOREIGN KEY (id_kval) REFERENCES kvalifikacija(id)
-    
+
 );
 ```
 
@@ -391,11 +391,11 @@ CREATE TABLE kval_vrijeme(
 
 Relacija utrka vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **ime_nagrade** podatak tipa *varchar* koji je limitiran na 50 znakova, ograničen je pomoću naredbe *unique* kako ne bi imali dvije nagrade s istim nazivom
 
-- ***broj_krugova*** podatak tipa *integer* 
+- ***broj_krugova*** podatak tipa *integer*
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
@@ -404,16 +404,16 @@ CREATE TABLE utrka(
    id INTEGER PRIMARY KEY,
    ime_nagrade VARCHAR(50) NOT NULL UNIQUE,
    broj_krugova INTEGER NOT NULL
-    
+
 );
 
 ```
 
-### Relacija utrka_vrijeme 
+### Relacija utrka_vrijeme
 
 Relacija utrka_vrijeme se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **id_utrka** podatak tipa *integer* , to je strani ključ iz relacije **utrka**
 
@@ -434,7 +434,7 @@ CREATE TABLE utrka_vrijeme(
    krug SMALLINT,
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_vus) REFERENCES vozac_u_sezoni(id)
-    
+
 );
 ```
 
@@ -442,7 +442,7 @@ CREATE TABLE utrka_vrijeme(
 
 Relacija vikend se sastoji od sljedećih atributa:
 
-- **id **podatak tipa *integer* koji je primarni ključ unutar relacije
+- **id** podatak tipa *integer* koji je primarni ključ unutar relacije
 
 - **datum_pocetak** podatak tipa *date*, prilagodili smo ga sljedećem standardu *"%d.%m.%Y."*, gdje se u bazu prvo upisuju dani, mjeseci pa godine.
 
@@ -452,9 +452,9 @@ Relacija vikend se sastoji od sljedećih atributa:
 
 - **id_trening** podatak tipa *integer* , to je strani ključ iz relacije **trening**
 
-- **id_quali **podatak tipa *integer* , to je strani ključ iz relacije **kvalifikacija**
+- **id_quali** podatak tipa *integer* , to je strani ključ iz relacije **kvalifikacija**
 - **id_utrka** podatak tipa *integer* , to je strani ključ iz relacije **utrka**
-- **id_sezona** podatak tipa *integer* , to je strani ključ iz relacije **sezona** 
+- **id_sezona** podatak tipa *integer* , to je strani ključ iz relacije **sezona**
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
 
@@ -462,7 +462,7 @@ Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip po
 CREATE TABLE vikend(
    id INTEGER PRIMARY KEY,
    datum_pocetka DATE NOT NULL,
-   datum_kraja DATE NOT NULL, 
+   datum_kraja DATE NOT NULL,
    id_staza INTEGER,
    id_trening INTEGER,
    id_quali INTEGER,
@@ -473,7 +473,7 @@ CREATE TABLE vikend(
    FOREIGN KEY (id_quali) REFERENCES kvalifikacija(id),
    FOREIGN KEY (id_utrka) REFERENCES utrka(id),
    FOREIGN KEY (id_sezona) REFERENCES sezona(id)
-    
+
 );
 ```
 
@@ -483,7 +483,7 @@ CREATE TABLE vikend(
 
 Putem ograničenja staze ograničili smo relaciju sljedećom metodom:
 
-- ograničenje *id_len_ck_staza* koje ograničava dužinu id na 4 znamenke, zbog preglednosti i da nam se id-evi ne podudaraju 
+- ograničenje *id_len_ck_staza* koje ograničava dužinu id na 4 znamenke, zbog preglednosti i da nam se id-evi ne podudaraju
 - ograničenje  *id_rng_ck_staza* ograničava da id smije poprimit samo vrijednosti od 1000 do 1999
 - ograničenje *duzina_rng_ck_staza* ograničava dužinu staze od 1000 do 6999 metara, zbog regulacija staza unutar Formule 1
 
@@ -572,7 +572,7 @@ Putem ograničenja utrka ograničili smo relaciju sljedećom metodom:
 - ograničenje *id_len_ck_vikend*  koje ograničava dužinu id na 4 znamenke, zbog preglednosti i da nam se id-evi ne podudaraju
 
 - ograničenje  *id_rng_ck_vikend* ograničava da id smije poprimit samo vrijednosti od 8000 do 8999
-- ograničenje *date_rng_ck* ograničava da vrijednost n-torke može biti jedino vrijednosti 3 
+- ograničenje *date_rng_ck* ograničava da vrijednost n-torke može biti jedino vrijednosti 3
 
 ```sql
 ALTER TABLE vikend
@@ -581,7 +581,7 @@ ALTER TABLE vikend
    ADD CONSTRAINT date_rng_ck  CHECK (datum_pocetka + INTERVAL 3 DAY == datum_kraja);
 ```
 
-### Ograničenje automobil 
+### Ograničenje automobil
 
 Putem ograničenja utrka ograničili smo relaciju sljedećom metodom:
 
@@ -595,7 +595,7 @@ ALTER TABLE automobil
    ADD CONSTRAINT id_rng_ck_automobil CHECK (id >= 9000 AND id < 10000);
 ```
 
-### Ograničenje vozac 
+### Ograničenje vozac
 
 Putem ograničenja utrka ograničili smo relaciju sljedećom metodom:
 
@@ -624,7 +624,7 @@ ALTER TABLE vozac_u_sezoni
 
 ```
 
-### Ograničenje sezona 
+### Ograničenje sezona
 
 Putem ograničenja sezona ograničili smo relaciju sljedećom metodom:
 
@@ -640,7 +640,7 @@ ALTER TABLE sezona
 *#0*#
 
 ```sql
-LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/utrke-vremena.csv" 
+LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/utrke-vremena.csv"
 INTO TABLE utrka_vrijeme
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -653,7 +653,7 @@ UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s
 
 
 ```sql
-LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/treninzi-vremena.csv" 
+LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/treninzi-vremena.csv"
 INTO TABLE tren_vrijeme
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -685,6 +685,14 @@ SELECT *
 - Ovaj upit nam prikazuje podatke od staza kraćih od 5 km.
 
 ```sql
+
+
+/* Ispišite najdužu stazu za vikend */
+SELECT ime_staze, max(duzina_m) as najduza
+	FROM vikend AS v
+    INNER JOIN staza AS u ON (u.id = v.id_staza);
+
+
 /* Prikažite podatke staza kraćih od 5km */
 SELECT *
 	FROM staza
@@ -708,8 +716,15 @@ SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) A
 ```sql
 /* Prikažite najdulju stazu u kalendaru (id_staza, ime_staze, max_duzina, broj_drs_zona) */
 SELECT id, ime_staze, duzina_m AS max_duzina, broj_drs_zona
+```
 
 ```sql
+/* Navedite sponzora sa najviše isplaćenog novca (id_sponzor, najveca_isplata) */
+SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
+   FROM sponzor, sponzor_u_sezoni AS sus;
+
+
+
 /* Prikažite najdulju stazu u kalendaru (id_staza, ime_staze, max_duzina, broj_drs_zona) */
 SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
    FROM staza
@@ -737,7 +752,6 @@ SELECT uv.id_utrka, u.ime_nagrade, MIN(vozeno_vrijeme) AS najbrzi_krug_2013
 
 6. Upit (2 varijante):
 - Ovim upitom se pronalazi prosjek trajanja kruga u 2014. godini spajanjem tablica vikend, utrka i utrka_vrijeme theta joinom, odnosno inner joinom tako da se u podupitu odabiru samo utrke iz sezone 2014. i nadalje računaju operacijom `AVG()`.
-=======
 
 
 ```sql
@@ -763,7 +777,6 @@ SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(vozeno_vrijeme))) AS prosjek
 
 7. Upit:
 - Ovim upitom se ispisuje tim koji ima najmanje sponzora spajanje tablica sponzor_u_sezoni (koja ima zapis o tome koji tim sponzorira pojedini sponzor), tim i konstruktor u sezoni inner joinom, grupiranjem po pojedinom id-ju timu/konstruktoru i uzlaznim sortiranjem podataka (broja sponzora) uz ograničenje na prikaz jednog podatka.
-=======
 
 
 ```sql
@@ -822,6 +835,8 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 - Ovim upitom prikazujemo stazu koja se najkraće vozi jednim krugom, ovdje moramo ///
 
 ```sql
+
+
 /* Prikažite stazu koja se najkraće vozi jednim krugom (ime_staze, vrijeme) */
 SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	FROM staza AS s

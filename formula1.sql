@@ -166,8 +166,7 @@ ALTER TABLE utrka
 
 ALTER TABLE vikend
    ADD CONSTRAINT id_len_ck_vikend CHECK (length(id) = 4),
-   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000),
-   ADD CONSTRAINT date_rng_ck  CHECK (datum_pocetka + INTERVAL 3 DAY == datum_kraja); -- Provjeriti
+   ADD CONSTRAINT id_rng_ck_vikend CHECK (id >= 8000 AND id < 9000); -- Provjeriti
 
 ALTER TABLE automobil
    ADD CONSTRAINT id_len_ck_automobil CHECK (length(id) = 4),

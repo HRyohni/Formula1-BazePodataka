@@ -817,18 +817,6 @@ INSERT INTO vikend VALUES (8000, STR_TO_DATE("15.03.2013.", "%d.%m.%Y."), STR_TO
 SELECT sponzor.id, sus.id, sponzor.ime, sus.id_sezona, MAX(sus.isplacen_novac) AS najveca_isplata
    FROM sponzor, sponzor_u_sezoni AS sus;
    
-/* Prikažite staze kraće od 5km */
-SELECT *
-	FROM staza
-    WHERE duzina_m < 5000;
-    
-/* Prikažite najdulju stazu u kalendaru */  
-SELECT id, ime_staze, MAX(duzina_m) AS max_duzina, broj_drs_zona
-   FROM staza
-   GROUP BY duzina_m
-   ORDER BY duzina_m DESC
-   LIMIT 1;
-   
 /* Prikažite vrijeme najbržeg kruga utrke u sezoni 2013. godine. */
 SELECT MIN(vozeno_vrijeme) AS prosjek
 	FROM utrka_vrijeme
@@ -892,9 +880,30 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
 	GROUP BY s.ime_staze
     ORDER BY vrijeme
     LIMIT 1;
-    
-    
-/* Prikažite koji je automobil dodijeljen pojedinom vozaču (vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, automobil.naziv, automobil.vrsta_motora) */
-SELECT vozac.id, vozac.ime, vozac.prezime, vozac.odabrani_broj, auto.naziv_auto, auto.vrsta_motora
-	FROM vozac_u_sezoni AS vus, vozac, automobil AS auto
-    WHERE vus.id_vozac = vozac.id AND vus.id_auto = auto.id;
+
+
+/* Ispišite average osvojeno_bodova za svaki tim u svakoj godini. */
+
+
+/* Ispišite najviše osvojeno_bodova za svaki tim u svakoj godini. */
+
+
+/* Ispis svih vozaca koji imaju preko x pobjeda. */
+
+
+/* Top 3 najuspijesnije momcadi */
+
+
+/* Driver championship (neka bude pogled view) */
+
+
+/* Constructor championship Gdje je bila najmanja razlika izmedu bodova (tesko, mozda se nezna) */
+
+
+/* Vjv da dodes 1. A bio si u pol positionu (br pobjeda sa br pol pozitiona se dijele) postotak kolikl ima sanse da budes prvi */
+
+
+/* Ko je pobjednik 2014. sezone */
+
+
+/* Ispišite tim koji ima najviše pobjeda. */

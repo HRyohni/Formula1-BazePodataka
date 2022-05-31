@@ -55,6 +55,7 @@ Cilj naše baze podataka je prikazat pojednostavljenu statistiku Formule 1. Prik
 
 ### Relacija *tim*
 
+Prati osnovne, nepromjenjive podatke o timovima.
 Relacija tim se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -81,6 +82,7 @@ CREATE TABLE tim(
 
 ### Relacija sezona
 
+Evidentira id-eve naših sezona.
 Relacija sezona se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -103,6 +105,7 @@ CREATE TABLE sezona(
 
 ### Relacija konstruktor_u_sezoni
 
+Promjenjivi podaci koji o timovima koji se mjenjaju kroz sezone.
 Relacija konstruktor_u_sezoni se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -131,6 +134,7 @@ CREATE TABLE konstruktor_u_sezoni(
 
 ### Relacija vozac
 
+Prati nepromjenjive podatke o vozačima.
 Relacija vozac se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -161,6 +165,7 @@ CREATE TABLE vozac(
 
 ### Relacija automobil
 
+Osnovni podaci o automobilima, nismo ih raspodjelili po sezonama pošto se vežu direktno na vozaća u sezoni.
 Relacija automobil se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -187,6 +192,7 @@ CREATE TABLE automobil(
 
 ### Relacija vozac_u_sezoni
 
+Prati promjenjive podatke o vozačima kroz sezone.
 Relacija automobil se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer,* koji je primarni ključ unutar relacije
@@ -220,6 +226,7 @@ CREATE TABLE vozac_u_sezoni(
 
 ### Relacija sponzor
 
+Lista dostupnih sponzora kroz sezone u F1.
 Relacija sponzor se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -240,6 +247,7 @@ CREATE TABLE sponzor(
 
 ### Relacija sponzor_u_sezoni
 
+Prati sponzore i njihove partnere/timove kroz sezone.
 Relacija sponzor se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -275,6 +283,7 @@ CREATE TABLE sponzor_u_sezoni(
 
 ### Relacija staza
 
+Zabilježava sve staze vožene kroz 3 sezone.
 Relacija staza se sastoji od sljedećih atributa;
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -284,6 +293,7 @@ Relacija staza se sastoji od sljedećih atributa;
 - **drzava** podatak tipa *varchar* koji je limitiran na 50 znakova
 
 - **duzina_m** podatak tipa *integer*
+
 -  **broj_drs_zona** podatak tipa *integer*, ograničen je naredbom *default* koja automatski postavlja vrijednost  *" 2 "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
@@ -302,6 +312,7 @@ CREATE TABLE staza(
 
 ### Relacija trening
 
+Ova tablica se koristi za vezanje treninga za specifični vikend.
 Relacija trening se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -317,6 +328,7 @@ CREATE TABLE trening(
 
 ### Relacija trening_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakom treningu.
 Relacija trening_vrijeme se sastoji od sljedećih atributa:
 
 - **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -346,6 +358,7 @@ CREATE TABLE tren_vrijeme(
 
 ### Relacija kvalifikacija
 
+Ova tablica se koristi za vezanje kvalifikacija za specifični vikend.
 Relacija kvalifikacije se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -359,6 +372,7 @@ CREATE TABLE kvalifikacija(
 
 ### Relacija kval_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakoj kvalifikaciji.
 Relacija kval_vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -389,6 +403,7 @@ CREATE TABLE kval_vrijeme(
 
 ### Relacija utrka
 
+Tablica se koristi za vezanje specifične utrke za određeni vikend. Također vidimo naziv nagrade i predefinirani broj krugova za utrku.
 Relacija utrka vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -411,6 +426,7 @@ CREATE TABLE utrka(
 
 ### Relacija utrka_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakoj utrci.
 Relacija utrka_vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -440,6 +456,7 @@ CREATE TABLE utrka_vrijeme(
 
 ### Relacija vikend
 
+Veže utrke, kvalifikacije i treninge. Također veže vikende za određenu sezonu.
 Relacija vikend se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -477,7 +494,7 @@ CREATE TABLE vikend(
 );
 ```
 
-## Alter tabel ograničenja
+## Alter table ograničenja
 
 ### Ograničenje staza
 

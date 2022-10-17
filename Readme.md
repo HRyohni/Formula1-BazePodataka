@@ -47,7 +47,53 @@ Cilj naše baze podataka je prikazat pojednostavljenu statistiku Formule 1. Prik
 
 
 
+## ER dijagram
 
+
+
+![ERD](https://cdn.discordapp.com/attachments/959129607041318933/981260131905962034/Formula1.png)
+
+
+
+### Opis dijagrama
+
+Skup entiteta **vikend** je povezan s skupom entiteta **sezona** više naprema jedan, jer možemo više **vikend(*race-a*)** provest unutar jedne sezone, dok unutar jedne **sezone** provodimo više **vikend(*race-a*)**. 
+
+Skup entiteta **vikend** je povezan s skupom entiteta **utrka** jedan naprema jedan, jer unutar **vikend(*race-a*)** se može vozit samo jedna **utrka**, dok se jedna utrka vozi unutar jednog **vikend(*race-a*)**. 
+
+Skup entiteta **utrka** povezan je s skupom entiteta **utrka_vrijeme** jedan naprema više, jer svake **utrke** možemo imat više vremena unutar **utrka_vrijeme**. Iz ovog odnosa veza možemo izlučit podatak opisnog atributa ***ostvareno_mjesto*** tako da uzmemo najbrže ostvareno vrijeme i rangiramo ostala vremena prema njemu.
+
+  Skup entiteta **utrka_vrijeme** je povezan s skupom entiteta **vozac_u-sezoni** više naprema više, jer unutar **utrka_vrijeme**, vrijeme se ostvaruje više puta zbog količine vozača unutar **vozac_u-sezoni**, samim time imamo više vremena unutar **utrka_vrijeme**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **automobil** više naprema jedan, jer svaki **vozac_u_sezoni** može voziti jedan **automobil**, dok jednog **automobila** može voziti više **vozaca_u_sezoni**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **vozac** jedan naprema jedan jer svaki **vozac** se nalazi unutar jedne sezone, što samo intuitivno opisuje naziv naše relacije **vozac_u_sezoni**.
+
+Skup entiteta  **vozac_u-sezoni** je povezan s skupom entiteta **konstruktor_u_sezoni** više naprema jedan, jer svaki vozač može imati samo jednog **konstruktora_u_sezoni**(*drugi naziv za tim: Ferrari, Red Bull itd*), dok unutar jednog **konstruktora_u_sezoni** možemo pronaći više **vozac_u-sezoni**. 
+
+Skup entiteta  **konstruktor_u_sezoni** je povezan s skupom entiteta **tim** jedan naprema jedan, jer svaki **konstruktor_u_sezoni** se nalazi unutar jednog **tima**. 
+
+Dodali smo odnos slabih veza jer bez **tima** skup entiteta **konstruktor_u_sezoni** ne bi imao pretjerano smisla.
+
+Skup entiteta **sponzor_u_sezoni** je povezan s skupom entiteta **sponzor** jedan naprema jedan, preko istog principa kako smo povezali skupove entiteta **vozac_u_sezoni** i **vozac**.  
+
+Skup entiteta **sponzor_u_sezoni** je povezan s skupom entiteta **sezona** više naprema jedan, jer unutar svake **sezone** nalazi se više sponzora, dok se svi ti **sponzori_u_sezoni** ne mogu pronaći u više **sezona** istovremeno.
+
+Skup entiteta **vozac_u_sezoni** je povezan s skupom entiteta **sezona** više naprema jedan, jer unutar jedne **sezone** pronalazimo više **vozača**, dok **vozaci_u_sezoni** se nalaze istovremeno u samo jednoj sezoni.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **trening** jedan naprema jedan, iz razloga jer unutar svakog **vikenda** provodi se samo jedan **trening**.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **kvalifikacija** jedan naprema jedan, iz razloga jer unutar svakog **vikenda** provodi se samo jedna **kvalifikacija**.
+
+Skup entiteta  **trening** je povezan s skupom entiteta **tren_vrijeme** jedan naprema jedan, iz razloga jer unutar svakog **treninga** proizlazi samo jedno ***trening**_**vrijeme***, dok ***trening_vrijeme*** se odnosi samo na jedan **trening**.
+
+Skup entiteta  **kvalifikacija** je povezan s skupom entiteta **kval_vrijeme** jedan naprema jedan, iz razloga jer unutar svake **kvalifikacije** proizlazi samo jedno ***kvalifikacijsko**_**vrijeme***, dok ***kvalifikacijsko_vrijeme*** se odnosi samo na jedanu **kvalifikaciju**.
+
+Skup entiteta  **tren_vrijeme** je povezan s skupom entiteta **vozac_u_sezoni** jedan naprema više, jer svako ***trening_vremena*** se povezuju na više **vozaca_u_sezoni**, dok jedan **vozac_u_sezoni** ima samo jedno ***trening_vrijeme***.
+
+Skup entiteta  **kval_vrijeme** je povezan s skupom entiteta **vozac_u_sezoni** jedan naprema više, jer svako ***kvalifikacijsko_vrijeme*** se povezuju na više **vozaca_u_sezoni**, dok jedan **vozac_u_sezoni** ima samo jedno ***kvalifikacijsko_vrijeme***.
+
+Skup entiteta  **vikend** je povezan s skupom entiteta **staza** jedan naprema više, jer svaki **vikend(*race*)** se odvija na samo jednoj **stazi**, dok na jednoj **stazi** se može izvršit više utrka bilo to iz **Formule 1** ili iz lokalnih natjecanja. 
 
 
 
@@ -55,6 +101,7 @@ Cilj naše baze podataka je prikazat pojednostavljenu statistiku Formule 1. Prik
 
 ### Relacija *tim*
 
+Prati osnovne, nepromjenjive podatke o timovima.
 Relacija tim se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -81,6 +128,7 @@ CREATE TABLE tim(
 
 ### Relacija sezona
 
+Evidentira id-eve naših sezona.
 Relacija sezona se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -103,6 +151,7 @@ CREATE TABLE sezona(
 
 ### Relacija konstruktor_u_sezoni
 
+Promjenjivi podaci koji o timovima koji se mjenjaju kroz sezone.
 Relacija konstruktor_u_sezoni se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -131,6 +180,7 @@ CREATE TABLE konstruktor_u_sezoni(
 
 ### Relacija vozac
 
+Prati nepromjenjive podatke o vozačima.
 Relacija vozac se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije  
@@ -161,6 +211,7 @@ CREATE TABLE vozac(
 
 ### Relacija automobil
 
+Osnovni podaci o automobilima, nismo ih raspodjelili po sezonama pošto se vežu direktno na vozaća u sezoni.
 Relacija automobil se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -187,6 +238,7 @@ CREATE TABLE automobil(
 
 ### Relacija vozac_u_sezoni
 
+Prati promjenjive podatke o vozačima kroz sezone.
 Relacija automobil se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer,* koji je primarni ključ unutar relacije
@@ -220,6 +272,7 @@ CREATE TABLE vozac_u_sezoni(
 
 ### Relacija sponzor
 
+Lista dostupnih sponzora kroz sezone u F1.
 Relacija sponzor se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -240,6 +293,7 @@ CREATE TABLE sponzor(
 
 ### Relacija sponzor_u_sezoni
 
+Prati sponzore i njihove partnere/timove kroz sezone.
 Relacija sponzor se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -275,6 +329,7 @@ CREATE TABLE sponzor_u_sezoni(
 
 ### Relacija staza
 
+Zabilježava sve staze vožene kroz 3 sezone.
 Relacija staza se sastoji od sljedećih atributa;
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -284,6 +339,7 @@ Relacija staza se sastoji od sljedećih atributa;
 - **drzava** podatak tipa *varchar* koji je limitiran na 50 znakova
 
 - **duzina_m** podatak tipa *integer*
+
 -  **broj_drs_zona** podatak tipa *integer*, ograničen je naredbom *default* koja automatski postavlja vrijednost  *" 2 "* unutar relacije, osima ako korisnik ne upiše drugu vrijednost
 
 Ograničenje ***not null*** označava da podatak ne smije biti ***null*** tip podatka.
@@ -302,6 +358,7 @@ CREATE TABLE staza(
 
 ### Relacija trening
 
+Ova tablica se koristi za vezanje treninga za specifični vikend.
 Relacija trening se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -317,6 +374,7 @@ CREATE TABLE trening(
 
 ### Relacija trening_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakom treningu.
 Relacija trening_vrijeme se sastoji od sljedećih atributa:
 
 - **id **podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -346,6 +404,7 @@ CREATE TABLE tren_vrijeme(
 
 ### Relacija kvalifikacija
 
+Ova tablica se koristi za vezanje kvalifikacija za specifični vikend.
 Relacija kvalifikacije se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -359,6 +418,7 @@ CREATE TABLE kvalifikacija(
 
 ### Relacija kval_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakoj kvalifikaciji.
 Relacija kval_vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer*, koji je primarni ključ unutar relacije
@@ -389,6 +449,7 @@ CREATE TABLE kval_vrijeme(
 
 ### Relacija utrka
 
+Tablica se koristi za vezanje specifične utrke za određeni vikend. Također vidimo naziv nagrade i predefinirani broj krugova za utrku.
 Relacija utrka vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -411,6 +472,7 @@ CREATE TABLE utrka(
 
 ### Relacija utrka_vrijeme
 
+Prati vremena svih vozača za svaki krug u svakoj utrci.
 Relacija utrka_vrijeme se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -440,6 +502,7 @@ CREATE TABLE utrka_vrijeme(
 
 ### Relacija vikend
 
+Veže utrke, kvalifikacije i treninge. Također veže vikende za određenu sezonu.
 Relacija vikend se sastoji od sljedećih atributa:
 
 - **id** podatak tipa *integer* koji je primarni ključ unutar relacije
@@ -477,7 +540,7 @@ CREATE TABLE vikend(
 );
 ```
 
-## Alter tabel ograničenja
+## Alter table ograničenja
 
 ### Ograničenje staza
 
@@ -635,9 +698,8 @@ ALTER TABLE sezona
    ADD CONSTRAINT id_check CHECK (id >= 2013 and id <= 2015);
 ```
 
-## Učitavanje podataka
+## Učitavanje podataka iz CSV datoteka
 
-*#0*#
 
 ```sql
 LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/utrke-vremena.csv"
@@ -646,11 +708,14 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
 
-ALTER TABLE utrka_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
-UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+Nakon učitavanja, sa **ALTER TABLE** dodajemo novu kolonu, to jest atribut gdje ćemo konvertirati vozeno vrijeme iz **VARCHAR** u **TIME** specificirajući format u kojem prezentira vrijeme.
+```
+	ALTER TABLE utrka_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
+	UPDATE utrka_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
 ```
 
 
+## Učitavanje podataka INSERT INTO komandom
 
 ```sql
 LOAD DATA INFILE "C:/ProgramData/sql/sql Server 8.0/Uploads/treninzi-vremena.csv"
@@ -659,8 +724,19 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
 
-ALTER TABLE tren_vrijeme ADD COLUMN vozeno_vrijeme TIME(3) NOT NULL;
-UPDATE tren_vrijeme SET vozeno_vrijeme = STR_TO_DATE(vozeno_vrijeme_str, "%i:%s:%f");
+Kako bi učitavali podatke u tablice koristimo komandu **INSERT INTO** ime tablice **VALUES** te u zagradama pišemo podatke u redoslijedu kao što smo ih specificirali pri stvaranju tablica. Primjer:
+```
+	INSERT INTO tim VALUES (100, "Scuderia Ferrari", "Maurizio Arrivabene", "Maranello, Italy"),
+			       (101, "Sahara Force India F1 Team", "Colin Kolles", "Silverstone, United Kingdom"),
+			       (102, "Lotus F1 Team", "Éric Boullier", "Enstone, Oxfordshire, United Kingdom"),
+			       (103, "Manor Marussia F1 Team", "John Booth ", "Banbury, Oxfordshire, United Kingdom"),
+			       (104, "McLaren Honda", "Eric Boullier", "Surrey, United Kingdom"),
+			       (105, "Mercedes AMG Petronas F1 Team", "Totto Wolf", "Brackley, United Kingdom"),
+			       (106, "Infiniti Red Bull Racing", "Christian Horner", "Milton Keynes, United Kingdom."),
+			       (107, "Sauber F1 Team", "Monisha Kaltenborn", "Hinwil, Switzerland"),
+			       (108, "Scuderia Toro Rosso", "Franz Tost", "Faenza, Italy"),
+			       (109, "Williams Martini Racing", "Claire Williams", "Grove, Oxfordshire, United Kingdom"),
+			       (110, "Caterham F1 Team", "Cyril Abiteboul", "Leafield, Oxfordshire, United Kingdom");
 ```
 
 
@@ -687,10 +763,6 @@ SELECT *
 ```sql
 
 
-/* Ispišite najdužu stazu za vikend */
-SELECT ime_staze, max(duzina_m) as najduza
-	FROM vikend AS v
-    INNER JOIN staza AS u ON (u.id = v.id_staza);
 
 
 /* Prikažite podatke staza kraćih od 5km */
@@ -816,17 +888,6 @@ SELECT AVG(k.kolicina_sponzora) AS prosjek_sponzora_po_timu
 			ORDER BY kolicina_sponzora) AS k;
 ```
 <br>
-
-10. Upit:
-- U ovom upitu inner joinom spajamo tablice staza, vikend, utrka i utrka_vrijeme da bismo mogli grupirati podatke po imenu staze (jer svaka staza ima jedinstveno ime) te se po svakoj stazi odabire najbrži krug. 
-
-```sql
-/* Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi (ime_staze, vrijeme) */
-SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
-	FROM staza AS s
-		INNER JOIN vikend AS v ON (s.id = v.id_staza)
-			INNER JOIN utrka AS u ON (u.id = v.id_utrka)
-				INNER JOIN utrka_vrijeme AS uv ON (uv.id_utrka = u.id)
 	GROUP BY s.ime_staze;
 ```
 <br>
@@ -848,6 +909,32 @@ SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
     LIMIT 1;
 ```
 <br>
+=======
+
+11. Prikažite staze i najbrze vrijeme ostvareno na svakoj stazi (ime_staze, vrijeme)
+```
+	SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
+		FROM staza AS s
+			INNER JOIN vikend AS v ON (s.id = v.id_staza)
+				INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+					INNER JOIN utrka_vrijeme AS uv ON (uv.id_utrka = u.id)
+		GROUP BY s.ime_staze;
+```
+
+
+
+12. Prikažite stazu koja se najkraće vozi jednim krugom (ime_staze, vrijeme)
+```
+	SELECT s.ime_staze, MIN(vozeno_vrijeme) AS vrijeme
+		FROM staza AS s
+			INNER JOIN vikend AS v ON (s.id = v.id_staza)
+				INNER JOIN utrka AS u ON (u.id = v.id_utrka)
+					INNER JOIN utrka_vrijeme AS uv ON (uv.id_utrka = u.id)
+		GROUP BY s.ime_staze
+   	 ORDER BY vrijeme
+   	 LIMIT 1;
+```
+>>>>>>> a2260a40221af9599c55c0d7ed3bca407fba0343
 
 12. Upit:
 - Ovim upitom prikazujemo koji je automobil dodijeljen pojedinom vozaču tako što 
